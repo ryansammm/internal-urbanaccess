@@ -1,0 +1,146 @@
+<?php
+
+namespace App\InputHasilSurveyOnsite\Controller;
+
+use App\InputHasilSurveyOnsite\Model\InputHasilSurveyOnsite;
+use App\LayananInternetDetail\Model\LayananInternetDetail;
+use App\Minat\Model\Minat;
+use App\MinatLayanan\Model\MinatLayanan;
+use App\Users\Model\Users;
+use App\Vendor\Model\Vendor;
+use Core\GlobalFunc;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+
+class InputHasilSurveyOnsiteController extends GlobalFunc
+{
+    public $model;
+
+    public function __construct()
+    {
+        $this->model = new InputHasilSurveyOnsite();
+        parent::beginSession();
+    }
+
+    public function index(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $datas = $this->model->selectAll("WHERE jenisSurvey = 2 AND tanggalHasil = 0000-00-00");
+        // dd($datas);
+
+
+        $vendor = new Vendor();
+        $data_vendor = $vendor->selectAll();
+
+        $layanan_internet_detail = new LayananInternetDetail();
+        $data_layanan_internet_detail = $layanan_internet_detail->selectAll();
+        // dd($data_layanan_internet_detail);
+
+        return $this->render_template('admin/master/input-hasil-survey-onsite/index', ['datas' => $datas, 'data_vendor' => $data_vendor, 'data_layanan_internet_detail' => $data_layanan_internet_detail]);
+    }
+
+
+
+    public function create(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        return $this->render_template('admin/master/input-hasil-survey-onsite/create');
+    }
+
+    public function store(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $create = $this->model->create($request->request);
+
+        return new RedirectResponse('/input-hasil-survey-onsite');
+    }
+
+    public function get(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        $data = $this->model->selectOne($id);
+
+        return new JsonResponse($data);
+    }
+
+    public function edit(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        $detail = $this->model->selectOne($id);
+
+        return $this->render_template('admin/master/input-hasil-survey-onsite/edit', ['detail' => $detail]);
+    }
+
+    public function update(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        $datas = $request->request->all();
+        $detail = $this->model->selectOne("WHERE jenisSurvey = 2");
+
+        $minat = new Minat();
+        $data_minat = $minat->selectOne($detail['kodeMinat']);
+
+        $minat_layanan = new MinatLayanan();
+        $data_minat_layanan = $minat_layanan->selectOne("WHERE idMinat = '" . $detail['kodeMinat'] . "'");
+
+        // dd($id, $datas, $data_minat_layanan);
+
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+
+        $nama_sales =  $_SESSION['_sf2_attributes']['namaUser'];
+
+
+
+        // dd($detail);
+
+        $group_data = [
+            'tanggalHasil' =>  $datas['tanggalHasil'],
+            'jarak' => $datas['jarak'],
+            'keterangan' => $datas['keterangan'],
+        ];
+        $input_survey_onsite_update = $this->model->update($id, $group_data);
+
+        $status = '6';
+        $minat = new Minat();
+        $minat_status = $minat->updateStatus($detail['kodeMinat'], $status);
+
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+
+        $message = urlencode("Berikut hasil survey on site. \n \nTanggal Hasil : \n" . date('d F Y', strtotime($datas['tanggalHasil'])) . "\n\nSales :\n" . $nama_sales . "\n\nPIC :\n" . $data_minat['namapemohon'] . "\n\nAlamat : \n" . $data_minat['alamat'] . " RT." . $data_minat['rt'] . " RW." . $data_minat['rw'] . " Kel." . $data_minat['nameKelurahan'] . ", Kec." .  $data_minat['nameKecamatan'] . ", Kab." .  substr(strstr($data_minat['nameKabupaten'], " "), 1)  . "\n\nPerkiraan koordinat : \n " . $data_minat['latitude'] . "," . $data_minat['longtitude']  . "\n\nLayanan : \n" . $data_minat_layanan['namaLayanan'] . " " .  $data_minat_layanan['kecepatan'] . " Mbps\n  \nJarak : \n" . $datas['jarak']) . "m";
+
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+
+        return new RedirectResponse('/input-hasil-survey-onsite');
+    }
+
+    public function delete(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        $delete = $this->model->delete($id);
+
+        return new RedirectResponse('/input-hasil-survey-onsite');
+    }
+}

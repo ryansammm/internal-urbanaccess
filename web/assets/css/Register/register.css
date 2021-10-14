@@ -1,0 +1,64 @@
+body{
+	background-image: url(../../media/bg.png);
+	background-size: cover;
+	background-position: fixed;
+	font-family: Product Sans;
+}
+
+hr {
+    border-bottom: 3px solid #FFC700;
+    width: 70%;
+    display: block;
+    margin-left: 15% !important; 
+    margin-right: 25% !important;
+}
+h3{
+	font-weight: bolder;
+}
+.card{
+	position: relative;
+}
+#forget{
+	font-size: 12px;
+	width: 40%;	
+	padding: 0%;
+	text-align: left;
+}
+#hlmn{
+	font-size: 9px;
+	width: 38%;
+	height: 6%;
+}
+.btn{
+	width: 100%;
+}
+#asset2{
+	z-index: 1;
+
+}
+#bpnb{
+	z-index: 4;
+	position: absolute;
+	margin: 55% 35%;
+	font-weight: bold;
+}
+#bpnbb{
+	z-index: 4;
+	position: absolute;
+	padding: 50px;
+	margin-top: 70%;
+	margin-left: 13%;
+	text-align: center;
+
+}
+
+
+@media screen and (max-width: 720px) {  
+    #pict{
+    	display: none;
+    }
+    #hlmn{
+    	display: none;
+    }
+
+}
