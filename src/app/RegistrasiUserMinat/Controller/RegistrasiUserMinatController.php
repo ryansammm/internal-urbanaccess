@@ -3,6 +3,7 @@
 namespace App\RegistrasiUserMinat\Controller;
 
 use App\Client\Model\Client;
+use App\FeeSales\Model\FeeSales;
 use App\GroupKontak\Model\GroupKontak;
 use App\GroupLayanan\Model\GroupLayanan;
 use App\GroupLegalitas\Model\GroupLegalitas;
@@ -120,16 +121,17 @@ class RegistrasiUserMinatController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        // dd($datas);
 
         $noRegistrasi = $this->noRegistrasi($datas);
 
         $datas['noRegistrasi'] = $noRegistrasi;
+        // dd($datas, $noRegistrasi);
 
         // dd($datas, $noRegistrasi);
 
 
-
+        $fee_sales = new FeeSales();
+        $fee_sales_create = $fee_sales->create($datas);
 
 
         $internet_user_registrasi_create = $this->model->create($datas);
@@ -229,6 +231,8 @@ class RegistrasiUserMinatController extends GlobalFunc
         ];
         $group_persyaratan_vendor_npwp_create = $group_legalitas->create($legalitas_vendor_create);
 
+        $media = new Media();
+        $media->create($_FILES['fileKTP'], $noRegistrasi, '1', 'foto-ktp');
 
         $user = new Users();
         $ambilUser = $user->selectOneUser($this->session->get('idUser'));

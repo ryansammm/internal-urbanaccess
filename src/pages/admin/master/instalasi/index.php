@@ -12,15 +12,18 @@
                             <thead>
                                 <tr>
                                     <td>#</td>
-                                    <td>Kode Minat</td>
-                                    <td>Nama</td>
+                                    <td>Nomor Registrasi</td>
+                                    <td>kode Form</td>
+                                    <td>User ID</td>
+                                    <td>Nama User</td>
                                     <td>Layanan</td>
-                                    <td>Alamat</td>
+                                    <td>Sales</td>
+                                    <td>Status</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($datas as $key => $value) { ?>
+                                <!-- <?php foreach ($datas as $key => $value) { ?>
                                     <tr>
                                         <td><?= $key += 1 ?></td>
                                         <td><a href="/minat/<?= $value['kodeMinat'] ?>"><?= $value['kodeMinat'] ?></a></td>
@@ -29,7 +32,7 @@
                                         <td><?= $value['alamat'] ?></td>
                                         <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $datas['0']['idMinat'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
                                     </tr>
-                                <?php } ?>
+                                <?php } ?> -->
                             </tbody>
                         </table>
                     </div>
