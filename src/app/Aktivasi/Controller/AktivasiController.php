@@ -2,6 +2,7 @@
 
 namespace App\Aktivasi\Controller;
 
+use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
 use Core\GlobalFunc;
@@ -28,9 +29,12 @@ class AktivasiController extends GlobalFunc
         }
 
         $datas = $this->model->selectAll();
+
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $data_internet_user_registrasi = $internet_user_registrasi->selectAll();
         // dd($datas);
 
-        return $this->render_template('admin/master/aktivasi/index', ['datas' => $datas]);
+        return $this->render_template('admin/master/aktivasi/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
     }
 
     public function create(Request $request)
@@ -38,9 +42,9 @@ class AktivasiController extends GlobalFunc
         if ($this->session->get('username') == null) {
             return new RedirectResponse("/admin");
         }
+        $id = $request->attributes->get('id');
 
-
-        return $this->render_template('admin/master/user-management/create', []);
+        return $this->render_template('admin/master/aktivasi/create', ['id' => $id]);
     }
 
     public function detail(Request $request)

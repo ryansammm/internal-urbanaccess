@@ -26,19 +26,6 @@
                                 <div class="card-body  rounded">
                                     <div class="row">
                                         <div class="form-group">
-                                            <label for="first-name-vertical">Role User</label>
-                                            <select name="idRole" id="" class="form-select" required>
-                                                <?php foreach ($data_roles as $key => $value) { ?>
-                                                    <option <?= $detail['idRole'] == $value['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['namaLayanan'] ?></option>
-                                                <?php } ?>
-                                                <option value="">-- Pilih Role --</option>
-                                                <option value="admin-010">Admin</option>
-                                                <option value="mitra-010">Mitra</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
                                             <label for="first-name-vertical">NIK User</label>
                                             <input type="text" class="form-control" name="nikUser" value="<?= $detail['nikUser'] ?>" required>
                                         </div>

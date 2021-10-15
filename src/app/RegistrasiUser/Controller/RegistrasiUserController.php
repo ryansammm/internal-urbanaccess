@@ -113,6 +113,7 @@ class RegistrasiUserController extends GlobalFunc
         // dd($datas);
 
 
+
         $internet_user_registrasi_create = $this->model->create($datas);
 
         $internet_user_alamat = new InternetUserAlamat();

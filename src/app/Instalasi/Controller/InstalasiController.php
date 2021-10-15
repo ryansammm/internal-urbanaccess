@@ -3,6 +3,7 @@
 namespace App\Instalasi\Controller;
 
 use App\Instalasi\Model\Instalasi;
+use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
 use Core\GlobalFunc;
@@ -31,7 +32,11 @@ class InstalasiController extends GlobalFunc
         $datas = $this->model->selectAll();
         // dd($datas);
 
-        return $this->render_template('admin/master/instalasi/index', ['datas' => $datas]);
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $data_internet_user_registrasi = $internet_user_registrasi->selectAll();
+        // dd($data_internet_user_registrasi);
+
+        return $this->render_template('admin/master/instalasi/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
     }
 
     public function create(Request $request)
@@ -41,7 +46,9 @@ class InstalasiController extends GlobalFunc
         }
 
 
-        return $this->render_template('admin/master/user-management/create', []);
+
+
+        return $this->render_template('admin/master/instalasi/create', []);
     }
 
     public function detail(Request $request)
@@ -63,21 +70,15 @@ class InstalasiController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
+        $id = $request->attributes->get('id');
+        // dd($datas, $id);
 
-        $pass1 = $datas['password'];
-        $pass2 = $datas['konfirmasiPassowrd'];
-
-        if ($pass1 == $pass2) {
-            $create_user_management = $this->model->create($datas);
-        } else {
-            return new RedirectResponse("/user-management/create");
-            die();
-        }
-
-        // dd($pass1, $pass2);
+        $instalasi_create = $this->model->create($datas, $id);
 
 
-        return new RedirectResponse('/user-management');
+
+
+        return new RedirectResponse('/instalasi');
     }
 
     public function get(Request $request)

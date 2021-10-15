@@ -36,7 +36,7 @@
                                         <td><?= $value['statusRegistrasi'] == 2 ? 'Sudah Aktivasi' : 'Belum Aktivasi' ?></td>
                                         <td>
 
-                                            <a class=dropdown-toggle" style="font-size: 11pt;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="dropdown-toggle" style="font-size: 11pt;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-h"></i>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

@@ -430,14 +430,29 @@ $routes->add('userManagementDelete', new Route('/user-management/{id}/delete', [
     '_controller' => 'App\UserManagement\Controller\UserManagementController::delete',
 ]));
 
+// User Management Mitra
+$routes->add('userMitraManagementEdit', new Route('/user-mitra-management/{id}/editMitra', [
+    '_controller' => 'App\UserManagement\Controller\UserManagementController::editMitra',
+]));
+
 //Instalasi
 $routes->add('instalasi', new Route('/instalasi', [
     '_controller' => 'App\Instalasi\Controller\InstalasiController::index',
 ]));
+$routes->add('instalasiStore', new Route('instalasi/{id}/store', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::store',
+]));
+
 
 //Aktivasi
 $routes->add('aktivasi', new Route('/aktivasi', [
     '_controller' => 'App\Aktivasi\Controller\AktivasiController::index',
+]));
+$routes->add('aktivasiCreate', new Route('/aktivasi/{id}/create', [
+    '_controller' => 'App\Aktivasi\Controller\AktivasiController::create',
+]));
+$routes->add('aktivasiStore', new Route('/aktivasi/store', [
+    '_controller' => 'App\Aktivasi\Controller\AktivasiController::store',
 ]));
 
 //Aktif

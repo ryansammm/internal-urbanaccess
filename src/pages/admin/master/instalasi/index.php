@@ -6,14 +6,13 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title mb-3">Daftar Request Survey</h4>
+                        <h4 class="card-title mb-3">Menunggu Instalasi</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
                         <table class="table " id="table1">
                             <thead>
                                 <tr>
                                     <td>#</td>
                                     <td>Nomor Registrasi</td>
-                                    <td>kode Form</td>
                                     <td>User ID</td>
                                     <td>Nama User</td>
                                     <td>Layanan</td>
@@ -23,16 +22,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <?php foreach ($datas as $key => $value) { ?>
+                                <?php foreach ($data_internet_user_registrasi as $key => $value) { ?>
                                     <tr>
                                         <td><?= $key += 1 ?></td>
-                                        <td><a href="/minat/<?= $value['kodeMinat'] ?>"><?= $value['kodeMinat'] ?></a></td>
-                                        <td><?= $value['namapemohon'] ?></td>
+                                        <td><?= $value['noRegistrasi'] ?></td>
+                                        <td><?= $value['idUser'] ?></td>
+                                        <td><?= $value['namauserRegistrasi'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
-                                        <td><?= $value['alamat'] ?></td>
-                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $datas['0']['idMinat'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
+                                        <td><?= $value['namaSales'] ?></td>
+                                        <td><?= $value['statusRegistrasi'] == 2 ? 'Sudah Aktivasi' : 'Registrasi' ?></td>
+                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['noRegistrasi'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-tools"></i></a></td>
                                     </tr>
-                                <?php } ?> -->
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -49,39 +50,32 @@
 <!-- Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Email ke Vendor</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="ro">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="first-name-vertical">Nama</label>
-                            <input type="text" class="form-control" name="namapemohon" value="<?= $value['namapemohon'] ?>" required readonly>
+        <form action="" class="form-update form-group" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hasil Instalasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ro">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="first-name-vertical">Tanggal Instalasi</label>
+                                <input type="date" class="form-control" name="tglInstalasi" value="" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="first-name-vertical">Pilih Vendor</label>
-                            <select class="choices form-select multiple-remove select-vendor" multiple="multiple" required>
-                                <optgroup label="Vendor">
-                                    <?php foreach ($data_vendor as $key => $value) { ?>
-                                        <option value="<?= $value['idVendor'] ?>"><?= $value['namaVendor'] ?></option>
-                                    <?php } ?>
-                                </optgroup>
-                            </select>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="first-name-vertical">Jarak</label>
+                                <input type="text" class="form-control" name="jarak" value="" required>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-submit-update">Konfirmasi</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-submit-update">Kirim Email Ke Vendor</button>
-            </div>
-        </div>
-        <form action="" method="POST" class="form-update">
-            <input type="hidden" name="idVendor" class="btn-list-vendor">
         </form>
     </div>
 </div>
@@ -99,7 +93,13 @@
         var modal = $('#updateModal');
         var id = $(this).attr('data-id');
 
-        modal.find('.form-update').prop('action', '/request-survey-vendor/' + id + '/update');
+        modal.find('.form-update').prop('action', '/instalasi/' + id + '/store');
+    })
+
+    $(document).ready(function() {
+        $('.btn-submit-update').on('click', function() {
+            $('.form-update').submit();
+        })
     })
 
     $(document).ready(function() {

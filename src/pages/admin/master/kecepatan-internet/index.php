@@ -9,7 +9,7 @@
                         <h4 class="card-title mb-3">Kecepatan Internet</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 10px;"></div>
                         <a type="button" class="btn btn-sm btn-primary mb-1" href="/kecepatan-internet/create">Tambah Data <i class="fas fa-plus"></i></a>
-                        <table class="table table-striped" id="table1">
+                        <table class="table" id="table1">
                             <thead>
                                 <tr>
                                     <td>No</td>
@@ -31,8 +31,8 @@
                                         <td>Rp. <?= number_format($value['biayabulanan'], 2, ',', '.') ?></td>
                                         <td><?= $value['ppnLayanandetail'] == '1' ? 'Ya' : 'Tidak' ?></td>
                                         <td>
-                                            <a href="/kecepatan-internet/<?= $value['idLayananinternetdetail'] ?>/edit" class="btn btn-sm btn-light text-primary"><i class="bi bi-pencil"></i></a>
-                                            <a href="#" class="btn btn-sm btn-light text-danger btn-hapus" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $value['idLayananinternetdetail'] ?>"><i class="bi bi-trash"></i></a>
+                                            <a href="/kecepatan-internet/<?= $value['idLayananinternetdetail'] ?>/edit" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn btn-sm btn-outline-danger btn-hapus" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $value['idLayananinternetdetail'] ?>"><i class="fas fa-user-slash"></i></a>
                                         </td>
                                     </tr>
                                 <?php } ?>

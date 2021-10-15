@@ -7,8 +7,8 @@ use PDOException;
 
 class Instalasi extends GlobalFunc
 {
-    private $table = 'users';
-    private $primaryKey = 'idUser';
+    private $table = 'instalasi';
+    private $primaryKey = 'idInstalasi';
     public $conn;
 
     public function __construct()
@@ -19,7 +19,7 @@ class Instalasi extends GlobalFunc
 
     public function selectAll($where = "")
     {
-        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN roles ON roles.idRole = users.idRole " . $where;
+        $sql = "SELECT * FROM " . $this->table . " " . $where;
         // dd($sql);
 
         try {
@@ -34,26 +34,23 @@ class Instalasi extends GlobalFunc
         }
     }
 
-    public function create($datas)
+    public function create($datas, $noRegistrasi)
     {
-        $idUser = uniqid('id');
-        $idRole = $datas['idRole'];
-        $nikUser = $datas['nikUser'];
-        $namaUser = $datas['namaUser'];
-        $username = $datas['username'];
-        $password = password_hash($datas['password'], PASSWORD_DEFAULT);
-        $chatId = '-1001571974882';
+        $idInstalasi = uniqid('id-');
+        $noRegistrasi = $noRegistrasi;
+        $tglInstalasi = $datas['tglInstalasi'];
+        $jarak = $datas['jarak'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$idUser','$idRole', '$nikUser', '$namaUser', '$username', '$password', '$chatId', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$idInstalasi','$noRegistrasi', '$tglInstalasi', '$jarak', '$createdAt', '$updatedAt')";
         // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
 
-            return $idUser;
+            return $idInstalasi;
         } catch (PDOException $e) {
             echo $e;
             die();
@@ -62,7 +59,7 @@ class Instalasi extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT * FROM " . $this->table .  " LEFT JOIN roles ON roles.idRole = users.idRole WHERE idUser = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " " . $this->primaryKey . " = '$id'";
         // dd($sql);
 
         try {
