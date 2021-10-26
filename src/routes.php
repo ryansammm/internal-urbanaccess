@@ -439,7 +439,7 @@ $routes->add('userMitraManagementEdit', new Route('/user-mitra-management/{id}/e
 $routes->add('instalasi', new Route('/instalasi', [
     '_controller' => 'App\Instalasi\Controller\InstalasiController::index',
 ]));
-$routes->add('instalasiStore', new Route('instalasi/{id}/store', [
+$routes->add('instalasiStore', new Route('/instalasi/{id}/store', [
     '_controller' => 'App\Instalasi\Controller\InstalasiController::store',
 ]));
 
@@ -451,13 +451,23 @@ $routes->add('aktivasi', new Route('/aktivasi', [
 $routes->add('aktivasiCreate', new Route('/aktivasi/{id}/create', [
     '_controller' => 'App\Aktivasi\Controller\AktivasiController::create',
 ]));
-$routes->add('aktivasiStore', new Route('/aktivasi/store', [
+$routes->add('aktivasiStore', new Route('/aktivasi/{id}/store', [
     '_controller' => 'App\Aktivasi\Controller\AktivasiController::store',
+]));
+
+$routes->add('aktivasiDokumentasi', new Route('/aktivasi/dokumentasi/{id}', [
+    '_controller' => 'App\Aktivasi\Controller\AktivasiController::dokumentasi',
+]));
+$routes->add('aktivasiDokumentasiStore', new Route('/aktivasi/dokumentasi/{id}/store', [
+    '_controller' => 'App\Aktivasi\Controller\AktivasiController::dokumentasiStore',
 ]));
 
 //Aktif
 $routes->add('aktif', new Route('/aktif', [
     '_controller' => 'App\Aktif\Controller\AktifController::index',
+]));
+$routes->add('aktifStore', new Route('/aktif/{id}/store', [
+    '_controller' => 'App\Aktif\Controller\AktifController::store',
 ]));
 
 

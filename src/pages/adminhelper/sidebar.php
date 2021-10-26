@@ -77,7 +77,7 @@
                     <a href="/minat"><img src="/assets/images/logo/logogram-urban-acess.png" class="img-fluid" alt="Logo" srcset="" style="width: 72%;    margin-left: 2rem;"></a>
                 </div>
                 <div class="toggler">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    <a href="#" class="btn for-hover text-light sidebar-hide d-xl-none d-block" style="position: absolute;top: 0rem;right: 0.5rem;font-size: 16pt;"><i class="fas fa-times"></i></a>
                 </div>
             </div>
         </div>
@@ -104,8 +104,8 @@
 
                 <?php } elseif ($_SESSION['idRole'] == 'admin-010') { ?>
 
-                    <li class="sidebar-item  has-sub <?= strpos($GLOBALS['url'], '/minat')  !== false ? 'active' : ''; ?>">
-                        <a href="#" class="sidebar-link">
+                    <li class="sidebar-item has-sub">
+                        <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/minat')  !== false || strpos($GLOBALS['url'], '-survey')  !== false || strpos($GLOBALS['url'], '-onsite')  !== false || strpos($GLOBALS['url'], '-minat')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/aktivasi')  !== false || strpos($GLOBALS['url'], '/aktif')  !== false || strpos($GLOBALS['url'], '/registrasi-user-minat')  !== false ? 'oncom' : ''; ?>">
                             <i class="fas fa-file-alt"></i>
                             <span>Minat</span>
                             <i class="icon-dropdown"></i>
@@ -162,15 +162,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item <?= $GLOBALS['url'] == '/registrasi-user' ? 'active' : ''; ?>">
+                    <li class="sidebar-item <?= $GLOBALS['url'] == '/registrasi-user' ? 'oncom' : ''; ?>">
                         <a href="/registrasi-user" class='sidebar-link'>
                             <i class="fas fa-users"></i>
                             <span>Data User Registrasi</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item  has-sub <?= strpos($GLOBALS['url'], '/layanan-internet')  !== false || strpos($GLOBALS['url'], '/kecepatan-internet')  !== false  ? 'active' : ''; ?>">
-                        <a href="#" class="sidebar-link">
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/layanan-internet')  !== false || strpos($GLOBALS['url'], '/kecepatan-internet')  !== false  ? 'oncom' : ''; ?>">
                             <i class="fas fa-wifi"></i>
                             <span>Layanan Internet</span>
                             <i class="icon-dropdown"></i>
@@ -185,8 +185,8 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  has-sub <?= $GLOBALS['url'] == '/urban-lite' || $GLOBALS['url'] == '/urban-max' || $GLOBALS['url'] == '/urban-ultimate'  ? 'active' : ''; ?>">
-                        <a href="#" class="sidebar-link">
+                    <li class="sidebar-item  has-sub ">
+                        <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/urban')  !== false  ? 'oncom' : ''; ?>">
                             <i class="bi bi-people-fill"></i>
                             <span>Data User</span>
                             <i class="icon-dropdown"></i>
@@ -204,8 +204,8 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  has-sub <?= $GLOBALS['url'] == '/reseller' || $GLOBALS['url'] == '/sales-perorangan'  ? 'active' : ''; ?>">
-                        <a href="form-layout.html" class="sidebar-link">
+                    <li class="sidebar-item  has-sub ">
+                        <a href="form-layout.html" class="sidebar-link <?= $GLOBALS['url'] == '/reseller' || $GLOBALS['url'] == '/sales-perorangan'  ? 'oncom' : ''; ?>">
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Data Sales</span>
                             <i class="icon-dropdown"></i>
@@ -220,7 +220,7 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item <?= strpos($GLOBALS['url'], '/vendor')  !== false ? 'active' : ''; ?>">
+                    <li class="sidebar-item <?= strpos($GLOBALS['url'], '/vendor')  !== false ? 'oncom' : ''; ?>">
                         <a href="/vendor" class='sidebar-link'>
                             <i class="fas fa-store"></i>
                             <span>Data Vendor</span>
@@ -228,7 +228,7 @@
                     </li>
 
 
-                    <li class="sidebar-item <?= $GLOBALS['url'] == '/forecast'  ? 'active' : ''; ?> ">
+                    <li class="sidebar-item <?= $GLOBALS['url'] == '/forecast'  ? 'oncom' : ''; ?> ">
                         <a href="/forecast" class='sidebar-link'>
                             <i class="bi bi-file-text-fill"></i>
                             <span>Forecast</span>
@@ -236,7 +236,7 @@
                     </li>
 
 
-                    <li class="sidebar-item <?= $GLOBALS['url'] == '/user-managemnet'  ? 'active' : ''; ?> ">
+                    <li class="sidebar-item <?= $GLOBALS['url'] == '/user-management'  ? 'oncom' : ''; ?> ">
                         <a href="/user-management" class='sidebar-link'>
                             <i class="fas fa-users-cog"></i>
                             <span>User Management</span>

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Instalasi\Model;
+namespace App\Aktif\Model;
 
 use Core\GlobalFunc;
 use PDOException;
 
-class Instalasi extends GlobalFunc
+class Aktif extends GlobalFunc
 {
-    private $table = 'instalasi';
-    private $primaryKey = 'idInstalasi';
+    private $table = 'aktif';
+    private $primaryKey = 'idAktif';
     public $conn;
 
     public function __construct()
@@ -34,23 +34,23 @@ class Instalasi extends GlobalFunc
         }
     }
 
-    public function create($datas, $noRegistrasi)
+    public function create($datas, $idRelation)
     {
-        $idInstalasi = uniqid('id-');
-        $noRegistrasi = $noRegistrasi;
-        $tglInstalasi = $datas['tglInstalasi'];
-        $jarak = $datas['jarak'];
+        $idAktif = uniqid('id-');
+        $idRelation = $idRelation;
+        $tanggalBayar = $datas['tanggalPembayaran'];
+        $jumlahPembayaran = $datas['jumlahPembayaran'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$idInstalasi','$noRegistrasi', '$tglInstalasi', '$jarak', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$idAktif','$idRelation', '$tanggalBayar', '$jumlahPembayaran', '$createdAt', '$updatedAt')";
         // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
 
-            return $idInstalasi;
+            return $idAktif;
         } catch (PDOException $e) {
             echo $e;
             die();
@@ -74,21 +74,21 @@ class Instalasi extends GlobalFunc
         }
     }
 
-    public function update($datas, $noRegistrasi)
+    public function update($idRelation, $datas)
     {
-        $noRegistrasi = $noRegistrasi;
-        $tglInstalasi = $datas['tglInstalasi'];
-        $jarak = $datas['jarak'];
+        $idRelation = $idRelation;
+        $tanggalBayar = $datas['tanggalPembayaran'];
+        $jumlahPembayaran = $datas['jumlahPembayaran'];
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "UPDATE " . $this->table . " SET noRegistrasi='$noRegistrasi', tglInstalasi='$tglInstalasi', jarak='$jarak',  updateAt='$updatedAt' WHERE noRegistrasi='$noRegistrasi'";
+        $sql = "UPDATE " . $this->table . " SET idRelation='$idRelation', tanggalPembayaran='$tanggalBayar', jumlahPembayaran='$jumlahPembayaran', jumlahPembayaran='$jumlahPembayaran',updateAt='$updatedAt' WHERE idRelation='$idRelation'";
         // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
 
-            return $noRegistrasi;
+            return $idRelation;
         } catch (PDOexception $e) {
             echo $e;
             die();
@@ -97,7 +97,7 @@ class Instalasi extends GlobalFunc
 
     public function delete($id)
     {
-        $sql = "DELETE FROM " . $this->table . " WHERE noRegistrasi = '$id'";
+        $sql = "DELETE FROM " . $this->table . " WHERE idRelation = '$id'";
 
         try {
             $query = $this->conn->prepare($sql);

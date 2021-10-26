@@ -90,7 +90,7 @@ class Minat extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT *, provinsi.id as idProvinsi, provinsi.name as nameProvinsi, kabupaten.id as idKabupaten, kabupaten.name as nameKabupaten, kecamatan.id as idKecamatan, kecamatan.name as nameKecamatan, kelurahan.id as idKelurahan, kelurahan.name as nameKelurahan FROM " . $this->table .  " LEFT JOIN provinsi ON provinsi.id = minat.idProvinsi LEFT JOIN kabupaten ON kabupaten.id = minat.idKabupaten LEFT JOIN kecamatan ON kecamatan.id = minat.idKecamatan LEFT JOIN kelurahan ON kelurahan.id = minat.idKelurahan LEFT JOIN media ON media.idRelation = minat.kodeMinat LEFT JOIN salesperorangan ON salesperorangan.idSales = minat.idSales LEFT JOIN salesreseller ON salesreseller.idSales = minat.idSales WHERE kodeMinat = '$id'";
+        $sql = "SELECT *, provinsi.id as idProvinsi, provinsi.name as nameProvinsi, kabupaten.id as idKabupaten, kabupaten.name as nameKabupaten, kecamatan.id as idKecamatan, kecamatan.name as nameKecamatan, kelurahan.id as idKelurahan, kelurahan.name as nameKelurahan, salesperorangan.namaSales as nameSales, salesreseller.namaSales as nameReseller FROM " . $this->table .  " LEFT JOIN provinsi ON provinsi.id = minat.idProvinsi LEFT JOIN kabupaten ON kabupaten.id = minat.idKabupaten LEFT JOIN kecamatan ON kecamatan.id = minat.idKecamatan LEFT JOIN kelurahan ON kelurahan.id = minat.idKelurahan LEFT JOIN media ON media.idRelation = minat.kodeMinat LEFT JOIN salesperorangan ON salesperorangan.idSales = minat.idSales LEFT JOIN salesreseller ON salesreseller.idSales = minat.idSales WHERE kodeMinat = '$id'";
         // dd($sql);
 
         try {

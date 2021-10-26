@@ -30,7 +30,7 @@
                                         <select name="idLayanan" id="layanan" class="form-select" required>
                                             <option value="">-- Pilih Layanan --</option>
                                             <?php foreach ($layanan as $key => $value) { ?>
-                                                <option <?= $value['idLayananinternet'] == $data_minat_layanan['idLayanan'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $data_minat_layanan['namaLayanan'] ?></option>
+                                                <option <?= $value['idLayananinternet'] == $data_minat_layanan['idLayanan'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['namaLayanan'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

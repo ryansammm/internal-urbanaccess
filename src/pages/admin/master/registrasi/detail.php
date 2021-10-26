@@ -61,7 +61,7 @@
                             <div class="col-6">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Tanggal Registrasi</label>
-                                    <h6><?= $datas['tanggalRegistrasi'] ?></h6>
+                                    <h6><?= date('d-m-Y', strtotime($datas['tanggalRegistrasi'])) ?></h6>
                                 </div>
                             </div>
                             <div class="col-3">
@@ -120,7 +120,7 @@
                             <div class="col-3">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Sales</label>
-                                    <h6><?= $datas[40] ?></h6>
+                                    <h6><?= $datas['nameSales'] == NULL ? $datas['namaReseller'] : $datas['nameSales'] ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -298,6 +298,102 @@
                             </div>
                         </div>
                     </div>
+
+                    <h5>Data Instalasi</h5>
+                    <div class="p-2">
+
+                        <!-- Data Kontak Vendor -->
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Tanggal Instalasi</label>
+                                    <h6><?= date('d-m-Y', strtotime($data_instalasi['tglInstalasi'])) ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Jenis</label>
+                                    <h6><?= $data_instalasi['jarak'] ?> Meter</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Data Aktivasi</h5>
+                    <div class="p-2">
+
+                        <!-- Data Kontak Vendor -->
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-12">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Tanggal Aktivasi</label>
+                                    <h6><?= date('d-m-Y', strtotime($data_aktivasi['tglAktivasi'])) ?></h6>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">VLan</label>
+                                    <h6><?= $data_aktivasi['vlan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">MAC Address</label>
+                                    <h6><?= $data_aktivasi['macAddress'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Serial Number</label>
+                                    <h6><?= $data_aktivasi['serialNumber'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Jenis IP</label>
+                                    <h6><?= $data_aktivasi['jenisIp'] == 1 ? "IP Publik" : "IP Private"  ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Data Aktif</h5>
+                    <div class="p-2">
+
+                        <!-- Data Kontak Vendor -->
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Tanggal Aktif</label>
+                                    <h6><?= date('d-m-Y', strtotime($data_aktif['tanggalPembayaran'])) ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Jumlah Pembayaran</label>
+                                    <h6>Rp.<?= $data_aktif['jumlahPembayaran'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Dokumentasi</h5>
+                    <div class="p-2">
+                        <div class="row border border-1 rounded mb-3 p-2">
+
+                            <?php foreach ($path_media_dokumentasi as $key => $value) { ?>
+                                <div class="col">
+                                    <div class="gallery">
+                                        <figure>
+                                            <img src="/assets/media/<?= $value['pathMedia'] ?>" alt="" />
+                                        </figure>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -305,6 +401,7 @@
             <a href="/registrasi-user" type="button" class="btn btn-secondary float-end">Close</a>
         </div>
     </div>
+
 
     <?php include('../src/pages/adminhelper/footer.php'); ?>
 </div>
@@ -428,6 +525,50 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="/assets/js/BsMultiSelect.min.js"></script>
 <script src="/assets/js/registrasi-user.js"></script>
+
+
+<!-- POPUP -->
+<script>
+    popup = {
+        init: function() {
+            $('figure').click(function() {
+                popup.open($(this));
+            });
+
+            $(document).on('click', '.popup img', function() {
+                return false;
+            }).on('click', '.popup', function() {
+                popup.close();
+            })
+        },
+        open: function($figure) {
+            $('.gallery').addClass('pop');
+            $popup = $('<div class="popup" />').appendTo($('body'));
+            $fig = $figure.clone().appendTo($('.popup'));
+            $bg = $('<div class="bg" />').appendTo($('.popup'));
+            // $close = $('<div class="close"><svg><use xlink:href="#close"></use></svg></div>').appendTo($fig);
+            $shadow = $('<div class="shadow" />').appendTo($fig);
+            src = $('img', $fig).attr('src');
+            $shadow.css({
+                backgroundImage: 'url(' + src + ')'
+            });
+            $bg.css({
+                backgroundImage: 'url(' + src + ')'
+            });
+            setTimeout(function() {
+                $('.popup').addClass('pop');
+            }, 10);
+        },
+        close: function() {
+            $('.gallery, .popup').removeClass('pop');
+            setTimeout(function() {
+                $('.popup').remove()
+            }, 100);
+        }
+    }
+
+    popup.init()
+</script>
 
 
 </body>

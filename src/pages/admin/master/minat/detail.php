@@ -159,7 +159,7 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Sales</label>
-                                                <h6><?= $datas[42] ?></h6>
+                                                <h6><?= $datas['nameSales'] == NULL ? $datas['namaReseller'] : $datas['nameSales'] ?></h6>
                                             </div>
                                         </div>
                                     </div>

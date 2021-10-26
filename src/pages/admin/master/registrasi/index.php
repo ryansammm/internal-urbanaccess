@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title mb-3">Daftar Data User</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 10px;"></div>
-                        <a type="button" class="btn btn-sm btn-primary mb-1" href="/registrasi-user/create">Tambah Data <i class="fas fa-plus"></i></a>
+                        <!-- <a type="button" class="btn btn-sm btn-primary mb-1" href="/registrasi-user/create">Tambah Data <i class="fas fa-plus"></i></a> -->
                         <table class="table" id="table1">
                             <thead>
                                 <tr>
@@ -33,16 +33,16 @@
                                         <td><?= $value['namauserRegistrasi'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['namaSales'] ?></td>
-                                        <td><?= $value['statusRegistrasi'] == 2 ? 'Sudah Aktivasi' : 'Belum Aktivasi' ?></td>
+                                        <td><?= $value['tercoverText'] ?></td>
                                         <td>
 
                                             <a class="dropdown-toggle" style="font-size: 11pt;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-h"></i>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a href="#" data-bs-toggle="modal" data-bs-target="#aktivasi" data-id="<?= $value['noRegistrasi'] ?>" class="dropdown-item btn-sm btn-outline-success text-success btn-aktivasi"><i class="fas fa-user-check"></i> Aktivasi</a></li>
+                                                <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#aktivasi" data-id="<?= $value['noRegistrasi'] ?>" class="dropdown-item btn-sm btn-outline-success text-success btn-aktivasi"><i class="fas fa-user-check"></i> Aktivasi</a></li>
                                                 <li>
-                                                    <hr class="dropdown-divider">
+                                                    <hr class="dropdown-divider"> -->
                                                 </li>
                                                 <li><a href="/registrasi-user/detail/<?= $value['noRegistrasi'] ?>" class="dropdown-item text-warning btn-sm btn-outline-warning"><i class="fas fa-eye"></i> Detail</a></li>
                                                 <li> <a href="/registrasi-user/<?= $value['noRegistrasi'] ?>/edit" class="dropdown-item text-primary btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Edit</a></li>

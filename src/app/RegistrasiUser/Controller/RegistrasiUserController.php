@@ -2,12 +2,15 @@
 
 namespace App\RegistrasiUser\Controller;
 
+use App\Aktif\Model\Aktif;
+use App\Aktivasi\Model\Aktivasi;
 use App\Client\Model\Client;
 use App\GroupKontak\Model\GroupKontak;
 use App\GroupLayanan\Model\GroupLayanan;
 use App\GroupLegalitas\Model\GroupLegalitas;
 use App\GroupPersyaratan\Model\GroupPersyaratan;
 use App\GroupPIC\Model\GroupPIC;
+use App\Instalasi\Model\Instalasi;
 use App\InternetUserAlamat\Model\InternetUserAlamat;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\InternetUserVendor\Model\InternetUserVendor;
@@ -50,8 +53,37 @@ class RegistrasiUserController extends GlobalFunc
         if ($this->session->get('username') == null) {
             return new RedirectResponse("/admin");
         }
-        $datas = $this->model->selectAll();
+        $datas = $this->model->selectAll("WHERE statusRegistrasi = 4");
         // dd($datas);
+
+
+        foreach ($datas as $key => $value) {
+            if ($value['statusRegistrasi'] == '1') {
+                $datas[$key]['tercoverText'] = 'Registrasi';
+            } else if ($value['statusRegistrasi'] == '2') {
+                $datas[$key]['tercoverText'] = 'Instalasi';
+            } else if ($value['statusRegistrasi'] == '3') {
+                $datas[$key]['tercoverText'] = 'Aktivasi';
+            } else if ($value['statusRegistrasi'] == '4') {
+                $datas[$key]['tercoverText'] = 'Aktif';
+            }
+        }
+
+        // dd($datas);
+
+
+        // $status_registrasi = '';
+        // foreach ($datas as $key => $value) {
+        //     if ($datas['statusRegistrasi'] == '1') {
+        //         $status_registrasi = 'Registrasi';
+        //     } elseif ($datas['statusRegistrasi'] == '2') {
+        //         $status_registrasi = 'Instalasi';
+        //     } elseif ($datas['statusRegistrasi'] == '3') {
+        //         $status_registrasi = 'Aktivasi';
+        //     } elseif ($datas['statusRegistrasi'] == '4') {
+        //         $status_registrasi = 'Aktif';
+        //     }
+        // }
 
         return $this->render_template('admin/master/registrasi/index', ['datas' => $datas]);
     }
@@ -101,7 +133,7 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        dd($datas);
+        // dd($datas);
 
         // Nomor Registrasi
         $noRegistrasi = $this->noRegistrasi($datas);
@@ -291,8 +323,20 @@ class RegistrasiUserController extends GlobalFunc
         $vendor = new Vendor();
         $data_vendor = $vendor->selectAll();
 
+        $instalasi = new Instalasi();
+        $data_instalasi = $instalasi->selectOne("WHERE noRegistrasi = '" . $id . "'");
+        // dd($data_instalasi);
 
-        return $this->render_template('admin/master/registrasi/edit', ['detail' => $detail, 'data_internet_user_layanan' => $data_internet_user_layanan, 'provinsi' => $data_provinsi, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales, 'data_vendor' => $data_vendor]);
+        $aktivasi = new Aktivasi();
+        $data_aktivasi = $aktivasi->selectOne("WHERE idRelation = '" . $id . "'");
+        // dd($data_aktivasi);
+
+        $aktif = new Aktif();
+        $data_aktif = $aktif->selectOne("WHERE idRelation = '" . $id . "'");
+        // dd($data_aktif);
+
+
+        return $this->render_template('admin/master/registrasi/edit', ['detail' => $detail, 'data_internet_user_layanan' => $data_internet_user_layanan, 'provinsi' => $data_provinsi, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales, 'data_vendor' => $data_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif]);
     }
 
     public function update(Request $request)
@@ -304,6 +348,8 @@ class RegistrasiUserController extends GlobalFunc
         // dd($id);
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
+
+
         $update = $this->model->update($id, $datas);
         $id_pic = $detail['nikPic'];
 
@@ -418,6 +464,17 @@ class RegistrasiUserController extends GlobalFunc
         ];
         $group_persyaratan_vendor_npwp_create = $group_legalitas->create($legalitas_vendor_create);
 
+        $instalasi = new Instalasi();
+        $instasi_update = $instalasi->update($datas, $id);
+
+        $aktivasi = new Aktivasi();
+        $aktivasi_update = $aktivasi->update($id, $datas);
+
+        $aktif = new Aktif();
+        $aktif_update = $aktif->update($id, $datas);
+
+
+
 
         return new RedirectResponse('/registrasi-user');
     }
@@ -428,6 +485,7 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
+        // dd($id);
         $detail = $this->model->selectOne($id);
 
         $delete = $this->model->delete($id);
@@ -459,6 +517,14 @@ class RegistrasiUserController extends GlobalFunc
         $group_pic = new GroupPIC();
         $group_pic_delete = $group_pic->delete("WHERE idRelation = '" . $id . "'");
 
+        $instalasi = new Instalasi();
+        $instalasi_delete = $instalasi->delete($id);
+
+        $aktivasi = new Aktivasi();
+        $aktivasi_delete = $aktivasi->delete($id);
+
+        $aktif = new Aktif();
+        $aktif_delete = $aktif->delete($id);
 
 
         return new RedirectResponse('/registrasi-user');
@@ -511,14 +577,30 @@ class RegistrasiUserController extends GlobalFunc
         $media = new Media();
 
         // Media Vendor
+        $path_media_dokumentasi = $media->selectALLMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'dokumentasi'");
+        // dd($path_media_dokumentasi);
+
         $npwp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "'");
+
+        // Media Vendor
 
         $internet_user_vendor = new InternetUserVendor();
         $data_internet_user_vendor = $internet_user_vendor->selectOne($id);
         // dd($data_internet_user_vendor);
 
+        $instalasi = new Instalasi();
+        $data_instalasi = $instalasi->selectOne("WHERE noRegistrasi = '" . $id . "'");
+        // dd($data_instalasi);
 
-        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_provinsi' => $data_provinsi, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor]);
+        $aktivasi = new Aktivasi();
+        $data_aktivasi = $aktivasi->selectOne("WHERE idRelation = '" . $id . "'");
+        // dd($data_aktivasi);
+
+        $aktif = new Aktif();
+        $data_aktif = $aktif->selectOne("WHERE idRelation = '" . $id . "'");
+        // dd($data_aktif);
+
+        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_provinsi' => $data_provinsi, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'path_media_dokumentasi' => $path_media_dokumentasi]);
     }
 
     public function status(Request $request)

@@ -6,36 +6,16 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title mb-3">Menunggu Aktivasi</h4>
+                        <h4 class="card-title mb-3">Dokumentasi</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
-                        <table class="table " id="table1">
-                            <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Nomor Registrasi</td>
-                                    <td>User ID</td>
-                                    <td>Nama User</td>
-                                    <td>Layanan</td>
-                                    <td>Sales</td>
-                                    <td>Status</td>
-                                    <td>Aksi</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data_internet_user_registrasi as $key => $value) { ?>
-                                    <tr>
-                                        <td><?= $key += 1 ?></td>
-                                        <td><?= $value['noRegistrasi'] ?></td>
-                                        <td><?= $value['idUser'] ?></td>
-                                        <td><?= $value['namauserRegistrasi'] ?></td>
-                                        <td><?= $value['namaLayanan'] ?></td>
-                                        <td><?= $value['namaSales'] ?></td>
-                                        <td><?= $value['statusRegistrasi'] == 2 ? 'Menunggu Aktivasi' : 'Registrasi' ?></td>
-                                        <td><a href="/aktivasi/<?= $value['noRegistrasi'] ?>/create" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['noRegistrasi'] ?>"><i class="fas fa-user-check"></i></a></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                        <form method="post" action="/aktivasi/dokumentasi/<?= $id ?>/store" enctype="multipart/form-data" class="dropzone" id="dropzonewidget">
+
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-12 d-flex justify-content-end">
+                            <a href="/aktivasi" class="btn btn-primary me-1 mb-1">Submit</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,6 +96,9 @@
 
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/choices.min.js"></script>
+
+<!-- Dropzone -->
+<script src="/plugins/dropzone/dropzone.js"></script>
 </body>
 
 </html>

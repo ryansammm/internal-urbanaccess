@@ -102,12 +102,6 @@
         })
     })
 
-    $(document).ready(function() {
-        $('.btn-submit-update').on('click', function() {
-            $('.form-update').submit();
-        })
-    })
-
     $(document).on('change', '.select-vendor', function() {
         var vendor = $(this).val()
         $('.btn-list-vendor').val(vendor)
@@ -116,6 +110,10 @@
 
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/choices.min.js"></script>
+
+<!-- DropzoneJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>

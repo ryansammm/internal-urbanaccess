@@ -33,7 +33,7 @@ class InstalasiController extends GlobalFunc
         // dd($datas);
 
         $internet_user_registrasi = new InternetUserRegistrasi();
-        $data_internet_user_registrasi = $internet_user_registrasi->selectAll();
+        $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = ''");
         // dd($data_internet_user_registrasi);
 
         return $this->render_template('admin/master/instalasi/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
@@ -73,9 +73,14 @@ class InstalasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         // dd($datas, $id);
 
+
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $status = '2';
+        $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
+        // dd($internet_user_registrasi_status);
+
+
         $instalasi_create = $this->model->create($datas, $id);
-
-
 
 
         return new RedirectResponse('/instalasi');

@@ -1,14 +1,14 @@
 <?php include('../src/pages/adminhelper/header.php'); ?>
 <?php include('../src/pages/adminhelper/sidebar.php'); ?>
 <div id="main">
-
+    <!-- <?php echo getcwd() ?> -->
     <div class="card">
         <div class="card-content">
-            <form class="form form-vertical" method="post" action="/layanan-internet/store" enctype="multipart/form-data">
+            <form class="form form-vertical" method="post" action="/aktivasi/<?= $id ?>/store" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-1" style="padding-top: 3pt; padding-left: 21pt;">
-                            <a href="/layanan-internet" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></a>
+                            <a href="/aktivasi" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></a>
                         </div>
                         <div class="col">
                             <h4 class="card-title">Tambah Data Kelengkapan Aktivasi</h4>
@@ -19,55 +19,97 @@
 
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">Nomor Registrasi</label>
-                                    <input type="text" class="form-control" name="nomorRegistrasi" value="<?= $id ?>" disabled>
+                            <div class="col-6">
+                                <div class="card-body border border-1 rounded">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Tanggal Aktivasi</label>
+                                                <input type="date" class="form-control" name="tglAktivasi" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Nomor Registrasi</label>
+                                                <input type="text" class="form-control" name="nomorRegistrasi" value="<?= $id ?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Nama Layanan</label>
+                                                <select name="idLayanan" id="layanan" class="form-select" readonly="readonly">
+                                                    <?php foreach ($layanan as $key => $value) { ?>
+                                                        <option <?= $value['idLayananinternet'] == $data_internet_user_layanan['idLayanan'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['namaLayanan'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Kecepatan</label>
+                                                <select name="idLayanandetail" id="kecepatan" class="form-control" readonly="readonly">
+                                                    <?php foreach ($layanan_detail as $key => $value) { ?>
+                                                        <option <?= $value['idLayananinternet'] == $data_internet_user_layanan['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">Tanggal Aktivasi</label>
-                                    <input type="date" class="form-control" name="tglAktivasi" required>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">Nama Layanan</label>
-                                    <input type="text" class="form-control" name="namaLayanan" required>
+
+                            <div class="col-6">
+                                <div class="card-body border border-1 rounded">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">VLan</label>
+                                                <input type="text" class="form-control" name="vlan" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">MAC Address</label>
+                                                <input type="text" class="form-control" name="macAddress" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">Serial Number</label>
+                                                <input type="text" class="form-control" name="serialNumber" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">IP Public/Private</label>
+                                                <select name="jenisIp" id="" class="form-select" required>
+                                                    <option value="">-- Pilih Jenis IP --</option>
+                                                    <option value="1">IP Public</option>
+                                                    <option value="2">IP Private</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mt-3">
+                                        <div action="/target" class="dropzone" id="my-great-dropzone"></div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">VLan</label>
-                                    <input type="text" class="form-control" name="vlan">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">MAC Address</label>
-                                    <input type="text" class="form-control" name="macAddress">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">Serial Number</label>
-                                    <input type="text" class="form-control" name="serialNumber">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="first-name-vertical">IP Public/Private</label>
-                                    <select name="" id="" class="form-select">
-                                        <option value="">-- Pilih Jenis IP --</option>
-                                        <option value="1">IP Public</option>
-                                        <option value="2">IP Private</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
                 <div class="card-footer">
@@ -92,11 +134,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="/assets/js/BsMultiSelect.min.js"></script>
 
+<!-- Dropzone -->
+<script src="/plugins/dropzone/dropzone.js"></script>
+
 <script>
     $(document).ready(function() {
 
     })
 </script>
+
+<!-- <script>
+    Dropzone.options.myGreatDropzone = { // camelized version of the `id`
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: 2, // MB
+        accept: function(file, done) {
+            if (file) {
+                done("Naha, you don't.");
+                console.log(file);
+            } else {
+                done();
+            }
+        }
+    };
+</script> -->
+
 </body>
 
 </html>

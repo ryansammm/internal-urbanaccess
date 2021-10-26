@@ -169,4 +169,21 @@ class Media extends GlobalFunc
             die();
         }
     }
+
+    public function selectALLMedia($where = "")
+    {
+        $sql = "SELECT * FROM " . $this->table . " " . $where;
+        // dd($sql);
+
+        try {
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            $data = $query->fetchAll();
+
+            return $data;
+        } catch (PDOException $e) {
+            echo $e;
+            die();
+        }
+    }
 }

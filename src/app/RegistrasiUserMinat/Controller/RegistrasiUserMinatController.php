@@ -79,7 +79,7 @@ class RegistrasiUserMinatController extends GlobalFunc
         $layanan = $data_layanan->selectAll();
         $data_layanan_detail = new LayananInternetDetail();
         $layanan_detail = $data_layanan_detail->selectAll();
-        // dd($data_minat);
+        // dd($layanan);
 
         $provinsi = new Provinsi();
         $data_provinsi = $provinsi->selectAll();

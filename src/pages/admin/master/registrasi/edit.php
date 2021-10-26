@@ -40,7 +40,7 @@
                                         <label for="first-name-vertical">Kecepatan *</label>
                                         <select name="idLayanandetail" id="kecepatan" class="form-control">
                                             <?php foreach ($layanan_detail as $key => $value) { ?>
-                                                <option <?= $value['idLayananinternet'] == $data_internet_user_layanan['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?></option>
+                                                <option <?= $value['idLayananinternet'] == $data_internet_user_layanan['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -358,6 +358,92 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">Keterangan</label>
                                         <textarea class="form-control" name="keterangan" id="" cols="30" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Instalasi -->
+                        <h5 class="mt-3">Data Instalasi</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Tanggal Instalasi</label>
+                                        <input type="date" class="form-control" name="tglInstalasi" value="<?= $data_instalasi['tglInstalasi'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Jarak</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control number" name="jarak" value="<?= $data_instalasi['jarak'] ?>">
+                                            <span class="input-group-text">Meter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-3">Data Aktivasi</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Tanggal Aktivasi</label>
+                                        <input type="date" class="form-control" name="tglAktivasi" value="<?= $data_aktivasi['tglAktivasi'] ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">VLan</label>
+                                        <input type="text" class="form-control" name="vlan" value="<?= $data_aktivasi['vlan'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">MAC Address</label>
+                                        <input type="text" class="form-control" name="macAddress" value="<?= $data_aktivasi['macAddress'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Serial Number</label>
+                                        <input type="text" class="form-control" name="serialNumber" value="<?= $data_aktivasi['serialNumber'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Jenis IP</label>
+                                        <select name="jenisIp" id="" class="form-select" required>
+                                            <option value="">-- Pilih Jenis IP --</option>
+                                            <option value="1" <?= $data_aktivasi['jenisIp'] == 1 ? "selected" : "" ?>>IP Publik</option>
+                                            <option value="2" <?= $data_aktivasi['jenisIp'] == 2 ? "selected" : "" ?>>IP Private</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Aktif -->
+                        <h5 class="mt-3">Data Aktif</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Tanggal Aktif</label>
+                                        <input type="date" class="form-control" name="tanggalPembayaran" value="<?= $data_aktif['tanggalPembayaran'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Total Pembayaran</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input type="text" class="form-control number" name="jumlahPembayaran" value="<?= $data_aktif['jumlahPembayaran'] ?>">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

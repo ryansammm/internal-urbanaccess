@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Aktivasi\Controller;
+namespace App\Aktif\Controller;
 
+use App\Aktif\Model\Aktif;
 use App\Aktivasi\Model\Aktivasi;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\LayananInternet\Model\LayananInternet;
-use App\LayananInternetDetail\Model\LayananInternetDetail;
-use App\Media\Model\Media;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
@@ -17,13 +16,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class AktivasiController extends GlobalFunc
+class AktifController extends GlobalFunc
 {
     public $model;
 
     public function __construct()
     {
-        $this->model = new Aktivasi();
+        $this->model = new Aktif();
         parent::beginSession();
     }
 
@@ -36,10 +35,10 @@ class AktivasiController extends GlobalFunc
         $datas = $this->model->selectAll();
 
         $internet_user_registrasi = new InternetUserRegistrasi();
-        $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = 2");
-        // dd($data_internet_user_registrasi);
+        $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = 3");
+        // dd($datas);
 
-        return $this->render_template('admin/master/aktivasi/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
+        return $this->render_template('admin/master/aktif/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
     }
 
     public function create(Request $request)
@@ -48,17 +47,14 @@ class AktivasiController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
-        // dd($id);
 
         $data_layanan = new LayananInternet();
         $layanan = $data_layanan->selectAll();
-        $data_layanan_detail = new LayananInternetDetail();
-        $layanan_detail = $data_layanan_detail->selectAll();
 
         $internet_user_layanan = new InternetUserLayanan();
         $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
 
-        return $this->render_template('admin/master/aktivasi/create', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan, 'layanan_detail' => $layanan_detail]);
+        return $this->render_template('admin/master/aktivasi/create', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan]);
     }
 
     public function detail(Request $request)
@@ -80,54 +76,17 @@ class AktivasiController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        // dd($datas);
         $id = $request->attributes->get('id');
-        // dd($id);
+        // dd($datas, $id);
 
         $internet_user_registrasi = new InternetUserRegistrasi();
-        $status = '3';
+        $status = '4';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
-        $aktivasi_create = $this->model->create($datas, $datas['nomorRegistrasi']);
+        $aktif_create = $this->model->create($datas, $id);
 
 
-        return new RedirectResponse('/aktivasi/dokumentasi/' . $id);
-    }
-
-    public function dokumentasi(Request $request)
-    {
-        if ($this->session->get('username') == null) {
-            return new RedirectResponse("/admin");
-        }
-        $id = $request->attributes->get('id');
-        // dd($id);
-
-        $data_layanan = new LayananInternet();
-        $layanan = $data_layanan->selectAll();
-        $data_layanan_detail = new LayananInternetDetail();
-        $layanan_detail = $data_layanan_detail->selectAll();
-
-        $internet_user_layanan = new InternetUserLayanan();
-        $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
-
-        return $this->render_template('admin/master/aktivasi/dokumentasi', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan, 'layanan_detail' => $layanan_detail]);
-    }
-
-    public function dokumentasiStore(Request $request)
-    {
-        // if ($this->session->get('username') == null) {
-        //     return new RedirectResponse("/admin");
-        // }
-        $datas = $request->request->all();
-        // dd($_FILES);
-        $id = $request->attributes->get('id');
-        // dd($id);
-
-        $media = new Media();
-        $media->create($_FILES['file'], $id, '1', 'dokumentasi');
-
-
-        return new JsonResponse([]);
+        return new RedirectResponse('/aktif');
     }
 
     public function get(Request $request)

@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/choices.min.css">
 
+    <!-- Dropzone -->
+    <link rel="stylesheet" href="/plugins/dropzone/dropzone.css">
+
 </head>
 
 <body>
