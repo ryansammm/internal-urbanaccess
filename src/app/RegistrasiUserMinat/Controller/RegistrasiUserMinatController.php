@@ -59,6 +59,18 @@ class RegistrasiUserMinatController extends GlobalFunc
 
 
 
+        foreach ($data_minat as $key => $value) {
+            if ($value['namaLayanan'] == 'UrbanLite') {
+                $data_minat[$key]['link'] = '/urban-lite/';
+            } elseif ($value['namaLayanan'] == 'UrbanMax') {
+                $data_minat[$key]['link'] = '/urban-max/';
+            } elseif ($value['namaLayanan'] == 'UrbanUltimate') {
+                $data_minat[$key]['link'] = '/urban-ultimate/';
+            }
+        }
+
+        // dd($data_minat);
+
         return $this->render_template('admin/master/registrasi-user-minat/index', ['data_minat' => $data_minat]);
     }
 

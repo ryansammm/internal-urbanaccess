@@ -69,8 +69,6 @@ class RegistrasiUserController extends GlobalFunc
             }
         }
 
-        // dd($datas);
-
 
         // $status_registrasi = '';
         // foreach ($datas as $key => $value) {

@@ -479,20 +479,26 @@ $routes->add('aktifStore', new Route('/aktif/{id}/store', [
 
 
 // URBAN-LITE
-// $routes->add('registrasiUrbanLiteCreate', new Route('/registrasi-user/create', [
-//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::create',
-// ]));
-// $routes->add('registrasiStore', new Route('/registrasi-user/store', [
-//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::store',
-// ]));
-// $routes->add('registrasiDetail', new Route('/registrasi-user/detail/{id}', [
-//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::detail',
-// ]));
-$routes->add('registrasiUrbanLiteEdit', new Route('/urban-lite/{id}/edit', [
+$routes->add('urbanLite', new Route('/urban-lite', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::index',
+]));
+$routes->add('urbanLiteCreate', new Route('/urban-lite/{id}/create', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::create',
+]));
+$routes->add('urbanLiteStore', new Route('/urban-lite/{id}/store', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::store',
+]));
+$routes->add('urbanLiteDetail', new Route('/urban-lite/detail/{id}', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::detail',
+]));
+$routes->add('urbanLiteEdit', new Route('/urban-lite/{id}/edit', [
     '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::edit',
 ]));
-$routes->add('registrasiUrbanLiteUpdate', new Route('/urban-lite/{id}/update', [
+$routes->add('urbanLiteUpdate', new Route('/urban-lite/{id}/update', [
     '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::update',
+]));
+$routes->add('urbanLiteDelete', new Route('/urban-lite/{id}/delete', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::delete',
 ]));
 
 
