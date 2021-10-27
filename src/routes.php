@@ -501,6 +501,52 @@ $routes->add('urbanLiteDelete', new Route('/urban-lite/{id}/delete', [
     '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::delete',
 ]));
 
+// URBAN-MAX
+$routes->add('urbanMax', new Route('/urban-max', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::index',
+]));
+$routes->add('urbanMaxCreate', new Route('/urban-max/{id}/create', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::create',
+]));
+$routes->add('urbanMaxStore', new Route('/urban-max/{id}/store', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::store',
+]));
+$routes->add('urbanMaxDetail', new Route('/urban-max/detail/{id}', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::detail',
+]));
+$routes->add('urbanMaxEdit', new Route('/urban-max/{id}/edit', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::edit',
+]));
+$routes->add('urbanMaxUpdate', new Route('/urban-max/{id}/update', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::update',
+]));
+$routes->add('urbanMaxDelete', new Route('/urban-max/{id}/delete', [
+    '_controller' => 'App\UrbanMax\Controller\UrbanMaxController::delete',
+]));
+
+// URBAN-ULTIMATE
+$routes->add('UrbanUltimate', new Route('/urban-ultimate', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::index',
+]));
+$routes->add('UrbanUltimateCreate', new Route('/urban-ultimate/{id}/create', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::create',
+]));
+$routes->add('UrbanUltimateStore', new Route('/urban-ultimate/{id}/store', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::store',
+]));
+$routes->add('UrbanUltimateDetail', new Route('/urban-ultimate/detail/{id}', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::detail',
+]));
+$routes->add('UrbanUltimateEdit', new Route('/urban-ultimate/{id}/edit', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::edit',
+]));
+$routes->add('UrbanUltimateUpdate', new Route('/urban-ultimate/{id}/update', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::update',
+]));
+$routes->add('UrbanUltimateDelete', new Route('/urban-ultimate/{id}/delete', [
+    '_controller' => 'App\UrbanUltimate\Controller\UrbanUltimateController::delete',
+]));
+
 
 
 return $routes;
