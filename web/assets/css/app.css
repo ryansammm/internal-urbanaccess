@@ -1053,7 +1053,8 @@
 .sidebar-wrapper .menu .submenu .submenu-item a {
   margin-top: 4pt;
   margin-bottom: 4pt;
-  padding: 5pt 2rem;
+  padding: 0.7rem 2rem;
+  /* padding: 5pt 2rem; */
   display: block;
   color: #25396f;
   font-size: 0.85rem;

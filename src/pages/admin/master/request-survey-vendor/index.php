@@ -101,7 +101,13 @@
 
     $(document).ready(function() {
         $('.btn-submit-update').on('click', function() {
-            $('.form-update').submit();
+            var select = $('.select-vendor').val()
+            // console.log(select)
+            if (select.length == 0) {
+                alert("Vendor Belum Dipilih")
+            } else {
+                $('.form-update').submit();
+            }
         })
     })
 

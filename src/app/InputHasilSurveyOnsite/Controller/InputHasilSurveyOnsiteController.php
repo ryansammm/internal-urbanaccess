@@ -3,7 +3,10 @@
 namespace App\InputHasilSurveyOnsite\Controller;
 
 use App\InputHasilSurveyOnsite\Model\InputHasilSurveyOnsite;
+use App\InternetUserLayanan\Model\InternetUserLayanan;
+use App\LayananInternet\Model\LayananInternet;
 use App\LayananInternetDetail\Model\LayananInternetDetail;
+use App\Media\Model\Media;
 use App\Minat\Model\Minat;
 use App\MinatLayanan\Model\MinatLayanan;
 use App\Users\Model\Users;
@@ -101,8 +104,6 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         $minat_layanan = new MinatLayanan();
         $data_minat_layanan = $minat_layanan->selectOne("WHERE idMinat = '" . $detail['kodeMinat'] . "'");
 
-        // dd($id, $datas, $data_minat_layanan);
-
         $user = new Users();
         $ambilUser = $user->selectOneUser($this->session->get('idUser'));
 
@@ -110,7 +111,6 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
 
 
 
-        // dd($detail);
 
         $group_data = [
             'tanggalHasil' =>  $datas['tanggalHasil'],
@@ -130,7 +130,43 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
 
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
-        return new RedirectResponse('/input-hasil-survey-onsite');
+        return new RedirectResponse('/input-hasil-survey-onsite/dokumentasi/' . $id);
+    }
+
+    public function dokumentasi(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+        $data_layanan = new LayananInternet();
+        $layanan = $data_layanan->selectAll();
+        $data_layanan_detail = new LayananInternetDetail();
+        $layanan_detail = $data_layanan_detail->selectAll();
+
+        $internet_user_layanan = new InternetUserLayanan();
+        $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
+
+        return $this->render_template('admin/master/input-hasil-survey-onsite/dokumentasi', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan, 'layanan_detail' => $layanan_detail]);
+    }
+
+    public function dokumentasiStore(Request $request)
+    {
+        // if ($this->session->get('username') == null) {
+        //     return new RedirectResponse("/admin");
+        // }
+        $datas = $request->request->all();
+        // dd($_FILES);
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+        $media = new Media();
+        $media->create($_FILES['file'], $id, '1', 'dokumentasi-onsite');
+
+
+        return new JsonResponse([]);
     }
 
     public function delete(Request $request)

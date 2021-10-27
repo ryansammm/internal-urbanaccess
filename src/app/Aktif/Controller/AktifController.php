@@ -36,7 +36,7 @@ class AktifController extends GlobalFunc
 
         $internet_user_registrasi = new InternetUserRegistrasi();
         $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = 3");
-        // dd($datas);
+        // dd($data_internet_user_registrasi);
 
         return $this->render_template('admin/master/aktif/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
     }

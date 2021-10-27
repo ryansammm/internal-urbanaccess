@@ -44,7 +44,7 @@ body,
 }
 
 .sidebar-wrapper .menu .submenu .submenu-item a:hover {
-  color: #589cd1;
+  color: #3577bc;
   background-color: white;
 }
 
@@ -1008,4 +1008,17 @@ img {
   100% {
     transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -300, -225, 0, 1);
   }
+}
+
+.sidebar-wrapper .menu .sidebar-link .icon-dropdown2 {
+  position: absolute;
+  color: white;
+  right: 18px;
+  top: 13px;
+  font-size: 12pt;
+  display: block;
+}
+
+.sidebar-wrapper .menu .sidebar-link .icon-dropdown2::after {
+  display: none;
 }

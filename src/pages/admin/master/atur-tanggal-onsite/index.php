@@ -91,6 +91,8 @@
 
     $(document).ready(function() {
         $('.btn-submit-update').on('click', function() {
+            // console.log('.btn-submit-hapus')
+
             $('.form-update').submit();
         })
     })

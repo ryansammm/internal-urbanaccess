@@ -342,6 +342,12 @@ $routes->add('inputHasilSurveyOnsiteGet', new Route('/input-hasil-survey-onsite/
 $routes->add('inputHasilSurveyOnsiteUpdate', new Route('/input-hasil-survey-onsite/{id}/update', [
     '_controller' => 'App\InputHasilSurveyOnsite\Controller\InputHasilSurveyOnsiteController::update',
 ]));
+$routes->add('inputHasilSurveyOnsiteDokumentasi', new Route('/input-hasil-survey-onsite/dokumentasi/{id}', [
+    '_controller' => 'App\InputHasilSurveyOnsite\Controller\InputHasilSurveyOnsiteController::dokumentasi',
+]));
+$routes->add('inputHasilSurveyOnsiteStore', new Route('/input-hasil-survey-onsite/dokumentasi/{id}/store', [
+    '_controller' => 'App\InputHasilSurveyOnsite\Controller\InputHasilSurveyOnsiteController::dokumentasiStore',
+]));
 
 // Forecast
 $routes->add('forecast', new Route('/forecast', [
@@ -468,6 +474,25 @@ $routes->add('aktif', new Route('/aktif', [
 ]));
 $routes->add('aktifStore', new Route('/aktif/{id}/store', [
     '_controller' => 'App\Aktif\Controller\AktifController::store',
+]));
+
+
+
+// URBAN-LITE
+// $routes->add('registrasiUrbanLiteCreate', new Route('/registrasi-user/create', [
+//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::create',
+// ]));
+// $routes->add('registrasiStore', new Route('/registrasi-user/store', [
+//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::store',
+// ]));
+// $routes->add('registrasiDetail', new Route('/registrasi-user/detail/{id}', [
+//     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::detail',
+// ]));
+$routes->add('registrasiUrbanLiteEdit', new Route('/urban-lite/{id}/edit', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::edit',
+]));
+$routes->add('registrasiUrbanLiteUpdate', new Route('/urban-lite/{id}/update', [
+    '_controller' => 'App\UrbanLite\Controller\UrbanLiteController::update',
 ]));
 
 

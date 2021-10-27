@@ -73,7 +73,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
         $input_survey = new InputHasilSoftSurvey;
         $data_survey = $input_survey->selectOne("WHERE id = '" . $id . "'");
-        $data_survey['biayaInstalasi'] =  number_format($data_survey['biayaInstalasi'], 0, "", ".");
+        // $data_survey['biayaInstalasi'] =  number_format($data_survey['biayaInstalasi'], 0, "", ".");
         // dd($data_survey);
 
 

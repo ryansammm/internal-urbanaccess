@@ -108,7 +108,7 @@
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/minat')  !== false || strpos($GLOBALS['url'], '-survey')  !== false || strpos($GLOBALS['url'], '-onsite')  !== false || strpos($GLOBALS['url'], '-minat')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/aktivasi')  !== false || strpos($GLOBALS['url'], '/aktif')  !== false || strpos($GLOBALS['url'], '/registrasi-user-minat')  !== false ? 'oncom' : ''; ?>">
                             <i class="fas fa-file-alt"></i>
                             <span>Minat</span>
-                            <i class="icon-dropdown"></i>
+                            <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
                         <ul class="submenu" style="display: none;">
                             <li class="submenu-item">
@@ -119,7 +119,7 @@
                             </li>
                             <li class="sidebar-item has-sub submenu-item">
                                 <a href="form-layout.html" class="sidebar-link">
-                                    <i class="icon-dropdown"></i>
+                                    <i class="icon-dropdown2 fas fa-caret-down"></i>
                                     <span style="margin-left: 0rem;">Data Soft Survey</span>
                                 </a>
                                 <ul class="submenu" style="display: none;">
@@ -136,7 +136,7 @@
                             </li>
                             <li class="sidebar-item has-sub submenu-item">
                                 <a href="form-layout.html" class="sidebar-link">
-                                    <i class="icon-dropdown"></i>
+                                    <i class="icon-dropdown2 fas fa-caret-down"></i>
                                     <span style="margin-left: 0rem;">Survey On Site</span>
                                 </a>
                                 <ul class="submenu" style="display: none;">
@@ -173,7 +173,7 @@
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/layanan-internet')  !== false || strpos($GLOBALS['url'], '/kecepatan-internet')  !== false  ? 'oncom' : ''; ?>">
                             <i class="fas fa-wifi"></i>
                             <span>Layanan Internet</span>
-                            <i class="icon-dropdown"></i>
+                            <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
                         <ul class="submenu" style="display: none;">
                             <li class="submenu-item ">
@@ -189,7 +189,7 @@
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/urban')  !== false  ? 'oncom' : ''; ?>">
                             <i class="bi bi-people-fill"></i>
                             <span>Data User</span>
-                            <i class="icon-dropdown"></i>
+                            <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
                         <ul class="submenu" style="display: none;">
                             <li class="submenu-item ">
@@ -208,7 +208,7 @@
                         <a href="form-layout.html" class="sidebar-link <?= $GLOBALS['url'] == '/reseller' || $GLOBALS['url'] == '/sales-perorangan'  ? 'oncom' : ''; ?>">
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Data Sales</span>
-                            <i class="icon-dropdown"></i>
+                            <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
                         <ul class="submenu" style="display: none;">
                             <li class="submenu-item ">

@@ -31,26 +31,27 @@ function j(t, e, o, i) {
     void 0 === p && (p = x);
     var f = x - p;
     i
-      ? ((t.style.height = g * f + "px"),
+      ?
+      ((t.style.height = g * f + "px"),
         (t.style.paddingTop = y * f + "px"),
         (t.style.paddingBottom = m * f + "px"),
         (t.style.marginTop = u * f + "px"),
-        (t.style.marginBottom = h * f + "px"))
-      : ((t.style.height = n - g * f + "px"),
+        (t.style.marginBottom = h * f + "px")) :
+      ((t.style.height = n - g * f + "px"),
         (t.style.paddingTop = a - y * f + "px"),
         (t.style.paddingBottom = s - m * f + "px"),
         (t.style.marginTop = r - u * f + "px"),
         (t.style.marginBottom = d - h * f + "px")),
-      f >= e
-        ? ((t.style.height = ""),
-          (t.style.paddingTop = ""),
-          (t.style.paddingBottom = ""),
-          (t.style.marginTop = ""),
-          (t.style.marginBottom = ""),
-          (t.style.overflow = ""),
-          i || (t.style.display = "none"),
-          "function" == typeof o && o())
-        : window.requestAnimationFrame(l);
+      f >= e ?
+      ((t.style.height = ""),
+        (t.style.paddingTop = ""),
+        (t.style.paddingBottom = ""),
+        (t.style.marginTop = ""),
+        (t.style.marginBottom = ""),
+        (t.style.overflow = ""),
+        i || (t.style.display = "none"),
+        "function" == typeof o && o()) :
+      window.requestAnimationFrame(l);
   });
 }
 
@@ -100,6 +101,49 @@ if (typeof PerfectScrollbar == "function") {
     wheelPropagation: false,
   });
 }
+
+
+
+popup = {
+  init: function () {
+    $('figure').click(function () {
+      popup.open($(this));
+    });
+
+    $(document).on('click', '.popup img', function () {
+      return false;
+    }).on('click', '.popup', function () {
+      popup.close();
+    })
+  },
+  open: function ($figure) {
+    $('.gallery').addClass('pop');
+    $popup = $('<div class="popup" />').appendTo($('body'));
+    $fig = $figure.clone().appendTo($('.popup'));
+    $bg = $('<div class="bg" />').appendTo($('.popup'));
+    // $close = $('<div class="close"><svg><use xlink:href="#close"></use></svg></div>').appendTo($fig);
+    $shadow = $('<div class="shadow" />').appendTo($fig);
+    src = $('img', $fig).attr('src');
+    $shadow.css({
+      backgroundImage: 'url(' + src + ')'
+    });
+    $bg.css({
+      backgroundImage: 'url(' + src + ')'
+    });
+    setTimeout(function () {
+      $('.popup').addClass('pop');
+    }, 10);
+  },
+  close: function () {
+    $('.gallery, .popup').removeClass('pop');
+    setTimeout(function () {
+      $('.popup').remove()
+    }, 100);
+  }
+}
+
+popup.init()
+
 
 // Scroll into active sidebar
 document.querySelector(".sidebar-item.active").scrollIntoView(false);

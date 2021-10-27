@@ -159,7 +159,7 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Sales</label>
-                                                <h6><?= $datas['nameSales'] == NULL ? $datas['namaReseller'] : $datas['nameSales'] ?></h6>
+                                                <h6><?= $datas['nameSales'] == NULL ? $datas['nameReseller'] : $datas['nameSales'] ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -172,13 +172,11 @@
                             <div class="col-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <h6>
-                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Detail
-                                                    </button>
-                                                </h6>
+                                        <div class="col-4">
+                                            <div class="gallery">
+                                                <figure>
+                                                    <img src="/assets/media/<?= $datas['pathMedia'] ?>" class="img-fluid" alt="">
+                                                </figure>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +208,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="col-12 d-flex justify-content-end mt-3">
+                    <div class="col-12 d-flex justify-content-end">
                         <a href="/minat" class="btn btn-secondary me-1">CLose</a>
                     </div>
                 </div>
@@ -222,29 +220,57 @@
 </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Foto Lokasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img src="/assets/media/<?= $datas['pathMedia'] ?>" class="img-fluid" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 
-<script src="/assets/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="/assets/js/BsMultiSelect.min.js"></script>
 <script src="/assets/js/minat.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- POPUP -->
+<!-- <script>
+    popup = {
+        init: function() {
+            $('figure').click(function() {
+                popup.open($(this));
+            });
+
+            $(document).on('click', '.popup img', function() {
+                return false;
+            }).on('click', '.popup', function() {
+                popup.close();
+            })
+        },
+        open: function($figure) {
+            $('.gallery').addClass('pop');
+            $popup = $('<div class="popup" />').appendTo($('body'));
+            $fig = $figure.clone().appendTo($('.popup'));
+            $bg = $('<div class="bg" />').appendTo($('.popup'));
+            // $close = $('<div class="close"><svg><use xlink:href="#close"></use></svg></div>').appendTo($fig);
+            $shadow = $('<div class="shadow" />').appendTo($fig);
+            src = $('img', $fig).attr('src');
+            $shadow.css({
+                backgroundImage: 'url(' + src + ')'
+            });
+            $bg.css({
+                backgroundImage: 'url(' + src + ')'
+            });
+            setTimeout(function() {
+                $('.popup').addClass('pop');
+            }, 10);
+        },
+        close: function() {
+            $('.gallery, .popup').removeClass('pop');
+            setTimeout(function() {
+                $('.popup').remove()
+            }, 100);
+        }
+    }
+
+    popup.init()
+</script> -->
 
 
 </body>

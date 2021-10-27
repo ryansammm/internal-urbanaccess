@@ -133,8 +133,8 @@
             method: "get",
         }).done(function(data) {
             modal.find('.namaVendor').html(data.namaVendor);
-            modal.find('.jarak').html(data.jarak + ' meter');
-            modal.find('.biayaInstalasi').html('Rp.' + data.biayaInstalasi);
+            modal.find('.jarak').html(data.jarak + ' Meter');
+            modal.find('.biayaInstalasi').html('Rp.' + data.biayaInstalasi + ',-');
             modal.find('.tglSurvey').html(data.tanggalRequest);
             modal.find('.tglHasilSurvey').html(data.tanggalHasil);
         });
