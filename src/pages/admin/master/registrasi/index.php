@@ -33,7 +33,7 @@
                                         <td><?= $value['namauserRegistrasi'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['namaSales'] ?></td>
-                                        <td><?= $value['tercoverText'] ?></td>
+                                        <td style="color: #00b30e;"><?= $value['tercoverText'] ?></td>
                                         <td>
 
                                             <a class="dropdown-toggle" style="font-size: 11pt;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

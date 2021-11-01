@@ -39,7 +39,7 @@ class InternetUserRegistrasiMinat extends GlobalFunc
         $kodeformInternetregistrasi = $datas['kodeformInternetregistrasi'];
         $tanggalRegistrasi = $datas['tanggalRegistrasi'];
         $idSales = $datas['idSales'];
-        $idMitra = NULL;
+        $nikUserRegistrasi = $datas['nikUserRegistrasi'];
         $idUser = $datas['idUser'];
         $jenisuserRegistrasi = $datas['jenisuserRegistrasi'];
         $statusRegistrasi = NULL;
@@ -51,7 +51,7 @@ class InternetUserRegistrasiMinat extends GlobalFunc
         $updatedAt = date('Y-m-d H:i:s');
         $keterangan = $datas['keterangan'];
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$idMitra', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt', '$keterangan')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt', '$keterangan')";
         // dd($sql);
         try {
             $data = $this->conn->prepare($sql);

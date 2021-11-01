@@ -124,7 +124,7 @@ class AktivasiController extends GlobalFunc
         // dd($id);
 
         $media = new Media();
-        $media->create($_FILES['file'], $id, '1', 'dokumentasi');
+        $media->create($_FILES['file'], $id, '1', 'dokumentasi-aktivasi');
 
 
         return new JsonResponse([]);

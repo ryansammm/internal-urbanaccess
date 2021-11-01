@@ -1,14 +1,14 @@
 <?php
 
-namespace App\PIC\Model;
+namespace App\Invoice\Model;
 
 use Core\GlobalFunc;
 use PDOException;
 
-class PIC extends GlobalFunc
+class Invoice extends GlobalFunc
 {
-    private $table = 'pic';
-    private $primaryKey = 'nikPic';
+    private $table = 'invoice';
+    private $primaryKey = 'id';
     public $conn;
 
     public function __construct()
@@ -33,26 +33,21 @@ class PIC extends GlobalFunc
         }
     }
 
-    public function create($datas)
+    public function create($noRegistrasi, $datas)
     {
-        $idPic = uniqid('idPIC');
-        $nikPic = $datas['nikPic'];
-        $namaPic = $datas['namaPic'];
-        $jenisPic = isset($datas['jenisPic']) ? $datas['jenisPic'] : NULL;
-        $tanggallahirPic = isset($datas['tanggallahirPic']) ? $datas['tanggallahirPic'] : NULL;
-        $statusPic = $datas['statusPic'];
-        $jabatanPic = isset($datas['jabatanPic']) ? $datas['jabatanPic'] : NULL;
+        $id = uniqid('id');
+        $pengirimaninvoice = $datas['pengirimanInvoice'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$idPic','$nikPic','$namaPic', '$jenisPic', '$tanggallahirPic', '$statusPic', '$jabatanPic', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$id','$noRegistrasi','$pengirimaninvoice', '$createdAt', '$updatedAt')";
         // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
 
-            return $nikPic;
+            return $id;
         } catch (PDOException $e) {
             echo $e;
             die();
@@ -77,15 +72,10 @@ class PIC extends GlobalFunc
 
     public function update($id, $datas, $where)
     {
-        $nikPic = $datas['nikPic'];
-        $namaPic = $datas['namaPic'];
-        $tempatlahirPic = $datas['tempatlahirPic'];
-        $tanggallahirPic = $datas['tanggallahirPic'];
-        $statusPic = $datas['statusPic'];
-        $jabatanPic = $datas['jabatanPic'];
+        $pengirimaninvoice = $datas['pengirimaninvoice'];
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "UPDATE " . $this->table . " SET nikPic = '$nikPic', namaPic = '$namaPic', tempatlahirPic = '$tempatlahirPic', tanggallahirPic = '$tanggallahirPic', statusPic = '$statusPic', jabatanPic = '$jabatanPic', updatedAt = '$updatedAt' " . $where;
+        $sql = "UPDATE " . $this->table . " SET  pengirimaninvoice = '$pengirimaninvoice', updatedAt = '$updatedAt' " . $where;
 
         try {
             $data = $this->conn->prepare($sql);

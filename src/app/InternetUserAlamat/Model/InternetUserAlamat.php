@@ -33,8 +33,9 @@ class InternetUserAlamat extends GlobalFunc
         }
     }
 
-    public function create($idInternetuserregistrasi, $datas)
+    public function create($noRegistrasi, $datas)
     {
+        $idInternetuserregistrasi = uniqid('id');
         $alamat = $datas['alamat'];
         $rt = $datas['rt'];
         $rw = $datas['rw'];
@@ -47,9 +48,10 @@ class InternetUserAlamat extends GlobalFunc
         $longtitude = explode(',', $datas['koordinat'])[1];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
+        $jenisAlamat = $datas['jenisAlamat'];
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$idInternetuserregistrasi','$alamat', '$rt', '$rw', '$idProvinsi', '$idKabupaten', '$idKecamatan', '$idKelurahan','$kodepos', '$latitude', '$longtitude', '$createdAt', '$updatedAt')";
-        // dd($latitude);
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$idInternetuserregistrasi','$noRegistrasi','$alamat', '$rt', '$rw', '$idProvinsi', '$idKabupaten', '$idKecamatan', '$idKelurahan','$kodepos', '$latitude', '$longtitude', '$createdAt', '$updatedAt','$jenisAlamat')";
+        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);

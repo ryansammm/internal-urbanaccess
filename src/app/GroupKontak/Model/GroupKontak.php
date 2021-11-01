@@ -59,7 +59,7 @@ class GroupKontak extends GlobalFunc
     public function selectOne($where = "")
     {
         $sql = "SELECT * FROM " . $this->table . " " . $where;
-        // dd($sql);
+        dd($sql);
 
         try {
             $query = $this->conn->prepare($sql);

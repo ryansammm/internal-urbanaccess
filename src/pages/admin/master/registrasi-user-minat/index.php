@@ -28,7 +28,7 @@
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['alamat'] ?></td>
                                         <td>
-                                            <a href="<?= $value['link'] ?><?= $value['kodeMinat'] ?>/create" class="btn-sm btn btn-outline-primary "><i class="fas fa-user-plus"></i></i></a>
+                                            <a href="registrasi-user-minat/<?= $value['kodeMinat'] ?>/create" class="btn-sm btn btn-outline-primary "><i class="fas fa-user-plus"></i></i></a>
                                             <a href="#" class=" btn-sm btn btn-outline-danger btn-cancel" data-bs-toggle="modal" data-bs-target="#cancelModal" data-id="<?= $value['kodeMinat'] ?>"><i class="fas fa-times"></i></a>
                                         </td>
                                     </tr>

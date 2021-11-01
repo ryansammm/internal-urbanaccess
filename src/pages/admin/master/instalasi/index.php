@@ -30,8 +30,13 @@
                                         <td><?= $value['namauserRegistrasi'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['namaSales'] ?></td>
-                                        <td><?= $value['statusRegistrasi'] == 2 ? 'Sudah Aktivasi' : 'Registrasi' ?></td>
-                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['noRegistrasi'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-tools"></i></a></td>
+                                        <td><?= $value['statusRegistrasi'] == 2 ? 'Sudah Aktivasi' : 'Menunggu Penjadwalan' ?></td>
+                                        <td>
+                                            <a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['noRegistrasi'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-plus"></i></a>
+                                            <a href="" class="btn-edit btn btn-sm btn-outline-warning" data-id="<?= $value['noRegistrasi'] ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fas fa-edit"></i></a>
+                                            <a href="/instalasi/dokumentasi/<?= $value['noRegistrasi'] ?>" class="btn-dokumentasi btn btn-sm btn-outline-secondary"><i class="fas fa-camera"></i></a>
+                                            <a href="" class="btn-detail btn btn-sm btn-outline-success" data-id="<?= $value['noRegistrasi'] ?>" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-check"></i></a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -53,11 +58,11 @@
         <form action="" class="form-update form-group" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hasil Instalasi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Hasil Instalasi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="ro">
+                    <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="first-name-vertical">Tanggal Instalasi</label>
@@ -80,6 +85,81 @@
     </div>
 </div>
 
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" class="form-edit form-group" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hasil Instalasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="first-name-vertical">Tanggal Instalasi</label>
+                                <input type="date" class="form-control" name="tglInstalasi" value="" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="first-name-vertical">Jarak</label>
+                                <input type="text" class="form-control" name="jarak" value="" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-submit-edit">Konfirmasi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Instalasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <form action="" class="form-detail">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td style="width: 35%;">Tanggal Instalasi</td>
+                                            <td>:</td>
+                                            <td class="tglInstalasi"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jarak</td>
+                                            <td>:</td>
+                                            <td class="jarak"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
@@ -89,6 +169,8 @@
     let table1 = document.querySelector('#table1');
     let dataTable = new simpleDatatables.DataTable(table1);
 
+
+    // Store Data Instalasi
     $(document).on('click', '.btn-update', function() {
         var modal = $('#updateModal');
         var id = $(this).attr('data-id');
@@ -108,11 +190,54 @@
     })
 </script>
 
+<script>
+    // Update Data Instalasi 
+    $(document).on('click', '.btn-edit', function() {
+        var modal = $('#editModal');
+        var id = $(this).attr('data-id');
+
+        modal.find('.form-edit').prop('action', '/instalasi/' + id + '/update');
+
+    })
+
+    $(document).ready(function() {
+        $('.btn-submit-edit').on('click', function() {
+            $('.form-edit').submit();
+        })
+    })
+
+    $(document).on('change', '.select-vendor', function() {
+        var vendor = $(this).val()
+        $('.btn-list-vendor').val(vendor)
+    })
+</script>
+
+<script>
+    // Konfirmasi Data Instalasi
+    $(document).on('click', '.btn-detail', function() {
+        var modal = $('#detailModal');
+        var id = $(this).attr('data-id');
+        // console.log(modal)
+
+        modal.find('.form-detail').prop('action', '/instalasi/' + id + '/status');
+
+
+        $.ajax({
+            url: "/instalasi/get/" + id,
+            method: "get",
+        }).done(function(data) {
+            modal.find('.tglInstalasi').html(data.tglInstalasi);
+            modal.find('.jarak').html(data.jarak + ' Meter');
+        });
+
+    })
+</script>
+
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/choices.min.js"></script>
 
 <!-- DropzoneJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js" integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/plugins/dropzone/dropzone.js"></script>
 
 </body>
 

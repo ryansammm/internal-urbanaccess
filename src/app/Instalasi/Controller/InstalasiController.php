@@ -3,6 +3,7 @@
 namespace App\Instalasi\Controller;
 
 use App\Instalasi\Model\Instalasi;
+use App\Media\Model\Media;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
@@ -35,6 +36,7 @@ class InstalasiController extends GlobalFunc
         $internet_user_registrasi = new InternetUserRegistrasi();
         $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = ''");
         // dd($data_internet_user_registrasi);
+
 
         return $this->render_template('admin/master/instalasi/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
     }
@@ -75,13 +77,29 @@ class InstalasiController extends GlobalFunc
 
 
         $internet_user_registrasi = new InternetUserRegistrasi();
-        $status = '2';
-        $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
+        // $status = '2';
+        // $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
         // dd($internet_user_registrasi_status);
 
 
         $instalasi_create = $this->model->create($datas, $id);
 
+
+        return new RedirectResponse('/instalasi');
+    }
+
+
+    public function status(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $datas = $request->request->all();
+        $id = $request->attributes->get('id');
+
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $status = '2';
+        $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
         return new RedirectResponse('/instalasi');
     }
@@ -92,9 +110,16 @@ class InstalasiController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
-        $data = $this->model->selectOne($id);
 
-        return new JsonResponse($data);
+        $data_instalasi = $this->model->selectOne("WHERE noRegistrasi = '" . $id . "'");
+        // $data_survey['biayaInstalasi'] =  number_format($data_survey['biayaInstalasi'], 0, "", ".");
+        // dd($data_survey);
+
+
+        $data_instalasi['tglInstalasi'] = date('d-m-Y', strtotime($data_instalasi['tglInstalasi']));
+        // dd($data_survey);
+
+        return new JsonResponse($data_instalasi);
     }
 
     public function edit(Request $request)
@@ -120,13 +145,15 @@ class InstalasiController extends GlobalFunc
         if ($this->session->get('username') == null) {
             return new RedirectResponse("/admin");
         }
-        $id = $request->attributes->get('id');
-        $detail = $this->model->selectOne($id);
+
         $datas = $request->request->all();
-        $update = $this->model->update($id, $datas);
+        $id = $request->attributes->get('id');
+        // dd($datas, $id);
 
 
-        return new RedirectResponse('/vendor');
+        $instalasi_create = $this->model->update($datas, $id);
+
+        return new RedirectResponse('/instalasi');
     }
 
     public function delete(Request $request)
@@ -141,5 +168,34 @@ class InstalasiController extends GlobalFunc
 
 
         return new RedirectResponse('/user-management');
+    }
+
+    public function dokumentasiStore(Request $request)
+    {
+        // if ($this->session->get('username') == null) {
+        //     return new RedirectResponse("/admin");
+        // }
+        $datas = $request->request->all();
+        // dd($_FILES);
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+        $media = new Media();
+        $media->create($_FILES['file'], $id, '1', 'dokumentasi-instalasi');
+
+
+        return new JsonResponse([]);
+    }
+
+    public function dokumentasi(Request $request)
+    {
+        if ($this->session->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+
+        return $this->render_template('admin/master/instalasi/dokumentasi', ['id' => $id]);
     }
 }

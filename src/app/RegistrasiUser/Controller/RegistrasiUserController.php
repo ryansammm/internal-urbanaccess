@@ -262,7 +262,7 @@ class RegistrasiUserController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
-        // dd($detail);
+        // dd($id);
 
         $internet_user_layanan = new InternetUserLayanan();
         $data_internet_user_layanan = $internet_user_layanan->selectOne($id);

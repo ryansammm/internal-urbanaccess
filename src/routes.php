@@ -448,6 +448,21 @@ $routes->add('instalasi', new Route('/instalasi', [
 $routes->add('instalasiStore', new Route('/instalasi/{id}/store', [
     '_controller' => 'App\Instalasi\Controller\InstalasiController::store',
 ]));
+$routes->add('instalasiUpdate', new Route('/instalasi/{id}/update', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::update',
+]));
+$routes->add('instalasiStatus', new Route('/instalasi/{id}/status', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::status',
+]));
+$routes->add('instalasiGet', new Route('/instalasi/get/{id}', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::get',
+]));
+$routes->add('instalasiDokumentasi', new Route('/instalasi/dokumentasi/{id}', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::dokumentasi',
+]));
+$routes->add('instalasiDokumentasiStore', new Route('/instalasi/dokumentasi/{id}/store', [
+    '_controller' => 'App\Instalasi\Controller\InstalasiController::dokumentasiStore',
+]));
 
 
 //Aktivasi

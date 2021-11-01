@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title mb-3">Data User Aktivasi</h4>
+                        <h4 class="card-title mb-3">Data Billing</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
                         <table class="table " id="table1">
                             <thead>
@@ -53,7 +53,7 @@
         <form action="" class="form-update form-group" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hasil Instalasi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Start Billing</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
