@@ -29,8 +29,9 @@
                                             <label for="first-name-vertical">Role User</label>
                                             <select name="idRole" id="" class="form-select" required>
                                                 <option value="">-- Pilih Role --</option>
-                                                <option value="admin-010">Admin</option>
-                                                <option value="mitra-010">Mitra</option>
+                                                <?php foreach ($roles as $key => $role) { ?>
+                                                <option value="<?= $role['idRole'] ?>"><?= $role['namaRole'] ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>

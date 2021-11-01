@@ -60,5 +60,131 @@ class AppPermissions
             'aliasPermission' => 'user-permissions',
             'url' => '/permissions'
         ],
+        [
+            'menu' => 'Data minat',
+            'aliasPermission' => 'minat',
+            'url' => '/minat'
+        ],
+        [
+            'menu' => 'List Minat Per Status',
+            'aliasPermission' => 'minat-status',
+            'url' => '/minat-status'
+        ],
+        [
+            'menu' => 'Request Survey Vendor',
+            'aliasPermission' => 'request-survey-vendor',
+            'url' => '/request-survey-vendor'
+        ],
+        [
+            'menu' => 'Input Hasil Survey',
+            'aliasPermission' => 'input-hasil-survey',
+            'url' => '/input-hasil-soft-survey'
+        ],
+        [
+            'menu' => 'Konfirmasi Hasil Survey',
+            'aliasPermission' => 'konfirmasi-hasil-survey',
+            'url' => '/konfirmasi-hasil-survey'
+        ],
+        [
+            'menu' => 'Atur Tanggal On Site',
+            'aliasPermission' => 'atur-tanggal-onsite',
+            'url' => '/atur-tanggal-onsite'
+        ],
+        [
+            'menu' => 'Input Hasil Survey',
+            'aliasPermission' => 'Input Hasil Survey',
+            'url' => '/input-hasil-survey-onsite'
+        ],
+        [
+            'menu' => 'Registrasi User',
+            'aliasPermission' => 'registrasi-user',
+            'url' => '/registrasi-user-minat'
+        ],
+        [
+            'menu' => 'Instalasi',
+            'aliasPermission' => 'instalasi',
+            'url' => '/instalasi'
+        ],
+        [
+            'menu' => 'Aktivasi',
+            'aliasPermission' => 'aktivasi',
+            'url' => '/aktivasi'
+        ],
+        [
+            'menu' => 'Billing',
+            'aliasPermission' => 'Billing',
+            'url' => '/aktif'
+        ],
+        [
+            'menu' => 'Data User Registrasi',
+            'aliasPermission' => 'data-user-registrasi',
+            'url' => '/registrasi-user'
+        ],
+        [
+            'menu' => 'Layanan Internet',
+            'aliasPermission' => 'layanan-internet',
+            'url' => '/layanan-internet'
+        ],
+        [
+            'menu' => 'Kecepatan Internet',
+            'aliasPermission' => 'kecepatan-internet',
+            'url' => '/kecepatan-internet'
+        ],
+        [
+            'menu' => 'UrbanLite',
+            'aliasPermission' => 'Urban-Lite',
+            'url' => '/Urban-Lite'
+        ],
+        [
+            'menu' => 'UrbanMax',
+            'aliasPermission' => 'urban-max',
+            'url' => '/urban-max'
+        ],
+        [
+            'menu' => 'UrbanUltimate',
+            'aliasPermission' => 'urban-ultimate',
+            'url' => '/urban-ultimate'
+        ],
+        [
+            'menu' => 'Reseller',
+            'aliasPermission' => 'reseller',
+            'url' => '/reseller'
+        ],
+        [
+            'menu' => 'Sales Perorangan',
+            'aliasPermission' => 'Sales-Perorangan',
+            'url' => '/sales-perorangan'
+        ],
+        [
+            'menu' => 'vendor',
+            'aliasPermission' => 'vendor',
+            'url' => '/kvendor'
+        ],
+        [
+            'menu' => 'Forecast',
+            'aliasPermission' => 'forecast',
+            'url' => '/forecast'
+        ],
+        [
+            'menu' => 'User Management',
+            'aliasPermission' => 'user-management',
+            'url' => '/user-management'
+        ],
+
     ];
+
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    public function getOnePermission($alias) {
+        foreach ($this->permissions as $key => $value) {
+            if ($value['aliasPermission'] == $alias) {
+                return $value;
+            }
+        }
+
+        return [];
+    }
 }

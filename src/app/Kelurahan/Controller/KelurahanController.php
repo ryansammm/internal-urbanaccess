@@ -18,7 +18,6 @@ class KelurahanController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Kelurahan();
-        parent::beginSession();
     }
 
     public function index(Request $request)

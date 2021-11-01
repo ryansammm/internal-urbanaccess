@@ -17,12 +17,11 @@ class LayananInternetController extends GlobalFunc
     public function __construct()
     {
         $this->model = new LayananInternet();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll();
@@ -32,7 +31,7 @@ class LayananInternetController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/layanan-internet/create');
@@ -40,7 +39,7 @@ class LayananInternetController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -50,7 +49,7 @@ class LayananInternetController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -61,7 +60,7 @@ class LayananInternetController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -72,7 +71,7 @@ class LayananInternetController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -83,7 +82,7 @@ class LayananInternetController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

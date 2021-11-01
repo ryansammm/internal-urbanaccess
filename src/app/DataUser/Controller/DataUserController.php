@@ -16,15 +16,12 @@ class DataUserController extends GlobalFunc
 
     public function __construct()
     {
-        if ($this->session->get('username') == null) {
-            return new RedirectResponse("/admin");
-        }
         $this->model = new DataUser();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll();
@@ -36,7 +33,7 @@ class DataUserController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/data-user/create');
@@ -44,7 +41,7 @@ class DataUserController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -54,7 +51,7 @@ class DataUserController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -65,7 +62,7 @@ class DataUserController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -76,7 +73,7 @@ class DataUserController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -87,7 +84,7 @@ class DataUserController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

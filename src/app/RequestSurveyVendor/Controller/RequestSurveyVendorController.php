@@ -27,12 +27,11 @@ class RequestSurveyVendorController extends GlobalFunc
     public function __construct()
     {
         $this->model = new RequestSurveyVendor();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll("WHERE status = 1");
@@ -48,7 +47,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/reseller/create');
@@ -56,7 +55,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -66,7 +65,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -86,7 +85,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function getInput(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -103,7 +102,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -114,7 +113,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -177,7 +176,7 @@ class RequestSurveyVendorController extends GlobalFunc
         }
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Request survey untuk <b>" . $data_minat['namapemohon'] . "</b> telah dikirmkan ke vendor <b>" . $data_vendor['namaVendor'] . "</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
         // dd($kirim);
@@ -200,7 +199,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

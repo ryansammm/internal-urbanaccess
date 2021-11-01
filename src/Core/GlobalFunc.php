@@ -29,6 +29,38 @@ class GlobalFunc
         }
         extract($data, EXTR_SKIP);
 
+        $isPermited = function ($userpermissions = [], $permissions, $option = 'required-all') {
+            $result = false;
+
+            // jika memiliki semua akses
+            if ($userpermissions == '*') {
+                return true;
+            }
+
+            // option "required-all"
+            if ($option == 'required-all') {
+                $permissionAmount = count($permissions);
+                foreach ($userpermissions as $key => $value) {
+                    foreach ($permissions as $key1 => $value1) {
+                        if ($value == $value1) {
+                            $permissionAmount--;
+                        }
+                    }
+                }
+                $result = $permissionAmount == 0 ? true : false;
+            } else {
+                // option "required-one"
+                foreach ($userpermissions as $key => $value) {
+                    if (in_array($value, $permissions)) {
+                        $result = true;
+                        break;
+                    }
+                }
+            }
+
+            return $result;
+        };
+
         ob_start();
         include sprintf(__DIR__ . '/../../src/pages/%s.php', $page);
 

@@ -45,12 +45,11 @@ class RegistrasiUserController extends GlobalFunc
     public function __construct()
     {
         $this->model = new InternetUserRegistrasi();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll("WHERE statusRegistrasi = 4");
@@ -89,7 +88,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -127,7 +126,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -247,7 +246,7 @@ class RegistrasiUserController extends GlobalFunc
 
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Data user atas nama " . $datas['namauserRegistrasi'] . " dengan nomor registrasi " . $datas['noRegistrasi'] . " berhasil ditambahkan";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
@@ -257,7 +256,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -339,7 +338,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -479,7 +478,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -530,7 +529,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function detail(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -603,7 +602,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function status(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -618,7 +617,7 @@ class RegistrasiUserController extends GlobalFunc
         $user_status = $this->model->status($id, $statusRegistrasi);
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "User atas nama <b>" . $detail['namauserRegistrasi'] . "</b> telah berhasil di <b>aktivasi</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
@@ -630,7 +629,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function lite(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanLite'");
@@ -640,7 +639,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function max(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanMax'");
@@ -650,7 +649,7 @@ class RegistrasiUserController extends GlobalFunc
 
     public function ultimate(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanUltimate'");

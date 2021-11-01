@@ -85,168 +85,199 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <!-- <li class="sidebar-title">Menu</li> -->
-
-                <?php if ($_SESSION['idRole'] != 'admin-010') { ?>
-
-
-                    <li class="sidebar-item <?= strpos($GLOBALS['url'], '/minat')  !== false ? 'active' : ''; ?>">
-                        <a href="/minat" class="sidebar-link">
-                            <i class="bi bi-person-circle"></i>
-                            <span>Minat</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?= $GLOBALS['url'] == '/konfirmasi-hasil-survey' ? 'active' : ''; ?>">
-                        <a href="/konfirmasi-hasil-survey" class='sidebar-link'>
-                            <i class="fas fa-poll-h"></i>
-                            <span>Konfirmasi Hasil Survey</span>
-                        </a>
-                    </li>
-
-                <?php } elseif ($_SESSION['idRole'] == 'admin-010') { ?>
-
+                
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['minat', 'list-minat-per-status', 'request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey', 'atur-tanggal-onsite', 'input-hasil-survey-onsite', 'registrasi-user', 'instalasi', 'aktivasi', 'billing'], 'required-one')) { ?>
                     <li class="sidebar-item has-sub">
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/minat')  !== false || strpos($GLOBALS['url'], '-survey')  !== false || strpos($GLOBALS['url'], '-onsite')  !== false || strpos($GLOBALS['url'], '-minat')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/aktivasi')  !== false || strpos($GLOBALS['url'], '/aktif')  !== false || strpos($GLOBALS['url'], '/registrasi-user-minat')  !== false ? 'oncom' : ''; ?>">
                             <i class="fas fa-file-alt"></i>
                             <span>Minat</span>
                             <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
-                        <ul class="submenu" style="display: none;">
+                        <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['minat'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/minat">Data Minat</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['list-minat-per-status'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/minat-status/1">List Minat Per Status</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey'], 'required-one')) { ?>
                             <li class="sidebar-item has-sub submenu-item">
                                 <a href="form-layout.html" class="sidebar-link">
                                     <i class="icon-dropdown2 fas fa-caret-down"></i>
                                     <span style="margin-left: 0rem;">Data Soft Survey</span>
                                 </a>
-                                <ul class="submenu" style="display: none;">
+                                <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                                    <?php if ($isPermited($GLOBALS['userPermissions'], ['request-survey-vendor'], 'required-one')) { ?>
                                     <li class="submenu-item ">
                                         <a href="/request-survey-vendor">Request Survey Vendor</a>
                                     </li>
+                                    <?php } ?>
+                                    <?php if ($isPermited($GLOBALS['userPermissions'], ['input-hasil-survey-soft'], 'required-one')) { ?>
                                     <li class="submenu-item ">
                                         <a href="/input-hasil-soft-survey">Input Hasil Survey</a>
                                     </li>
+                                    <?php } ?>
+                                    <?php if ($isPermited($GLOBALS['userPermissions'], ['konfirmasi-hasil-survey'], 'required-one')) { ?>
                                     <li class="submenu-item ">
                                         <a href="/konfirmasi-hasil-survey">Konfirmasi Hasil Survey</a>
                                     </li>
+                                    <?php } ?>
                                 </ul>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['atur-tanggal-onsite', 'input-hasil-survey-onsite'], 'required-one')) { ?>
                             <li class="sidebar-item has-sub submenu-item">
                                 <a href="form-layout.html" class="sidebar-link">
                                     <i class="icon-dropdown2 fas fa-caret-down"></i>
                                     <span style="margin-left: 0rem;">Survey On Site</span>
                                 </a>
-                                <ul class="submenu" style="display: none;">
+                                <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                                    <?php if ($isPermited($GLOBALS['userPermissions'], ['atur-tanggal-onsite'], 'required-one')) { ?>
                                     <li class="submenu-item ">
                                         <a href="/atur-tanggal-onsite">Atur Tanggal On Site</a>
                                     </li>
+                                    <?php } ?>
+                                    <?php if ($isPermited($GLOBALS['userPermissions'], ['input-hasil-survey-onsite'], 'required-one')) { ?>
                                     <li class="submenu-item ">
                                         <a href="/input-hasil-survey-onsite">Input Hasil Survey</a>
                                     </li>
+                                    <?php } ?>
                                 </ul>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['registrasi-user'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/registrasi-user-minat">Registrasi User</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['instalasi'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/instalasi">Instalasi</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['aktivasi'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/aktivasi">Aktivasi</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['billing'], 'required-one')) { ?>
                             <li class="submenu-item">
                                 <a href="/aktif">Billing</a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </li>
+                    <?php } ?>
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['data-user-registrasi'], 'required-one')) { ?>
                     <li class="sidebar-item <?= $GLOBALS['url'] == '/registrasi-user' ? 'oncom' : ''; ?>">
                         <a href="/registrasi-user" class='sidebar-link'>
                             <i class="fas fa-users"></i>
                             <span>Data User Registrasi</span>
                         </a>
                     </li>
+                    <?php } ?>
 
-                    <li class="sidebar-item  has-sub">
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['layanan-internet', 'kecepatan-internet'], 'required-one')) { ?>
+                    <li class="sidebar-item has-sub">
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/layanan-internet')  !== false || strpos($GLOBALS['url'], '/kecepatan-internet')  !== false  ? 'oncom' : ''; ?>">
                             <i class="fas fa-wifi"></i>
                             <span>Layanan Internet</span>
                             <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
-                        <ul class="submenu" style="display: none;">
+                        <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['layanan-internet'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/layanan-internet">Layanan Internet</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['kecepatan-internet'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/kecepatan-internet">Kecepatan Internet</a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </li>
+                    <?php } ?>
 
-                    <li class="sidebar-item  has-sub ">
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['urban-lite', 'urban-max', 'urban-ultimate'], 'required-one')) { ?>
+                    <li class="sidebar-item has-sub ">
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/urban')  !== false  ? 'oncom' : ''; ?>">
                             <i class="bi bi-people-fill"></i>
                             <span>Data User</span>
                             <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
-                        <ul class="submenu" style="display: none;">
+                        <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['urban-lite'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/urban-lite">UrbanLite</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['urban-max'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/urban-max">UrbanMax</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['urban-ultimate'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/urban-ultimate">UrbanUltimate</a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </li>
+                    <?php } ?>
 
-                    <li class="sidebar-item  has-sub ">
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['reseller', 'sales-perorangan'], 'required-one')) { ?>
+                    <li class="sidebar-item has-sub ">
                         <a href="form-layout.html" class="sidebar-link <?= $GLOBALS['url'] == '/reseller' || $GLOBALS['url'] == '/sales-perorangan'  ? 'oncom' : ''; ?>">
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Data Sales</span>
                             <i class="icon-dropdown2 fas fa-caret-down"></i>
                         </a>
-                        <ul class="submenu" style="display: none;">
+                        <ul class="submenu" style="<?= $GLOBALS['aliasRole'] == 'admin' ? 'display: none;' : 'display: block;' ?>">
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['reseller'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/reseller">Reseller</a>
                             </li>
+                            <?php } ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['sales-perorangan'], 'required-one')) { ?>
                             <li class="submenu-item ">
                                 <a href="/sales-perorangan">Sales Perorangan</a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </li>
+                    <?php } ?>
 
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['data-vendor'], 'required-one')) { ?>
                     <li class="sidebar-item <?= strpos($GLOBALS['url'], '/vendor')  !== false ? 'oncom' : ''; ?>">
                         <a href="/vendor" class='sidebar-link'>
                             <i class="fas fa-store"></i>
                             <span>Data Vendor</span>
                         </a>
                     </li>
+                    <?php } ?>
 
-
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['forecast'], 'required-one')) { ?>
                     <li class="sidebar-item <?= $GLOBALS['url'] == '/forecast'  ? 'oncom' : ''; ?> ">
                         <a href="/forecast" class='sidebar-link'>
                             <i class="bi bi-file-text-fill"></i>
                             <span>Forecast</span>
                         </a>
                     </li>
+                    <?php } ?>
 
-
+                    <?php if ($isPermited($GLOBALS['userPermissions'], ['user-management'], 'required-one')) { ?>
                     <li class="sidebar-item <?= $GLOBALS['url'] == '/user-management'  ? 'oncom' : ''; ?> ">
                         <a href="/user-management" class='sidebar-link'>
                             <i class="fas fa-users-cog"></i>
                             <span>User Management</span>
                         </a>
                     </li>
-
-                <?php } ?>
-
-
-
+                    <?php } ?>
 
             </ul>
         </div>

@@ -24,12 +24,11 @@ class AktivasiController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Aktivasi();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -44,7 +43,7 @@ class AktivasiController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -63,7 +62,7 @@ class AktivasiController extends GlobalFunc
 
     public function detail(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -76,7 +75,7 @@ class AktivasiController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -96,7 +95,7 @@ class AktivasiController extends GlobalFunc
 
     public function dokumentasi(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -115,7 +114,7 @@ class AktivasiController extends GlobalFunc
 
     public function dokumentasiStore(Request $request)
     {
-        // if ($this->session->get('username') == null) {
+        // if ($request->getSession()->get('username') == null) {
         //     return new RedirectResponse("/admin");
         // }
         $datas = $request->request->all();
@@ -132,7 +131,7 @@ class AktivasiController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -143,7 +142,7 @@ class AktivasiController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -161,7 +160,7 @@ class AktivasiController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -175,7 +174,7 @@ class AktivasiController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
