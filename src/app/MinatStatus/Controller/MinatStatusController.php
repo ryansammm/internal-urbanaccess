@@ -27,12 +27,11 @@ class MinatStatusController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Minat();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $status = $request->attributes->get('status');

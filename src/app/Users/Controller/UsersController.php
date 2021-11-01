@@ -14,13 +14,10 @@ class UsersController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Users();
-        parent::beginSession();
     }
 
     public function telegram(Request $request)
     {
-
-
         $datas = json_decode($request->getContent(), true);
 
         $user = new Users();

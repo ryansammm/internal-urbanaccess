@@ -21,12 +21,11 @@ class InputHasilSoftSurveyController extends GlobalFunc
     public function __construct()
     {
         $this->model = new InputHasilSoftSurvey();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -59,7 +58,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/input-hasil-soft-survey/create');
@@ -67,7 +66,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -77,7 +76,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -88,7 +87,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -99,7 +98,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -144,7 +143,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
             $data_minat_layanan = $minat_layanan->selectOne("WHERE idMinat = '" . $id . "'");
 
             $user = new Users();
-            $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+            $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
             $message = urlencode("Berikut hasil survey untuk kebutuhan tersebut. \n \nSales :\n" . $nama_sales . "\n\nPIC :\n" . $data_minat['namapemohon'] . "\n\nAlamat : \n" . $data_minat['alamat'] . " RT." . $data_minat['rt'] . " RW." . $data_minat['rw'] . " Kel." . $data_minat['nameKelurahan'] . ", Kec." .  $data_minat['nameKecamatan'] . ", Kab." .  substr(strstr($data_minat['nameKabupaten'], " "), 1)  . "\n\nPerkiraan koordinat : \n " . $data_minat['latitude'] . "," . $data_minat['longtitude']  . "\n\nLayanan : \n" . $data_minat_layanan['namaLayanan'] . " " .  $data_minat_layanan['kecepatan'] . " Mbps\n\nHasil Mapping : \n" . $value['jarak'] . "m - " . ($value['hasil'] == 1 ? "Tercover" : "Belum Tercover") . "\n\nInstalasi : \nRp." . $value['biayaInstalasi']);
             // dd($message);
 
@@ -193,7 +192,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

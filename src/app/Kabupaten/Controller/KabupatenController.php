@@ -18,7 +18,6 @@ class KabupatenController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Kabupaten();
-        parent::beginSession();
     }
 
     public function index(Request $request)

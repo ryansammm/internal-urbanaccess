@@ -18,7 +18,6 @@ class KecamatanController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Kecamatan();
-        parent::beginSession();
     }
 
     public function index(Request $request)

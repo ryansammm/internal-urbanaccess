@@ -3,6 +3,8 @@
 namespace App\Login\Controller;
 
 use App\Login\Model\Login;
+use Config\AppPermissions;
+use Config\RolePermissions;
 use Core\GlobalFunc;
 use PDOException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,23 +17,21 @@ class LoginController extends GlobalFunc
 {
     public $conn;
     public $model;
-    public $username;
 
     public function __construct()
     {
         $this->model = new Login();
-        parent::beginSession();
         $globalFunc = new GlobalFunc();
         $this->conn = $globalFunc->conn;
     }
 
     public function index(Request $request)
     {
-        if ($this->username != null) {
-            return new RedirectResponse("/minat");
-        }
+        // if ($request->getSession()->get('username') != null) {
+        //     return new RedirectResponse("/minat");
+        // }
 
-        $errors = $this->session->getFlashBag()->get('errors', []);  //parameter kedua untuk default value
+        $errors = $request->getSession()->getFlashBag()->get('errors', []);  //parameter kedua untuk default value
         return $this->render_template('admin/master/index', ['errors' => $errors]); // parameter pertama key, paramater kedua value
     }
 
@@ -53,23 +53,30 @@ class LoginController extends GlobalFunc
 
                 if (password_verify($password, $data['password'])) {
 
-                    $this->session->set('idUser', $data['idUser']);
-                    $this->session->set('idRole', $data['idRole']);
-                    $this->session->set('namaUser', $data['namaUser']);
-                    $this->session->set('username', $data['username']);
-                    $this->session->set('namaRole', $data['namaRole']);
+                    $request->getSession()->set('idUser', $data['idUser']);
+                    $request->getSession()->set('idRole', $data['idRole']);
+                    $request->getSession()->set('aliasRole', $data['aliasRole']);
+                    $request->getSession()->set('namaUser', $data['namaUser']);
+                    $request->getSession()->set('username', $data['username']);
+                    $request->getSession()->set('namaRole', $data['namaRole']);
                     $_SESSION['idRole'] = $data['idRole'];
 
-                    return header("Location: /minat");
+                    $role_permissions = new RolePermissions();
+                    $data_role_permissions = $role_permissions->getRolePermissions($data['idRole']);
+                    $app_permissions = new AppPermissions();
+                    $data_app_permission = $app_permissions->getOnePermission($data_role_permissions[0]);
+                    $urlTujuan = $data['aliasRole'] == 'admin' ? '/minat' : $data_app_permission['url'];
+
+                    return header("Location: ".$urlTujuan);
                 } else {
 
-                    $this->session->getFlashBag()->add('errors', 'Password salah!');
+                    $request->getSession()->getFlashBag()->add('errors', 'Password salah!');
 
                     return header("Location: /admin");
                 }
             } else {
 
-                $this->session->getFlashBag()->add('errors', 'Akun tidak ditemukan!');
+                $request->getSession()->getFlashBag()->add('errors', 'Akun tidak ditemukan!');
 
                 return header("Location: /admin");
             }
@@ -81,7 +88,7 @@ class LoginController extends GlobalFunc
 
     public function logout(Request $request)
     {
-        $this->session->invalidate();
+        $request->getSession()->invalidate();
         return header("Location: /admin");
     }
 }

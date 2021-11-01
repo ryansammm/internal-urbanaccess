@@ -48,12 +48,11 @@ class RegistrasiUserMinatController extends GlobalFunc
     public function __construct()
     {
         $this->model = new InternetUserRegistrasiMinat();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -80,7 +79,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -141,7 +140,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -330,7 +329,7 @@ class RegistrasiUserMinatController extends GlobalFunc
         $media->create($_FILES['fileKTP'], $noRegistrasi, '1', 'foto-ktp');
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Data registrasi atas nama <br>" . $datas['namauserRegistrasi'] . "</br> telah dilengkapi";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
@@ -349,7 +348,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $idBank = $request->attributes->get('id');
@@ -363,7 +362,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $idBank = $request->attributes->get('id');
@@ -376,7 +375,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $idBank = $request->attributes->get('id');

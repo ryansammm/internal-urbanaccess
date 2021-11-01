@@ -31,22 +31,17 @@ class MinatController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Minat();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
 
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
-        // dd($_SESSION);
-
         $datas = $this->model->selectAll("WHERE status < 7");
         $minat_layanan = new MinatLayanan();
-        // dd($datas);
-
 
         foreach ($datas as $key => $value) {
             if ($value['status'] == '1') {
@@ -83,7 +78,7 @@ class MinatController extends GlobalFunc
 
     public function detail(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -147,7 +142,7 @@ class MinatController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -172,7 +167,7 @@ class MinatController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -255,7 +250,7 @@ class MinatController extends GlobalFunc
         $namaUser = $_SESSION['_sf2_attributes']['namaUser'];
 
 
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "" . $namaUser . " telah menambahkan data peminat baru atas nama <b>" . $datas['namaPemohon'] . "</b> dengan layanan <b>" . $data_layanan['namaLayanan'] . " " . $data_layanan_detail['kecepatan'] . " Mbps</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
         // dd($kirim);
@@ -266,7 +261,7 @@ class MinatController extends GlobalFunc
     public function edit(Request $request)
     {
 
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -310,7 +305,7 @@ class MinatController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -422,7 +417,7 @@ class MinatController extends GlobalFunc
     public function delete(Request $request)
     {
 
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -456,7 +451,7 @@ class MinatController extends GlobalFunc
 
     public function get_all(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -469,7 +464,7 @@ class MinatController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -484,7 +479,7 @@ class MinatController extends GlobalFunc
     public function cancel(Request $request)
     {
 
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -497,7 +492,7 @@ class MinatController extends GlobalFunc
         $minat_status = $this->model->cancel($id, $status, $keterangan);
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Batal";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 

@@ -23,12 +23,11 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     {
         $this->model = new KonfirmasiHasilSurvey();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll("WHERE minat.status = 3");
@@ -50,7 +49,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/reseller/create');
@@ -58,7 +57,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -68,7 +67,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -83,7 +82,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -94,7 +93,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $minat = new Minat();
@@ -124,7 +123,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         // dd($minat_status);
 
 
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Hasil survey dari vendor <b>" . $data_vendor_detail['namaVendor'] . "</b> atas nama <b>" . $data_minat['namapemohon'] . "</b> telah dikonfirmasi.";
         // dd($message);
         $kirim = $user->telegram($message, $ambilUser['chatId']);
@@ -135,7 +134,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

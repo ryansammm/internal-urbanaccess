@@ -18,7 +18,6 @@ class ProvinsiController extends GlobalFunc
     public function __construct()
     {
         $this->model = new Provinsi();
-        parent::beginSession();
     }
 
     public function index(Request $request)

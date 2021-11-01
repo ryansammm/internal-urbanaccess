@@ -21,12 +21,11 @@ class AturTanggalOnsiteController extends GlobalFunc
     public function __construct()
     {
         $this->model = new AturTanggalOnsite();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
@@ -43,7 +42,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         return $this->render_template('admin/master/atur-tanggal-onsite/create');
@@ -51,7 +50,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
@@ -61,7 +60,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -72,7 +71,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -83,7 +82,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $minat = new Minat();
@@ -124,7 +123,7 @@ class AturTanggalOnsiteController extends GlobalFunc
         $minat_status = $minat->updateStatus($detail['kodeMinat'], $status);
 
         $user = new Users();
-        $ambilUser = $user->selectOneUser($this->session->get('idUser'));
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Jadwal survey on site atas nama <b>" . $data_minat['namapemohon'] . "</b> telah dijadwalkan pada tanggal <b>" . date('d F Y', strtotime($datas['tanggalRequest'])) . "</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
@@ -133,7 +132,7 @@ class AturTanggalOnsiteController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

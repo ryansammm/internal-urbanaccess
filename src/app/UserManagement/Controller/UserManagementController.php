@@ -18,34 +18,34 @@ class UserManagementController extends GlobalFunc
     public function __construct()
     {
         $this->model = new UserManagement();
-        parent::beginSession();
     }
 
     public function index(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
         $datas = $this->model->selectAll();
-        // dd($datas);
 
         return $this->render_template('admin/master/user-management/index', ['datas' => $datas]);
     }
 
     public function create(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
 
+        $role = new Roles();
+        $data_role = $role->selectAll("WHERE idRole != 'admin-010'");
 
-        return $this->render_template('admin/master/user-management/create', []);
+        return $this->render_template('admin/master/user-management/create', ['roles' => $data_role]);
     }
 
     public function detail(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -58,7 +58,7 @@ class UserManagementController extends GlobalFunc
 
     public function store(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
@@ -81,7 +81,7 @@ class UserManagementController extends GlobalFunc
 
     public function get(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -92,7 +92,7 @@ class UserManagementController extends GlobalFunc
 
     public function edit(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -110,7 +110,7 @@ class UserManagementController extends GlobalFunc
 
     public function update(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
@@ -124,7 +124,7 @@ class UserManagementController extends GlobalFunc
 
     public function delete(Request $request)
     {
-        if ($this->session->get('username') == null) {
+        if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');

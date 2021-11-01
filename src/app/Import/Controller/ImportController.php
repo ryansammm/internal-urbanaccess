@@ -46,7 +46,7 @@ class ImportController extends GlobalFunc
 {
     public function __construct()
     {
-        parent::beginSession();
+        
     }
 
     public function index(Request $request)
