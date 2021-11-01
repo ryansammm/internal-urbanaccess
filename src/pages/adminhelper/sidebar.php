@@ -166,7 +166,7 @@
                             <?php } ?>
                             <?php if ($isPermited($GLOBALS['userPermissions'], ['billing'], 'required-one')) { ?>
                             <li class="submenu-item">
-                                <a href="/aktif">Billing</a>
+                                <a href="/aktif">Start Billing</a>
                             </li>
                             <?php } ?>
                         </ul>

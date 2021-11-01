@@ -62,6 +62,7 @@ class PIC extends GlobalFunc
     public function selectOne($id)
     {
         $sql = "SELECT * FROM " . $this->table . " WHERE " . $this->primaryKey . " = '$id'";
+        // dd($sql);
 
         try {
             $query = $this->conn->prepare($sql);

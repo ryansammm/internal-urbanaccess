@@ -3,8 +3,8 @@
 <div id="main">
 
     <div class="card">
-        <div class="card-content">
-            <form class="form form-vertical" method="post" action="/registrasi-user/<?= $detail['noRegistrasi'] ?>/update" enctype="multipart/form-data">
+        <form class="form form-vertical" method="post" action="/registrasi-user/<?= $detail['noRegistrasi'] ?>/update" enctype="multipart/form-data">
+            <div class="card-content">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-1" style="padding-top: 3pt; padding-left: 21pt;">
@@ -40,7 +40,7 @@
                                         <label for="first-name-vertical">Kecepatan *</label>
                                         <select name="idLayanandetail" id="kecepatan" class="form-control">
                                             <?php foreach ($layanan_detail as $key => $value) { ?>
-                                                <option <?= $value['idLayananinternet'] == $data_internet_user_layanan['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
+                                                <option <?= $value['idLayananinternetdetail'] == $data_internet_user_layanan['idLayanandetail'] ? 'selected' : '' ?> value="<?= $value['idLayananinternetdetail'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -62,7 +62,7 @@
                                         <label for="first-name-vertical">Fee Sales</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="feeSales">
+                                            <input type="text" class="form-control number" name="feeSales" value="<?= $data_feesales['feeSales'] ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -143,124 +143,13 @@
                                         <span class="text-danger" style="font-size: 10pt;" id="errorFile"></span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Alamat Pemasangan -->
-                        <h5 class="mt-3">Alamat Pemasangan</h5>
-                        <div class="card-body border border-1 rounded">
-                            <div class="row">
-                                <div class="col-6">
+                                <div class="col">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Provinsi *</label>
-                                        <select name="idProvinsi" id="provinsi" class="form-select">
-                                            <option value="">-- Pilih Provinsi --</option>
-                                            <?php foreach ($provinsi as $key => $value) { ?>
-                                                <option <?= $value['id'] == $detail['idProvinsi'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Kabupaten *</label>
-                                        <select name="idKabupaten" id="kabupaten" class="form-select" disabled>
-                                            <option value=""> -- Pilih Kabupaten -- </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Kecamatan *</label>
-                                        <select name="idKecamatan" id="kecamatan" class="form-select" disabled>
-                                            <option value=""> -- Pilih Kecamatan -- </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Kelurahan *</label>
-                                        <select name="idKelurahan" id="kelurahan" class="form-select" disabled>
-                                            <option value=""> -- Pilih Kelurahan -- </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Kode Pos *</label>
-                                        <input type="text" class="form-control" name="kodepos" value="<?= $detail['kodepos'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">RT *</label>
-                                        <input type="text" class="form-control" name="rt" value="<?= $detail['rt'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">RW *</label>
-                                        <input type="text" class="form-control" name="rw" value="<?= $detail['rw'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Koordinat</label>
-                                        <input type="text" id="koordinat" class="form-control" name="koordinat" value="<?= $detail['latitude'] ?>,<?= $detail['longtitude'] ?>">
-                                        <span class="text-danger" style="font-size: 10pt;" id="error"></span>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Alamat *</label>
-                                        <textarea name="alamat" id="" class="form-control"><?= $detail['alamat'] ?></textarea>
+                                        <label for="first-name-vertical">Nomor Induk Kependudukan</label>
+                                        <input type="text" class="form-control" name="nikUserRegistrasi" value="<?= $detail['nikUserRegistrasi'] ?>">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Data PIC Internal -->
-                        <h5 class="mt-3">Data PIC Internal</h5>
-                        <div class="card-body border border-1 rounded">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">NIK PIC</label>
-                                        <input type="text" class="form-control" name="nikPic" value="<?= $detail['nikPic'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Nama PIC Internal </label>
-                                        <input type="text" class="form-control" name="namaPic" value="<?= $detail['namaPic'] ?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPIC" value="<?= $data_kontak_telp_pic['isiKontak'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPIC" value="<?= $data_kontak_whatsapp_pic['isiKontak'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPIC" value="<?= $data_kontak_email_pic['isiKontak'] ?>">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Legalitas -->
-                        <h5 class="mt-3">Persyaratan</h5>
-                        <div class="card-body border border-1 rounded">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -278,6 +167,288 @@
                             </div>
                         </div>
 
+                        <h5 class="mt-3">Alamat Pemasangan</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Provinsi *</label>
+                                        <select name="idProvinsiPemasangan" id="provinsi" class="form-select">
+                                            <option value="">Pilih Provinsi</option>
+                                            <?php foreach ($data_provinsi_pemasangan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_pemasangan['idProvinsi'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kabupaten *</label>
+                                        <select name="idKabupatenPemasangan" id="kabupaten" class="form-select">
+                                            <option value=""> -- Pilih Kabupaten -- </option>
+                                            <?php foreach ($data_kabupaten_pemasangan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_pemasangan['idKabupaten'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kecamatan *</label>
+                                        <select name="idKecamatanPemasangan" id="kecamatan" class="form-select">
+                                            <option value=""> -- Pilih Kecamatan -- </option>
+                                            <?php foreach ($data_kecamatan_pemasangan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_pemasangan['idKecamatan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kelurahan *</label>
+                                        <select name="idKelurahanPemasangan" id="kelurahan" class="form-select">
+                                            <option value=""> -- Pilih Kelurahan -- </option>
+                                            <?php foreach ($data_kelurahan_pemasangan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_pemasangan['idKelurahan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kode Pos *</label>
+                                        <input type="text" class="form-control" name="kodeposPemasangan" value="<?= $alamat_pemasangan['kodepos'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RT *</label>
+                                        <input type="text" class="form-control" name="rtPemasangan" value="<?= $alamat_pemasangan['rt'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RW *</label>
+                                        <input type="text" class="form-control" name="rwPemasangan" value="<?= $alamat_pemasangan['rw'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Koordinat</label>
+                                        <input type="text" class="form-control" name="koordinatPemasangan" id="koordinat" value="<?= $alamat_pemasangan['latitude'] ?>,<?= $alamat_pemasangan['longtitude'] ?>">
+                                        <span class="text-danger" style="font-size: 10pt;" id="error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Alamat *</label>
+                                        <textarea name="alamatPemasangan" id="" class="form-control" required><?= $alamat_pemasangan['alamat'] ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alamat Penagihan -->
+                        <h5 class="mt-3">Alamat Penagihan</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Provinsi *</label>
+                                        <select name="idProvinsiPenagihan" id="provinsi" class="form-select">
+                                            <option value="">Pilih Provinsi</option>
+                                            <?php foreach ($data_provinsi_penagihan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_penagihan['idProvinsi'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kabupaten *</label>
+                                        <select name="idKabupatenPenagihan" id="kabupaten" class="form-select">
+                                            <option value=""> -- Pilih Kabupaten -- </option>
+                                            <?php foreach ($data_kabupaten_penagihan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_penagihan['idKabupaten'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kecamatan *</label>
+                                        <select name="idKecamatanPenagihan" id="kecamatan" class="form-select">
+                                            <option value=""> -- Pilih Kecamatan -- </option>
+                                            <?php foreach ($data_kecamatan_penagihan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_penagihan['idKecamatan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kelurahan *</label>
+                                        <select name="idKelurahanPenagihan" id="kelurahan" class="form-select">
+                                            <option value=""> -- Pilih Kelurahan -- </option>
+                                            <?php foreach ($data_kelurahan_penagihan as $key => $value) { ?>
+                                                <option <?= $value['id'] == $alamat_penagihan['idKelurahan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kode Pos *</label>
+                                        <input type="text" class="form-control" name="kodeposPenagihan" value="<?= $alamat_penagihan['kodepos'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RT *</label>
+                                        <input type="text" class="form-control" name="rtPenagihan" value="<?= $alamat_penagihan['rt'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RW *</label>
+                                        <input type="text" class="form-control" name="rwPenagihan" value="<?= $alamat_penagihan['rw'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Koordinat</label>
+                                        <input type="text" class="form-control" name="koordinatPenagihan" id="koordinat" value="<?= $alamat_penagihan['latitude'] ?>,<?= $alamat_penagihan['longtitude'] ?>">
+                                        <span class="text-danger" style="font-size: 10pt;" id="error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Alamat *</label>
+                                        <textarea name="alamatPenagihan" id="" class="form-control" required><?= $alamat_penagihan['alamat'] ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metode Pengiriman invoice -->
+                        <h5 class="mt-3">Metode Pengiriman Invoice</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio1" value="1" <?= $data_invoice['pengirimaninvoice'] == '1' ? 'checked' : ''  ?>>
+                                        <label class="form-check-label" for="inlineRadio1">Softcopy</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio2" value="2" <?= $data_invoice['pengirimaninvoice'] == '2' ? 'checked' : ''  ?>>
+                                        <label class="form-check-label" for="inlineRadio2">Hardcopy</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio3" value="3" <?= $data_invoice['pengirimaninvoice'] == '3' ? 'checked' : ''  ?>>
+                                        <label class="form-check-label" for="inlineRadio3">Softcopy & Hardcopy</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data PIC Keuangan -->
+                        <h5 class="mt-3">Data PIC Keuangan</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">NIK PIC Keuangan</label>
+                                        <input type="text" class="form-control" name="nikPicKeuangan" value="<?= $data_group_pic_keuangan['nikPic'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Nama PIC Keuangan </label>
+                                        <input type="text" class="form-control" name="namaPicKeuangan" value="<?= $data_group_pic_keuangan['namaPic'] ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">No. Telp </label>
+                                        <input type="text" class="form-control" name="noTelpPICKeuangan" value="<?= $data_kontak_telp_pic_keuangan['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Whatsapp </label>
+                                        <input type="text" class="form-control" name="noWaPICKeuangan" value="<?= $data_kontak_whatsapp_pic_keuangan['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Email </label>
+                                        <input type="text" class="form-control" name="emailPICKeuangan" value="<?= $data_kontak_email_pic_keuangan['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="cekKeuangan">
+                                        <label class="form-check-label" for="cekKeuangan">
+                                            Data yang digunakan sama
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data PIC Teknis -->
+                        <h5 class="mt-3">Data PIC Teknis</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">NIK PIC Keuangan</label>
+                                        <input type="text" class="form-control" name="nikPicTeknik" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Nama PIC Keuangan </label>
+                                        <input type="text" class="form-control" name="namaPicTeknik" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">No. Telp </label>
+                                        <input type="text" class="form-control" name="noTelpPICTeknik" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Whatsapp </label>
+                                        <input type="text" class="form-control" name="noWaPICTeknik" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Email </label>
+                                        <input type="text" class="form-control" name="emailPICTeknik" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="cekTeknis">
+                                        <label class="form-check-label" for="cekTeknis">
+                                            Data yang digunakan sama
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Data Vendor -->
                         <h5 class="mt-3">Data Vendor</h5>
                         <div class="card-body border border-1 rounded">
@@ -285,7 +456,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama Vendor</label>
-                                        <select name="idVendor" id="" class="form-select">
+                                        <select name="idVendor" id="" class="form-select" required>
                                             <option value="">Pilih Vendor</option>
                                             <?php foreach ($data_vendor as $key => $value) { ?>
                                                 <option <?= $value['idVendor'] == $data_internet_user_vendor['idVendor'] ? 'selected' : '' ?> value="<?= $value['idVendor'] ?>"><?= $value['namaVendor'] ?></option>
@@ -296,7 +467,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Jenis</label>
-                                        <select name="jenislinkVendor" id="" class="form-select">
+                                        <select name="jenislinkVendor" id="" class="form-select" required>
                                             <option value="1" <?= $data_internet_user_vendor['jenislinkVendor'] == 1 ? "selected" : "" ?>>Link Utama</option>
                                             <option value="2" <?= $data_internet_user_vendor['jenislinkVendor'] == 2 ? "selected" : "" ?>>Link Backup</option>
                                         </select>
@@ -305,7 +476,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Media Koneksi</label>
-                                        <select name="mediakoneksiVendor" id="" class="form-select">
+                                        <select name="mediakoneksiVendor" id="" class="form-select" required>
                                             <option value="1" <?= $data_internet_user_vendor['mediakoneksiVendor'] == 1 ? "selected" : "" ?>>Fiber Optic</option>
                                             <option value="2" <?= $data_internet_user_vendor['mediakoneksiVendor'] == 2 ? "selected" : "" ?>>Wireless</option>
                                         </select>
@@ -319,14 +490,14 @@
                                         <label for="first-name-vertical">Biaya Registrasi</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayaregistrasiLayanan" value="<?= $data_internet_user_layanan['biayaregistrasiLayanan'] ?>">
+                                            <input type="text" class="form-control number" name="biayaregistrasiLayanan" value="<?= $data_internet_user_layanan['biayaregistrasiLayanan'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Registrasi</label>
-                                        <select name="ppnbiayainstalasi" id="" class="form-select">
+                                        <select name="ppnbiayainstalasi" id="" class="form-select" required>
                                             <option value="1" <?= $data_internet_user_vendor['ppnbiayainstalasi'] == 1 ? "selected" : "" ?>>Ya</option>
                                             <option value="2" <?= $data_internet_user_vendor['ppnbiayainstalasi'] == 2 ? "selected" : "" ?>>Tidak</option>
                                         </select>
@@ -337,14 +508,14 @@
                                         <label for="first-name-vertical">Biaya Bulanan</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayabulananLayanan" value="<?= $data_internet_user_layanan['biayabulananLayanan'] ?>">
+                                            <input type="text" class="form-control number" name="biayabulananLayanan" value="<?= $data_internet_user_layanan['biayabulananLayanan'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Bulanan</label>
-                                        <select name="ppnbiayabulanan" id="" class="form-select">
+                                        <select name="ppnbiayabulanan" id="" class="form-select" required>
                                             <option value="">PPN Biaya Bulanan</option>
                                             <option value="1" <?= $data_internet_user_vendor['ppnbiayabulanan'] == 1 ? "selected" : "" ?>>Ya</option>
                                             <option value="2" <?= $data_internet_user_vendor['ppnbiayabulanan'] == 2 ? "selected" : "" ?>>Tidak</option>
@@ -357,7 +528,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Keterangan</label>
-                                        <textarea class="form-control" name="keterangan" id="" cols="30" rows="4"></textarea>
+                                        <textarea class="form-control" name="keterangan" id="" cols="30" rows="4"><?= $detail['keterangan'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -370,14 +541,14 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Tanggal Instalasi</label>
-                                        <input type="date" class="form-control" name="tglInstalasi" value="<?= $data_instalasi['tglInstalasi'] ?>">
+                                        <input type="date" class="form-control" name="tglInstalasi" value="<?= $data_instalasi['tglInstalasi'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Jarak</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control number" name="jarak" value="<?= $data_instalasi['jarak'] ?>">
+                                            <input type="text" class="form-control number" name="jarak" value="<?= $data_instalasi['jarak'] ?>" required>
                                             <span class="input-group-text">Meter</span>
                                         </div>
                                     </div>
@@ -391,7 +562,7 @@
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Tanggal Aktivasi</label>
-                                        <input type="date" class="form-control" name="tglAktivasi" value="<?= $data_aktivasi['tglAktivasi'] ?>">
+                                        <input type="date" class="form-control" name="tglAktivasi" value="<?= $data_aktivasi['tglAktivasi'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -399,19 +570,19 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">VLan</label>
-                                        <input type="text" class="form-control" name="vlan" value="<?= $data_aktivasi['vlan'] ?>">
+                                        <input type="text" class="form-control" name="vlan" value="<?= $data_aktivasi['vlan'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">MAC Address</label>
-                                        <input type="text" class="form-control" name="macAddress" value="<?= $data_aktivasi['macAddress'] ?>">
+                                        <input type="text" class="form-control" name="macAddress" value="<?= $data_aktivasi['macAddress'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Serial Number</label>
-                                        <input type="text" class="form-control" name="serialNumber" value="<?= $data_aktivasi['serialNumber'] ?>">
+                                        <input type="text" class="form-control" name="serialNumber" value="<?= $data_aktivasi['serialNumber'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -428,7 +599,7 @@
                         </div>
 
                         <!-- Data Aktif -->
-                        <h5 class="mt-3">Data Aktif</h5>
+                        <h5 class="mt-3">Start Billing</h5>
                         <div class="card-body border border-1 rounded">
                             <div class="row">
                                 <div class="col-4">
@@ -488,15 +659,16 @@
 
                     </div>
                 </div>
-                <div class="card-footer">
-                    <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary float-end">Submit</button>
-                    </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary float-end">Submit</button>
                 </div>
-            </form>
-        </div>
+            </div>
 
     </div>
+    </form>
 
     <?php include('../src/pages/adminhelper/footer.php'); ?>
 </div>

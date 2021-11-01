@@ -153,7 +153,7 @@ class RegistrasiUserMinatController extends GlobalFunc
         $invoice_create = $invoice->create($noRegistrasi, $datas);
 
         $fee_sales = new FeeSales();
-        $fee_sales_create = $fee_sales->create($datas);
+        $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);
 
         $internet_user_registrasi_create = $this->model->create($datas);
 

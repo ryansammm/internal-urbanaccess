@@ -19,7 +19,7 @@ class InternetUserRegistrasi extends GlobalFunc
 
     public function selectAll($where = "")
     {
-        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN internetuserlayanan ON internetuserlayanan.idInternetuserregistrasi  = internetuserregistrasi.noRegistrasi LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN salesperorangan ON salesperorangan.idSales = internetuserregistrasi.idSales LEFT JOIN salesreseller ON salesreseller.idSales = internetuserregistrasi.idSales " . $where;
+        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN internetuserlayanan ON internetuserlayanan.idInternetuserregistrasi  = internetuserregistrasi.noRegistrasi LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN layananinternetdetail ON layananinternetdetail.idLayananinternetdetail = internetuserlayanan.idLayanandetail LEFT JOIN salesperorangan ON salesperorangan.idSales = internetuserregistrasi.idSales LEFT JOIN salesreseller ON salesreseller.idSales = internetuserregistrasi.idSales " . $where;
 
         // dd($sql);
 
@@ -67,7 +67,7 @@ class InternetUserRegistrasi extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT *, provinsi.id as idProvinsi, provinsi.name as nameProvinsi, kabupaten.id as idKabupaten, kabupaten.name as nameKabupaten, kecamatan.id as idKecamatan, kecamatan.name as nameKecamatan, kelurahan.id as idKelurahan, kelurahan.name as nameKelurahan,salesperorangan.namaSales as nameSales, salesreseller.namaSales as nameReseller FROM " . $this->table . " LEFT JOIN internetuseralamat ON internetuseralamat.idInternetuserregistrasi = internetuserregistrasi.noRegistrasi LEFT JOIN provinsi ON provinsi.id = internetuseralamat.idProvinsi LEFT JOIN kabupaten ON kabupaten.id = internetuseralamat.idKabupaten LEFT JOIN kecamatan ON kecamatan.id = internetuseralamat.idKecamatan LEFT JOIN kelurahan ON kelurahan.id = internetuseralamat.idKelurahan LEFT JOIN salesperorangan ON salesperorangan.idSales = internetuserregistrasi.idSales LEFT JOIN salesreseller ON salesreseller.idSales = internetuserregistrasi.idSales LEFT JOIN grouppic ON grouppic.idRelation = internetuserregistrasi.noRegistrasi LEFT JOIN pic ON pic.nikPic = grouppic.nikPic WHERE internetuserregistrasi." . $this->primaryKey . " = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN salesperorangan ON salesperorangan.idSales = internetuserregistrasi.idSales LEFT JOIN salesreseller ON salesreseller.idSales = internetuserregistrasi.idSales WHERE internetuserregistrasi." . $this->primaryKey . " = '$id'";
         // dd($sql);
 
         try {

@@ -5,6 +5,7 @@ namespace App\RegistrasiUser\Controller;
 use App\Aktif\Model\Aktif;
 use App\Aktivasi\Model\Aktivasi;
 use App\Client\Model\Client;
+use App\FeeSales\Model\FeeSales;
 use App\GroupKontak\Model\GroupKontak;
 use App\GroupLayanan\Model\GroupLayanan;
 use App\GroupLegalitas\Model\GroupLegalitas;
@@ -14,6 +15,10 @@ use App\Instalasi\Model\Instalasi;
 use App\InternetUserAlamat\Model\InternetUserAlamat;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\InternetUserVendor\Model\InternetUserVendor;
+use App\Invoice\Model\Invoice;
+use App\Kabupaten\Model\Kabupaten;
+use App\Kecamatan\Model\Kecamatan;
+use App\Kelurahan\Model\Kelurahan;
 use App\Kontak\Model\Kontak;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\LayananInternet\Model\LayananInternet;
@@ -261,7 +266,7 @@ class RegistrasiUserController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
-        // dd($id);
+        // dd($detail);
 
         $internet_user_layanan = new InternetUserLayanan();
         $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
@@ -269,10 +274,40 @@ class RegistrasiUserController extends GlobalFunc
         $layanan = $data_layanan->selectAll();
         $data_layanan_detail = new LayananInternetDetail();
         $layanan_detail = $data_layanan_detail->selectAll();
-        // dd($layanan);
+        // dd($data_internet_user_layanan);
 
+        $feesales = new FeeSales();
+        $data_feesales = $feesales->selectOne("WHERE idUser = '" . $id . "'");
+
+        // Alamat
         $provinsi = new Provinsi();
         $data_provinsi = $provinsi->selectAll();
+
+        $alamat_user = new InternetUserAlamat();
+        $alamat_pemasangan = $alamat_user->selectOne("WHERE noregistrasi = '" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $alamat_penagihan = $alamat_user->selectOne("WHERE noregistrasi = '" . $id . "' AND jenisAlamat = 'penagihan'");
+
+        $provinsi = new Provinsi();
+        $kabupaten = new Kabupaten();
+        $kecamatan = new Kecamatan();
+        $kelurahan = new Kelurahan();
+
+        // Alamat Pemasangan
+        $data_provinsi_pemasangan = $provinsi->selectAll();
+        $data_kabupaten_pemasangan = $kabupaten->selectAll("WHERE idProvinsi = '" . $alamat_pemasangan['idProvinsi'] . "'");
+        $data_kecamatan_pemasangan = $kecamatan->selectAll("WHERE idKabupaten = '" . $alamat_pemasangan['idKabupaten'] . "'");
+        $data_kelurahan_pemasangan = $kelurahan->selectAll("WHERE idKecamatan = '" . $alamat_pemasangan['idKecamatan'] . "'");
+
+        // Alamat Penagihan
+        $data_provinsi_penagihan = $provinsi->selectAll();
+        $data_kabupaten_penagihan = $kabupaten->selectAll("WHERE idProvinsi = '" . $alamat_penagihan['idProvinsi'] . "'");
+        $data_kecamatan_penagihan = $kecamatan->selectAll("WHERE idKabupaten = '" . $alamat_penagihan['idKabupaten'] . "'");
+        $data_kelurahan_penagihan = $kelurahan->selectAll("WHERE idKecamatan = '" . $alamat_penagihan['idKecamatan'] . "'");
+        // dd($alamat_penagihan, $data_kabupaten_penagihan);
+
+        $invoice = new Invoice();
+        $data_invoice = $invoice->selectOne("WHERE noRegistrasi = '" . $id . "'");
+        // dd($data_invoice);
 
         $reseller = new Reseller();
         $nama_reseller = $reseller->selectAll();
@@ -286,18 +321,30 @@ class RegistrasiUserController extends GlobalFunc
         $id_jenis_whatsapp = $jeniskontak->namaKontak("Whatsapp")['idKontak'];
         $id_jenis_email = $jeniskontak->namaKontak("Email")['idKontak'];
 
+        $pic = new PIC();
+        $group_pic = new GroupPIC();
+        $data_group_pic_keuangan = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic = 'keuangan'");
+        $data_group_pic_teknis = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic = 'teknis'");
+        // dd($data_group_pic_teknis);
+
         // Group Kontak Vendor
         $group_kontak = new GroupKontak();
         $data_kontak_telp = $group_kontak->selectOne("WHERE idRelation = '" . $detail['noRegistrasi'] . "' AND idKontak = '" . $id_jenis_telp . "'");
         $data_kontak_whatsapp = $group_kontak->selectOne("WHERE idRelation = '" . $detail['noRegistrasi'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
         $data_kontak_email = $group_kontak->selectOne("WHERE idRelation = '" . $detail['noRegistrasi'] . "' AND idKontak = '" . $id_jenis_email . "'");
-        // dd($data_kontak_telp);
 
-        // Group Kontak PIC
-        $data_kontak_telp_pic = $group_kontak->selectOne("WHERE idRelation = '" . $detail['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
-        $data_kontak_whatsapp_pic = $group_kontak->selectOne("WHERE idRelation = '" . $detail['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
-        $data_kontak_email_pic = $group_kontak->selectOne("WHERE idRelation = '" . $detail['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
-        // dd($data_kontak_email_pic);
+
+        // Group Kontak PIC Keuangan
+        $data_kontak_telp_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
+        $data_kontak_whatsapp_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
+        $data_kontak_email_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
+        // dd($data_kontak_telp_pic_keuangan);
+
+        // Group Kontak PIC Teknis
+        $data_kontak_telp_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
+        $data_kontak_whatsapp_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
+        $data_kontak_email_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
+
 
         // Legalitas
         $legalitas = new Legalitas();
@@ -333,7 +380,7 @@ class RegistrasiUserController extends GlobalFunc
         // dd($data_aktif);
 
 
-        return $this->render_template('admin/master/registrasi/edit', ['detail' => $detail, 'data_internet_user_layanan' => $data_internet_user_layanan, 'provinsi' => $data_provinsi, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales, 'data_vendor' => $data_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif]);
+        return $this->render_template('admin/master/registrasi/edit', ['detail' => $detail, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_provinsi_pemasangan' => $data_provinsi_pemasangan, 'data_kabupaten_pemasangan' => $data_kabupaten_pemasangan, 'data_kecamatan_pemasangan' => $data_kecamatan_pemasangan, 'data_kelurahan_pemasangan' => $data_kelurahan_pemasangan, 'data_provinsi_penagihan' => $data_provinsi_penagihan, 'data_kabupaten_penagihan' => $data_kabupaten_penagihan, 'data_kecamatan_penagihan' => $data_kecamatan_penagihan, 'data_kelurahan_penagihan' => $data_kelurahan_penagihan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic_keuangan' => $data_kontak_telp_pic_keuangan, 'data_kontak_whatsapp_pic_keuangan' => $data_kontak_whatsapp_pic_keuangan, 'data_kontak_email_pic_keuangan' => $data_kontak_email_pic_keuangan, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales, 'data_vendor' => $data_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'alamat_pemasangan' => $alamat_pemasangan, 'alamat_penagihan' => $alamat_penagihan, 'data_invoice' => $data_invoice, 'data_kontak_telp_pic_teknis' => $data_kontak_telp_pic_teknis, 'data_kontak_whatsapp_pic_teknis' => $data_kontak_whatsapp_pic_teknis, 'data_kontak_email_pic_teknis' => $data_kontak_email_pic_teknis, 'data_group_pic_keuangan' => $data_group_pic_keuangan, 'data_group_pic_teknis' => $data_group_pic_teknis, 'data_feesales' => $data_feesales]);
     }
 
     public function update(Request $request)

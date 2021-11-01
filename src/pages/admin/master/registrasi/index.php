@@ -14,11 +14,10 @@
                                 <tr>
                                     <td>#</td>
                                     <td>Nomor Registrasi</td>
-                                    <td>Kode Form</td>
                                     <td>User ID</td>
                                     <td>Nama User</td>
                                     <td>Layanan</td>
-                                    <td>Sales</td>
+                                    <td>Biaya Bulanan</td>
                                     <td>Status</td>
                                     <td>Aksi</td>
                                 </tr>
@@ -28,11 +27,10 @@
                                     <tr>
                                         <td><?= $key += 1 ?></td>
                                         <td><?= $value['noRegistrasi'] ?></td>
-                                        <td><?= $value['kodeformInternetregistrasi'] ?></td>
                                         <td><?= $value['idUser'] ?></td>
                                         <td><?= $value['namauserRegistrasi'] ?></td>
-                                        <td><?= $value['namaLayanan'] ?></td>
-                                        <td><?= $value['namaSales'] ?></td>
+                                        <td><?= $value['namaLayanan'] ?>, <?= $value['kecepatan'] ?> Mbps</td>
+                                        <td>Rp.<?= $value['biayabulananLayanan'] ?>,-</td>
                                         <td style="color: #00b30e;"><?= $value['tercoverText'] ?></td>
                                         <td>
 

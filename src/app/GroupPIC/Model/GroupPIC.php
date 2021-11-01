@@ -69,6 +69,26 @@ class GroupPIC extends GlobalFunc
             die();
         }
     }
+
+
+    public function selectOneJoin($where = "")
+    {
+        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN pic ON pic.nikPic = grouppic.nikPic " . $where;
+        // dd($sql);
+
+        try {
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            $data = $query->fetch();
+
+            return $data;
+        } catch (PDOException $e) {
+            echo $e;
+            die();
+        }
+    }
+
+
     public function update($id, $datas, $where)
     {
         $id = uniqid('gpc');

@@ -66,6 +66,7 @@ class InternetUserLayanan extends GlobalFunc
     public function selectOne($id)
     {
         $sql = "SELECT * FROM " . $this->table . " LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN layananinternetdetail ON layananinternetdetail.idLayananinternet = internetuserlayanan.idLayanandetail WHERE " . $this->primaryKey . " = '$id'";
+        // dd($sql);
 
         try {
             $query = $this->conn->prepare($sql);

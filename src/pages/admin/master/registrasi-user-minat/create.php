@@ -642,8 +642,8 @@
                         </tbody>
                         </table>
                     </div>
-                </div>
-            </div> -->
+                         </div>
+                    </div> -->
 
                         <!-- Detail -->
                         <!-- <div class="row">

@@ -63,7 +63,7 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         }
         $create = $this->model->create($request->request);
 
-        return new RedirectResponse('/input-hasil-survey-onsite');
+        return new RedirectResponse('/input-hasil-survey-onsite/dokumentasi/{id}');
     }
 
     public function get(Request $request)
@@ -97,6 +97,12 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         $datas = $request->request->all();
         $detail = $this->model->selectOne("WHERE jenisSurvey = 2");
 
+        // dd($id);
+
+        $status = '6';
+        $minat = new Minat();
+        $minat_status = $minat->updateStatus($id, $status);
+
         $minat = new Minat();
         $data_minat = $minat->selectOne($detail['kodeMinat']);
 
@@ -108,9 +114,6 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
 
         $nama_sales =  $_SESSION['_sf2_attributes']['namaUser'];
 
-
-
-
         $group_data = [
             'tanggalHasil' =>  $datas['tanggalHasil'],
             'jarak' => $datas['jarak'],
@@ -118,9 +121,6 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         ];
         $input_survey_onsite_update = $this->model->update($id, $group_data);
 
-        $status = '6';
-        $minat = new Minat();
-        $minat_status = $minat->updateStatus($detail['kodeMinat'], $status);
 
         $user = new Users();
         $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
