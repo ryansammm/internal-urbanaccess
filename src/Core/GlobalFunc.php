@@ -13,6 +13,7 @@ class GlobalFunc
 {
     public $conn;
     public $baseUrl;
+    public $session;
 
     public function __construct()
     {
@@ -43,7 +44,10 @@ class GlobalFunc
     {
         $this->session = new Session();
         $this->session->start();
+
+        return $this->session;
     }
+
 
     public function dd(...$var)
     {
