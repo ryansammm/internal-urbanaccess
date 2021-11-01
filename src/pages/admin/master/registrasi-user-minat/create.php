@@ -519,14 +519,14 @@
                                         <label for="first-name-vertical">Biaya Registrasi</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayaregistrasiLayanan">
+                                            <input type="text" class="form-control number biayaregistrasiLayanan" name="biayaregistrasiLayanan">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Registrasi</label>
-                                        <select name="ppnbiayainstalasi" id="" class="form-select" required>
+                                        <select name="ppnbiayainstalasi" id="" class="form-select ppnbiayainstalasi" required>
                                             <option value="">-- PPN --</option>
                                             <option value="1">Ya</option>
                                             <option value="2">Tidak</option>
@@ -538,14 +538,14 @@
                                         <label for="first-name-vertical">Biaya Bulanan</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayabulananLayanan">
+                                            <input type="text" class="form-control number biayabulananLayanan" name="biayabulananLayanan">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Bulanan</label>
-                                        <select name="ppnbiayabulanan" id="" class="form-select" required>
+                                        <select name="ppnbiayabulanan" id="" class="form-select ppnbiayabulanan" required>
                                             <option value="">-- PPN --</option>
                                             <option value="1">Ya</option>
                                             <option value="2">Tidak</option>
@@ -845,6 +845,40 @@
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             });
         });
+
+        // hitung ppn biaya registrasi
+        var biayaregistrasiPPN = 0;
+        $('.ppnbiayainstalasi').on('change', function() {
+            var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+            var biayaregistrasiPPNAkhir = 0;
+            if ($(this).val() == '1') {
+                biayaregistrasiPPN = (biayaregistrasi*10)/100;
+                biayaregistrasiPPNAkhir = biayaregistrasi+biayaregistrasiPPN;
+            } else {
+                biayaregistrasiPPNAkhir = biayaregistrasi-biayaregistrasiPPN;
+                biayaregistrasiPPN = 0;
+            }
+            $('.biayaregistrasiLayanan').val(
+                biayaregistrasiPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            );
+        })
+
+        // hitung ppn biaya bulanan
+        var biayabulananPPN = 0;
+        $('.ppnbiayabulanan').on('change', function() {
+            var biayabulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
+            var biayabulananPPNAkhir = 0;
+            if ($(this).val() == '1') {
+                biayabulananPPN = (biayabulanan*10)/100;
+                biayabulananPPNAkhir = biayabulanan+biayabulananPPN;
+            } else {
+                biayabulananPPNAkhir = biayabulanan-biayabulananPPN;
+                biayabulananPPN = 0;
+            }
+            $('.biayabulananLayanan').val(
+                biayabulananPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            );
+        })
     });
 </script>
 
