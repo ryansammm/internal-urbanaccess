@@ -64,9 +64,9 @@ class InternetUserAlamat extends GlobalFunc
         }
     }
 
-    public function selectOne($id)
+    public function selectOne($where = "")
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " " . $where;
         // dd($sql);
         try {
             $query = $this->conn->prepare($sql);

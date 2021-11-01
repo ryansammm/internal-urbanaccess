@@ -158,7 +158,7 @@
                                 <a href="/aktivasi">Aktivasi</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="/aktif">Billing</a>
+                                <a href="/aktif">Start Billing</a>
                             </li>
                         </ul>
                     </li>

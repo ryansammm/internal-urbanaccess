@@ -173,6 +173,7 @@ class Minat extends GlobalFunc
         $tanggalRequest = date('Y-m-d H:i:s');
 
         $sql = "UPDATE " . $this->table . " SET status = '$status', tanggalRequest = '$tanggalRequest' WHERE kodeMinat = '$id'";
+        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);

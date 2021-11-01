@@ -54,9 +54,9 @@ class Invoice extends GlobalFunc
         }
     }
 
-    public function selectOne($id)
+    public function selectOne($where = "")
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " " . $where;
 
         try {
             $query = $this->conn->prepare($sql);

@@ -30,7 +30,7 @@
                                         <td><?= $value['namaLayanan'] ?>, <?= $value['kecepatan'] ?> Mbps</td>
                                         <td><?= $value['alamat'] ?></td>
                                         <td>
-                                            <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['id'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-user-plus"></i></a>
+                                            <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['kodeMinat'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-user-plus"></i></a>
                                             <!-- <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['id'] ?>" data-bs-toggle="modal" data-bs-target="#dokumentasi"><i class="fas fa-camera"></i></a> -->
                                         </td>
                                     </tr>
@@ -81,30 +81,6 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Dokumentasi-->
-<div class="modal fade" id="dokumentasi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Dokumentasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 class="card-title mb-3">Dokumentasi</h4>
-                <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
-                <form method="post" action="/aktivasi/dokumentasi/<?= $id ?>/store" enctype="multipart/form-data" class="dropzone" id="dropzonewidget">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
-            </div>
         </div>
     </div>
 </div>

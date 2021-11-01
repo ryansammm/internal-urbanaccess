@@ -32,9 +32,9 @@ class FeeSales extends GlobalFunc
         }
     }
 
-    public function selectOne($id)
+    public function selectOne($where = " ")
     {
-        $sql = "SELECT * FROM " . $this->table . " " . $this->primaryKey . " = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " " . $where;
 
         try {
             $query = $this->conn->prepare($sql);
@@ -48,11 +48,10 @@ class FeeSales extends GlobalFunc
         }
     }
 
-    public function create($datas)
+    public function create($idUser, $datas)
     {
         $idFeeSales = uniqid('fee-');
         $idSales = $datas['idSales'];
-        $idUser = $datas['idUser'];
         $feeSales = $datas['feeSales'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
