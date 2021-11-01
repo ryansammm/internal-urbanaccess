@@ -110,7 +110,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama Penanggung Jawab *</label>
-                                        <input type="text" class="form-control" name="namauserRegistrasi" value="<?= $detail['namauserRegistrasi'] ?>">
+                                        <input type="text" class="form-control namauserRegistrasi" name="namauserRegistrasi" value="<?= $detail['namauserRegistrasi'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -119,19 +119,19 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp *</label>
-                                        <input type="text" class="form-control" name="telpkontak" value="<?= $data_kontak_telp['isiKontak'] ?>">
+                                        <input type="text" class="form-control telpkontakuser" name="telpkontak" value="<?= $data_kontak_telp['isiKontak'] ?>">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp *</label>
-                                        <input type="text" class="form-control" name="whatsappkontak" value="<?= $data_kontak_whatsapp['isiKontak'] ?>">
+                                        <input type="text" class="form-control whatsappkontakuser" name="whatsappkontak" value="<?= $data_kontak_whatsapp['isiKontak'] ?>">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email *</label>
-                                        <input type="text" class="form-control" name="emailkontak" value="<?= $data_kontak_email['isiKontak'] ?>">
+                                        <input type="text" class="form-control emailkontakuser" name="emailkontak" value="<?= $data_kontak_email['isiKontak'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nomor Induk Kependudukan</label>
-                                        <input type="text" class="form-control" name="nikUserRegistrasi" value="<?= $detail['nikUserRegistrasi'] ?>">
+                                        <input type="text" class="form-control nikUserRegistrasi" name="nikUserRegistrasi" value="<?= $detail['nikUserRegistrasi'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -358,13 +358,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK PIC Keuangan</label>
-                                        <input type="text" class="form-control" name="nikPicKeuangan" value="<?= $data_group_pic_keuangan['nikPic'] ?>" required>
+                                        <input type="text" class="form-control nikPicKeuangan" name="nikPicKeuangan" value="<?= $data_group_pic_keuangan['nikPic'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama PIC Keuangan </label>
-                                        <input type="text" class="form-control" name="namaPicKeuangan" value="<?= $data_group_pic_keuangan['namaPic'] ?>" required>
+                                        <input type="text" class="form-control namaPicKeuangan" name="namaPicKeuangan" value="<?= $data_group_pic_keuangan['namaPic'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -372,19 +372,19 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICKeuangan" value="<?= $data_kontak_telp_pic_keuangan['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noTelpPICKeuangan" name="noTelpPICKeuangan" value="<?= $data_kontak_telp_pic_keuangan['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICKeuangan" value="<?= $data_kontak_whatsapp_pic_keuangan['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noWaPICKeuangan" name="noWaPICKeuangan" value="<?= $data_kontak_whatsapp_pic_keuangan['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICKeuangan" value="<?= $data_kontak_email_pic_keuangan['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control emailPICKeuangan" name="emailPICKeuangan" value="<?= $data_kontak_email_pic_keuangan['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -407,13 +407,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK PIC Keuangan</label>
-                                        <input type="text" class="form-control" name="nikPicTeknik" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
+                                        <input type="text" class="form-control nikPicTeknik" name="nikPicTeknik" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama PIC Keuangan </label>
-                                        <input type="text" class="form-control" name="namaPicTeknik" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
+                                        <input type="text" class="form-control namaPicTeknik" name="namaPicTeknik" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -421,26 +421,26 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICTeknik" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noTelpPICTeknik" name="noTelpPICTeknik" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICTeknik" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noWaPICTeknik" name="noWaPICTeknik" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICTeknik" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control emailPICTeknik" name="emailPICTeknik" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="cekTeknis">
+                                        <input class="form-check-input" type="checkbox" value="1" id="cekTeknis">
                                         <label class="form-check-label" for="cekTeknis">
                                             Data yang digunakan sama
                                         </label>
@@ -860,6 +860,30 @@
             $('.biayabulananLayanan').val(
                 biayabulananPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             );
+        })
+
+        // copy data user ke pic keuangan
+        $('#cekKeuangan').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            if (isChecked) {
+                $('.nikPicKeuangan').val($('.nikUserRegistrasi').val())
+                $('.namaPicKeuangan').val($('.namauserRegistrasi').val())
+                $('.noTelpPICKeuangan').val($('.telpkontakuser').val())
+                $('.noWaPICKeuangan').val($('.whatsappkontakuser').val())
+                $('.emailPICKeuangan').val($('.emailkontakuser').val())
+            }
+        })
+
+        // copy data user ke pic teknis
+        $('#cekTeknis').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            if (isChecked) {
+                $('.nikPicTeknik').val($('.nikUserRegistrasi').val())
+                $('.namaPicTeknik').val($('.namauserRegistrasi').val())
+                $('.noTelpPICTeknik').val($('.telpkontakuser').val())
+                $('.noWaPICTeknik').val($('.whatsappkontakuser').val())
+                $('.emailPICTeknik').val($('.emailkontakuser').val())
+            }
         })
     });
 </script>
