@@ -107,6 +107,36 @@ class InternetUserAlamat extends GlobalFunc
         }
     }
 
+
+    public function updateJenis($where = "", $datas)
+    {
+        $alamat = isset($datas['alamat']) ? $datas['alamat'] : NULL;
+        $rt = isset($datas['rt']) ? $datas['rt'] : NULL;
+        $rw = isset($datas['rw']) ? $datas['rw'] : NULL;
+        $idProvinsi = isset($datas['idProvinsi']) ? $datas['idProvinsi'] : NULL;
+        $idKabupaten = isset($datas['idKabupaten']) ? $datas['idKabupaten'] : NULL;
+        $idKecamatan = isset($datas['idKecamatan']) ? $datas['idKecamatan'] : NULL;
+        $idKelurahan = isset($datas['idKelurahan']) ? $datas['idKelurahan'] : NULL;
+        $kodepos = isset($datas['kodepos']) ? $datas['kodepos'] : NULL;
+        $latitude = explode(',', $datas['koordinat'])[0];
+        $longtitude = explode(',', $datas['koordinat'])[1];
+        $updatedAt = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE " . $this->table . " SET alamat = '$alamat', rt = '$rt', rw = '$rw', idProvinsi = '$idProvinsi', idKabupaten = '$idKabupaten', idKecamatan = '$idKecamatan', idKelurahan = '$idKelurahan', kodepos = '$kodepos', latitude = '$latitude', longtitude = '$longtitude', updatedAt = '$updatedAt'" . $where;
+        // dd($sql);
+
+        try {
+            $data = $this->conn->prepare($sql);
+            $data->execute();
+
+            return true;
+        } catch (PDOexception $e) {
+            echo $e;
+            die();
+        }
+    }
+
+
     public function delete($id)
     {
         $sql = "DELETE FROM " . $this->table . " WHERE " . $this->primaryKey . " = '$id'";

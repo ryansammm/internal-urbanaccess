@@ -30,7 +30,7 @@
                                         <td><?= $value['namaLayanan'] ?>, <?= $value['kecepatan'] ?> Mbps</td>
                                         <td><?= $value['alamat'] ?></td>
                                         <td>
-                                            <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['kodeMinat'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-user-plus"></i></a>
+                                            <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['id'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-user-plus"></i></a>
                                             <!-- <a class="btn-update btn btn-sm btn-outline-primary" href="" data-id="<?= $value['id'] ?>" data-bs-toggle="modal" data-bs-target="#dokumentasi"><i class="fas fa-camera"></i></a> -->
                                         </td>
                                     </tr>

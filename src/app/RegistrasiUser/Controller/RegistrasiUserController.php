@@ -390,13 +390,10 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
-        // dd($id);
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
 
-
         $update = $this->model->update($id, $datas);
-        $id_pic = $detail['nikPic'];
 
         $internet_user_layanan = new InternetUserLayanan();
         $internet_user_layanan_update = $internet_user_layanan->update($id, $datas);
@@ -412,7 +409,7 @@ class RegistrasiUserController extends GlobalFunc
 
         // Update with delete method
         $delete_kontak = $group_kontak->delete("WHERE idRelation = '" . $id . "'");
-        $delete_kontak_pic = $group_kontak->delete("WHERE idRelation = '" . $detail['nikPic'] . "'");
+
 
         // create kontak Vendor
         $data_group_kontak_telp = [
@@ -436,48 +433,133 @@ class RegistrasiUserController extends GlobalFunc
         ];
         $create_group_kontak_email = $group_kontak->create($data_group_kontak_email);
 
-        // create kontak PIC
-        $data_group_kontak_telp_pic = [
-            'idRelation' => $detail['nikPic'],
-            'idKontak' => $id_jenis_telp,
-            'isiKontak' => $datas['noTelpPIC']
-        ];
-        $create_group_kontak_telp = $group_kontak->create($data_group_kontak_telp_pic);
-
-        $data_group_kontak_whatsapp_pic = [
-            'idRelation' => $detail['nikPic'],
-            'idKontak' => $id_jenis_whatsapp,
-            'isiKontak' => $datas['noWaPIC']
-        ];
-        $create_group_kontak_whatsapp = $group_kontak->create($data_group_kontak_whatsapp_pic);
-
-        $data_group_kontak_email_pic = [
-            'idRelation' => $detail['nikPic'],
-            'idKontak' => $id_jenis_email,
-            'isiKontak' => $datas['emailPIC']
-        ];
-        $create_group_kontak_email = $group_kontak->create($data_group_kontak_email_pic);
-
-
 
         $internet_user_alamat = new InternetUserAlamat();
-        $internet_user_alamat_update = $internet_user_alamat->update($id, $datas);
+        $data_alamat_pemasangan = $internet_user_alamat->selectOne("WHERE noRegistrasi = '" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $data_alamat_penagihan = $internet_user_alamat->selectOne("WHERE noRegistrasi = '" . $id . "' AND jenisAlamat = 'penagihan'");
+
+        // Alamat Pemasangan
+        $data_alamat_pemasangan = [
+            'alamat' => $datas['alamatPemasangan'],
+            'rt' => $datas['rtPemasangan'],
+            'rw' => $datas['rwPemasangan'],
+            'idProvinsi' => $datas['idProvinsiPemasangan'],
+            'idKabupaten' => $datas['idKabupatenPemasangan'],
+            'idKecamatan' => $datas['idKecamatanPemasangan'],
+            'idKelurahan' => $datas['idKelurahanPemasangan'],
+            'kodepos' => $datas['kodeposPemasangan'],
+            'koordinat' => $datas['koordinatPemasangan'],
+            'jenisAlamat' => 'pemasangan',
+        ];
+        $create_alamat_pemasangan = $internet_user_alamat->updateJenis("WHERE noRegistrasi = '" . $id . "' AND jenisAlamat = 'pemasangan'", $data_alamat_pemasangan);
+
+        $data_alamat_penagihan = [
+            'alamat' => $datas['alamatPenagihan'],
+            'rt' => $datas['rtPenagihan'],
+            'rw' => $datas['rwPenagihan'],
+            'idProvinsi' => $datas['idProvinsiPenagihan'],
+            'idKabupaten' => $datas['idKabupatenPenagihan'],
+            'idKecamatan' => $datas['idKecamatanPenagihan'],
+            'idKelurahan' => $datas['idKelurahanPenagihan'],
+            'kodepos' => $datas['kodeposPenagihan'],
+            'koordinat' => $datas['koordinatPenagihan'],
+            'jenisAlamat' => 'penagihan',
+        ];
+        $create_alamat_penagihan = $internet_user_alamat->updateJenis("WHERE noRegistrasi = '" . $id . "' AND jenisAlamat = 'penagihan'", $data_alamat_penagihan);
+
 
         // PIC
-        // create pic internal
         $pic = new PIC();
-        $pic_delete = $pic->delete("WHERE nikPic = '" . $detail['nikPic'] . "'");
-        $datas['statusPic'] = '1';
-        $pic_create = $pic->create($datas);
-
-        // create group pic vendor
         $group_pic = new GroupPIC();
-        $group_pic_delete = $group_pic->delete("WHERE nikPic = '" . $detail['nikPic'] . "'");
-        $group_pic_data = [
-            'nikPic' => $datas['nikPic'],
+        $group_pic_keuangan = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic= 'keuangan'");
+        $group_pic_teknis = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic= 'keuangan'");
+
+        // KEUANGAN
+        // pic
+        $pic_keuangan_delete = $pic->delete("WHERE nikPic = '" . $detail['nikPicKeuangan'] . "'");
+        $data_pic_keuangan = [
+            'nikPic' =>  $datas['nikPicKeuangan'],
+            'namaPic' =>  $datas['namaPicKeuangan'],
+            'jenisPic' => 'keuangan',
+            'statusPic' => '1'
+        ];
+        $pic_keuangan_create = $pic->create($data_pic_keuangan);
+
+        // groupPic
+        $group_pic_keuangan_delete = $group_pic->delete("WHERE nikPic = '" . $detail['nikPicKeuangan'] . "'");
+        $group_pic_keuangan_data = [
+            'nikPic' => $datas['nikPicKeuangan'],
             'idRelation' => $id
         ];
-        $group_pic_create = $group_pic->create($group_pic_data);
+        $group_pic_keuangan_create = $group_pic->create($group_pic_keuangan_data);
+
+        //  kontak
+        $delete_kontak_pic_keuangan = $group_kontak->delete("WHERE idRelation = '" . $detail['nikPicKeuangan'] . "'");
+        $data_group_kontak_telp_pic_keuangan = [
+            'idRelation' => $datas['nikPicKeuangan'],
+            'idKontak' => $id_jenis_telp,
+            'isiKontak' => $datas['noTelpPICKeuangan']
+        ];
+        $create_group_kontak_telp_keuangan = $group_kontak->create($data_group_kontak_telp_pic_keuangan);
+
+        $data_group_kontak_whatsapp_pic_keuangan = [
+            'idRelation' => $datas['nikPicKeuangan'],
+            'idKontak' => $id_jenis_whatsapp,
+            'isiKontak' => $datas['noWaPICKeuangan']
+        ];
+        $create_group_kontak_whatsapp_keuangan = $group_kontak->create($data_group_kontak_whatsapp_pic_keuangan);
+
+        $data_group_kontak_email_pic_keuangan = [
+            'idRelation' => $datas['nikPicKeuangan'],
+            'idKontak' => $id_jenis_email,
+            'isiKontak' => $datas['emailPICKeuangan']
+        ];
+        $create_group_kontak_email_keuangan = $group_kontak->create($data_group_kontak_email_pic_keuangan);
+
+
+
+        // Teknis
+        $pic_teknis_delete = $pic->delete("WHERE nikPic = '" . $detail['nikPicTeknis'] . "'");
+        $data_pic_teknis = [
+            'nikPic' =>  $datas['nikPicTeknis'],
+            'namaPic' =>  $datas['namaPicTeknis'],
+            'jenisPic' => 'teknis',
+            'statusPic' => '1'
+        ];
+        $pic_vendor_create_teknis = $pic->create($data_pic_teknis);
+
+        $group_pic_teknis_delete = $group_pic->delete("WHERE nikPic = '" . $detail['nikPicTeknis'] . "'");
+        $group_pic_teknis_data = [
+            'nikPic' => $datas['nikPicTeknis'],
+            'idRelation' => $id
+        ];
+        $group_pic_teknis_create = $group_pic->create($group_pic_teknis_data);
+
+        //  kontak
+        $delete_kontak_pic_teknis = $group_kontak->delete("WHERE idRelation = '" . $detail['nikPicTeknis'] . "'");
+        $data_group_kontak_telp_pic_teknis = [
+            'idRelation' => $datas['nikPicTeknis'],
+            'idKontak' => $id_jenis_telp,
+            'isiKontak' => $datas['noTelpPICTeknik']
+        ];
+        $create_group_kontak_telp_teknis = $group_kontak->create($data_group_kontak_telp_pic_teknis);
+
+        $data_group_kontak_whatsapp_pic_teknis = [
+            'idRelation' => $datas['nikPicTeknis'],
+            'idKontak' => $id_jenis_whatsapp,
+            'isiKontak' => $datas['noWaPICTeknik']
+        ];
+        $create_group_kontak_whatsapp_teknis = $group_kontak->create($data_group_kontak_whatsapp_pic_teknis);
+
+        $data_group_kontak_email_pic_teknis = [
+            'idRelation' => $datas['nikPicTeknis'],
+            'idKontak' => $id_jenis_email,
+            'isiKontak' => $datas['emailPICTeknik']
+        ];
+        $create_group_kontak_email_teknis = $group_kontak->create($data_group_kontak_email_pic_teknis);
+
+        $invoice = new Invoice();
+        $invoice_update = $invoice->update($id, $datas, "WHERE noRegistrasi = '" . $id . "'");
 
         // Legalitas
         $legalitas = new Legalitas();

@@ -255,7 +255,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Provinsi *</label>
-                                        <select name="idProvinsiPenagihan" id="provinsi" class="form-select">
+                                        <select name="idProvinsiPenagihan" id="provinsiPenagihan" class="form-select">
                                             <option value="">Pilih Provinsi</option>
                                             <?php foreach ($data_provinsi_penagihan as $key => $value) { ?>
                                                 <option <?= $value['id'] == $alamat_penagihan['idProvinsi'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -266,7 +266,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Kabupaten *</label>
-                                        <select name="idKabupatenPenagihan" id="kabupaten" class="form-select">
+                                        <select name="idKabupatenPenagihan" id="kabupatenPenagihan" class="form-select">
                                             <option value=""> -- Pilih Kabupaten -- </option>
                                             <?php foreach ($data_kabupaten_penagihan as $key => $value) { ?>
                                                 <option <?= $value['id'] == $alamat_penagihan['idKabupaten'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -277,7 +277,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Kecamatan *</label>
-                                        <select name="idKecamatanPenagihan" id="kecamatan" class="form-select">
+                                        <select name="idKecamatanPenagihan" id="kecamatanPenagihan" class="form-select">
                                             <option value=""> -- Pilih Kecamatan -- </option>
                                             <?php foreach ($data_kecamatan_penagihan as $key => $value) { ?>
                                                 <option <?= $value['id'] == $alamat_penagihan['idKecamatan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -288,7 +288,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Kelurahan *</label>
-                                        <select name="idKelurahanPenagihan" id="kelurahan" class="form-select">
+                                        <select name="idKelurahanPenagihan" id="kelurahanPenagihan" class="form-select">
                                             <option value=""> -- Pilih Kelurahan -- </option>
                                             <?php foreach ($data_kelurahan_penagihan as $key => $value) { ?>
                                                 <option <?= $value['id'] == $alamat_penagihan['idKelurahan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -468,6 +468,7 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">Jenis</label>
                                         <select name="jenislinkVendor" id="" class="form-select" required>
+                                            <option value="">-- Pilih Jenis Koneksi --</option>
                                             <option value="1" <?= $data_internet_user_vendor['jenislinkVendor'] == 1 ? "selected" : "" ?>>Link Utama</option>
                                             <option value="2" <?= $data_internet_user_vendor['jenislinkVendor'] == 2 ? "selected" : "" ?>>Link Backup</option>
                                         </select>
@@ -477,6 +478,7 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">Media Koneksi</label>
                                         <select name="mediakoneksiVendor" id="" class="form-select" required>
+                                            <option value="">-- Pilih Media Koneksi --</option>
                                             <option value="1" <?= $data_internet_user_vendor['mediakoneksiVendor'] == 1 ? "selected" : "" ?>>Fiber Optic</option>
                                             <option value="2" <?= $data_internet_user_vendor['mediakoneksiVendor'] == 2 ? "selected" : "" ?>>Wireless</option>
                                         </select>
@@ -498,6 +500,7 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Registrasi</label>
                                         <select name="ppnbiayainstalasi" id="" class="form-select" required>
+                                            <option value="">-- PPN --</option>
                                             <option value="1" <?= $data_internet_user_vendor['ppnbiayainstalasi'] == 1 ? "selected" : "" ?>>Ya</option>
                                             <option value="2" <?= $data_internet_user_vendor['ppnbiayainstalasi'] == 2 ? "selected" : "" ?>>Tidak</option>
                                         </select>
@@ -516,7 +519,7 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Bulanan</label>
                                         <select name="ppnbiayabulanan" id="" class="form-select" required>
-                                            <option value="">PPN Biaya Bulanan</option>
+                                            <option value="">-- PPN --</option>
                                             <option value="1" <?= $data_internet_user_vendor['ppnbiayabulanan'] == 1 ? "selected" : "" ?>>Ya</option>
                                             <option value="2" <?= $data_internet_user_vendor['ppnbiayabulanan'] == 2 ? "selected" : "" ?>>Tidak</option>
                                         </select>
@@ -824,6 +827,65 @@
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             });
         });
+    });
+</script>
+
+<script>
+    var optionKabupaten = "";
+    $("#provinsiPenagihan").on("change", function() {
+        optionKabupaten = '<option value="">Pilih Kabupaten</option>';
+        if ($(this).val() != "") {
+            $.ajax({
+                url: "/kabupaten/get/" + $(this).val(),
+                method: "get",
+            }).done(function(data) {
+                for (let index = 0; index < data.length; index++) {
+                    const element = data[index];
+                    optionKabupaten +=
+                        '<option value="' + element.id + '">' + element.name + "</option>";
+                }
+                $("#kabupatenPenagihan").html(optionKabupaten);
+                $("#kabupatenPenagihan").prop("disabled", false);
+            });
+        }
+    });
+
+    var optionKecamatan = "";
+    $("#kabupatenPenagihan").on("change", function() {
+        optionKecamatan = '<option value="">Pilih Kecamatan</option>';
+        if ($(this).val() != "") {
+            $.ajax({
+                url: "/kecamatan/get/" + $(this).val(),
+                method: "get",
+            }).done(function(data) {
+                for (let index = 0; index < data.length; index++) {
+                    const element = data[index];
+                    optionKecamatan +=
+                        '<option value="' + element.id + '">' + element.name + "</option>";
+                }
+                $("#kecamatanPenagihan").html(optionKecamatan);
+                $("#kecamatanPenagihan").prop("disabled", false);
+            });
+        }
+    });
+
+    var optionKelurahan = "";
+    $("#kecamatanPenagihan").on("change", function() {
+        optionKelurahan = '<option value="">Pilih Kelurahan</option>';
+        if ($(this).val() != "") {
+            $.ajax({
+                url: "/kelurahan/get/" + $(this).val(),
+                method: "get",
+            }).done(function(data) {
+                for (let index = 0; index < data.length; index++) {
+                    const element = data[index];
+                    optionKelurahan +=
+                        '<option value="' + element.id + '">' + element.name + "</option>";
+                }
+                $("#kelurahanPenagihan").html(optionKelurahan);
+                $("#kelurahanPenagihan").prop("disabled", false);
+            });
+        }
     });
 </script>
 

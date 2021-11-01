@@ -96,13 +96,9 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $datas = $request->request->all();
-        $detail = $this->model->selectOne("WHERE jenisSurvey = 2");
+        $detail = $this->model->selectOne("WHERE jenisSurvey = 2 AND id = '" . $id . "'");
 
-        // dd($id);
-
-        $status = '6';
-        $minat = new Minat();
-        $minat_status = $minat->updateStatus($id, $status);
+        // dd($detail);
 
         $minat = new Minat();
         $data_minat = $minat->selectOne($detail['kodeMinat']);
@@ -121,6 +117,10 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
             'keterangan' => $datas['keterangan'],
         ];
         $input_survey_onsite_update = $this->model->update($id, $group_data);
+
+        $status = '6';
+        $minat = new Minat();
+        $minat_status = $minat->updateStatus($detail['kodeMinat'], $status);
 
 
         $user = new Users();

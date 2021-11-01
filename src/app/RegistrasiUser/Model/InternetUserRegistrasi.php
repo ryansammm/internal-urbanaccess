@@ -41,7 +41,7 @@ class InternetUserRegistrasi extends GlobalFunc
         $kodeformInternetregistrasi = $datas['kodeformInternetregistrasi'];
         $tanggalRegistrasi = $datas['tanggalRegistrasi'];
         $idSales = $datas['idSales'];
-        $idMitra = $datas['idMitra'];
+        $nikUserRegistrasi = $datas['nikUserRegistrasi'];
         $idUser = $datas['idUser'];
         $jenisuserRegistrasi = $datas['jenisuserRegistrasi'];
         $statusRegistrasi = $datas['statusRegistrasi'];
@@ -52,7 +52,7 @@ class InternetUserRegistrasi extends GlobalFunc
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$idMitra', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt')";
         // dd($sql);
         try {
             $data = $this->conn->prepare($sql);
@@ -103,7 +103,7 @@ class InternetUserRegistrasi extends GlobalFunc
         $kodeformInternetregistrasi =  isset($datas['kodeformInternetregistrasi']) ? $datas['kodeformInternetregistrasi'] : NULL;
         $tanggalRegistrasi =  isset($datas['tanggalRegistrasi']) ? $datas['tanggalRegistrasi'] : NULL;
         $idSales =  isset($datas['idSales']) ? $datas['idSales'] : NULL;
-        $idMitra = isset($datas['idMitra']) ? $datas['idMitra'] : NULL;
+        $nikUserRegistrasi = isset($datas['nikUserRegistrasi']) ? $datas['nikUserRegistrasi'] : NULL;
         $idUser =  isset($datas['idUser']) ? $datas['idUser'] : NULL;
         $jenisuserRegistrasi =  isset($datas['jenisuserRegistrasi']) ? $datas['jenisuserRegistrasi'] : NULL;
         $statusRegistrasi =  isset($datas['statusRegistrasi']) ? $datas['statusRegistrasi'] : NULL;
@@ -113,7 +113,7 @@ class InternetUserRegistrasi extends GlobalFunc
         $jenisusahaRegistrasi =  isset($datas['jenisusahaRegistrasi']) ? $datas['jenisusahaRegistrasi'] : NULL;
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "UPDATE " . $this->table . " SET kodeformInternetregistrasi = '$kodeformInternetregistrasi', tanggalRegistrasi = '$tanggalRegistrasi', idSales = '$idSales', idMitra = '$idMitra', idUser = '$idUser', jenisuserRegistrasi = '$jenisuserRegistrasi', statusRegistrasi = '$statusRegistrasi', namauserRegistrasi = '$namauserRegistrasi', jabatanuserRegistrasi = '$jabatanuserRegistrasi', namabadanRegistrasi = '$namabadanRegistrasi', jenisusahaRegistrasi = '$jenisusahaRegistrasi', updatedAt = '$updatedAt' WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "UPDATE " . $this->table . " SET kodeformInternetregistrasi = '$kodeformInternetregistrasi', tanggalRegistrasi = '$tanggalRegistrasi', idSales = '$idSales', nikUserRegistrasi = '$nikUserRegistrasi', idUser = '$idUser', jenisuserRegistrasi = '$jenisuserRegistrasi', statusRegistrasi = '$statusRegistrasi', namauserRegistrasi = '$namauserRegistrasi', jabatanuserRegistrasi = '$jabatanuserRegistrasi', namabadanRegistrasi = '$namabadanRegistrasi', jenisusahaRegistrasi = '$jenisusahaRegistrasi', updatedAt = '$updatedAt' WHERE " . $this->primaryKey . " = '$id'";
 
         try {
             $data = $this->conn->prepare($sql);

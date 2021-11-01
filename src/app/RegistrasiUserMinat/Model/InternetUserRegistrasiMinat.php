@@ -50,8 +50,10 @@ class InternetUserRegistrasiMinat extends GlobalFunc
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
         $keterangan = $datas['keterangan'];
+        $nikPicKeuangan = $datas['nikPicKeuangan'];
+        $nikPicTeknis = $datas['nikPicTeknis'];
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt', '$keterangan')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt', '$keterangan','$nikPicKeuangan','$nikPicTeknis')";
         // dd($sql);
         try {
             $data = $this->conn->prepare($sql);
