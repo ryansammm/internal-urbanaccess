@@ -69,20 +69,20 @@ class FeeSales extends GlobalFunc
         }
     }
 
-    public function update($id, $datas)
+    public function update($idUser, $datas)
     {
         $idSales = $datas['idSales'];
-        $idUser = $datas['idUser'];
         $feeSales = $datas['feeSales'];
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "UPDATE " . $this->table . " SET idSales='$idSales', idUser='$idUser', feeSales='$feeSales', updatedAt='$updatedAt' WHERE idSales = '$id'";
+        $sql = "UPDATE " . $this->table . " SET idSales='$idSales', idUser='$idUser', feeSales='$feeSales', updatedAt='$updatedAt' WHERE idUser = '$idUser'";
+        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
 
-            return $id;
+            return $idUser;
         } catch (\PDOException $e) {
             echo $e;
             die();
@@ -91,7 +91,7 @@ class FeeSales extends GlobalFunc
 
     public function delete($id)
     {
-        $sql = "DELETE FROM " . $this->table . " WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "DELETE FROM " . $this->table . " WHERE idUser = '$id'";
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();

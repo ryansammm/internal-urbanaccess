@@ -107,6 +107,40 @@
     </div>
 </div>
 
+
+<!-- Modal Riwayat -->
+<div class="modal fade" id="riwayat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="riwayatLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="riwayatLabel">Riwayat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table " id="table1">
+                    <thead>
+                        <tr>
+                            <td>No</td>
+                            <td>Deskripsi</td>
+                            <td>Tanggal</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td>Contoh</td>
+                            <td>1-10-2010</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>

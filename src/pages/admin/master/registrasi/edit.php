@@ -406,14 +406,14 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">NIK PIC Keuangan</label>
-                                        <input type="text" class="form-control" name="nikPicTeknik" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
+                                        <label for="first-name-vertical">NIK PIC Teknis</label>
+                                        <input type="text" class="form-control" name="nikPicTeknis" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Nama PIC Keuangan </label>
-                                        <input type="text" class="form-control" name="namaPicTeknik" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
+                                        <label for="first-name-vertical">Nama PIC Teknis </label>
+                                        <input type="text" class="form-control" name="namaPicTeknis" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -421,19 +421,19 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICTeknik" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="noTelpPICTeknis" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICTeknik" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="noWaPICTeknis" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICTeknik" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="emailPICTeknis" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>

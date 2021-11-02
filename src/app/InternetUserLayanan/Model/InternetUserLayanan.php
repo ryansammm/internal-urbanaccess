@@ -80,6 +80,23 @@ class InternetUserLayanan extends GlobalFunc
         }
     }
 
+    public function selectOneWhere($where = "")
+    {
+        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN layananinternetdetail ON layananinternetdetail.idLayananinternetdetail = internetuserlayanan.idLayanandetail " . $where;
+        // dd($sql);
+
+        try {
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            $data = $query->fetch();
+
+            return $data;
+        } catch (PDOException $e) {
+            echo $e;
+            die();
+        }
+    }
+
     public function update($id, $datas)
     {
         $idLayanan =  isset($datas['idLayanan']) ? $datas['idLayanan'] : NULL;
