@@ -2,6 +2,7 @@
 
 namespace App\RegistrasiUser\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Aktif\Model\Aktif;
 use App\Aktivasi\Model\Aktivasi;
 use App\Client\Model\Client;
@@ -145,7 +146,7 @@ class RegistrasiUserController extends GlobalFunc
 
 
         // dd($datas);
-
+        
 
 
         $internet_user_registrasi_create = $this->model->create($datas);
@@ -254,6 +255,12 @@ class RegistrasiUserController extends GlobalFunc
         $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Data user atas nama " . $datas['namauserRegistrasi'] . " dengan nomor registrasi " . $datas['noRegistrasi'] . " berhasil ditambahkan";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Registrasi User pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $internet_user_vendor_create , $idUser);
 
         return new RedirectResponse('/registrasi-user');
     }
@@ -599,7 +606,11 @@ class RegistrasiUserController extends GlobalFunc
         $aktif = new Aktif();
         $aktif_update = $aktif->update($id, $datas);
 
-
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Registrasi User pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi,  $internet_user_layanan_update , $idUser);
 
 
         return new RedirectResponse('/registrasi-user');
@@ -652,6 +663,11 @@ class RegistrasiUserController extends GlobalFunc
         $aktif = new Aktif();
         $aktif_delete = $aktif->delete($id);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Registrasi User pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi,  $internet_user_layanan_delete , $idUser);
 
         return new RedirectResponse('/registrasi-user');
     }

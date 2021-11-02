@@ -2,6 +2,7 @@
 
 namespace App\Reseller\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Bank\Model\Bank;
 use App\BankSales\Model\BankSales;
 use App\GroupKontak\Model\GroupKontak;
@@ -160,6 +161,11 @@ class ResellerController extends GlobalFunc
         $media = new Media();
         $file_upload_pic_npwp_create = $media->create($file_npwp_pic, $group_persyaratan_pic_npwp_create, '1', 'foto-legalitas-pic');
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Reseller pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_reseller , $idUser);
 
         return new RedirectResponse('/reseller');
     }
@@ -408,6 +414,12 @@ class ResellerController extends GlobalFunc
         ];
         $group_persyaratan_pic_npwp_create = $group_legalitas->create($group_persyaratan_pic_npwp_data);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Reseller pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
 
         return new RedirectResponse('/reseller');
     }
@@ -443,6 +455,11 @@ class ResellerController extends GlobalFunc
         $group_pic = new GroupPIC();
         $group_pic_delete = $group_pic->delete("WHERE idRelation = '" . $detail['idSales'] . "'");
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Reseller pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $deletee , $idUser);
 
 
         return new RedirectResponse('/reseller');

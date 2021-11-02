@@ -2,6 +2,7 @@
 
 namespace App\Instalasi\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Instalasi\Model\Instalasi;
 use App\Media\Model\Media;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
@@ -82,6 +83,12 @@ class InstalasiController extends GlobalFunc
 
 
         $instalasi_create = $this->model->create($datas, $id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah instalasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
 
         return new RedirectResponse('/instalasi');
@@ -151,6 +158,12 @@ class InstalasiController extends GlobalFunc
 
 
         $instalasi_create = $this->model->update($datas, $id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui instalasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
         return new RedirectResponse('/instalasi');
     }
@@ -164,6 +177,12 @@ class InstalasiController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
 
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus instalasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 
         return new RedirectResponse('/user-management');

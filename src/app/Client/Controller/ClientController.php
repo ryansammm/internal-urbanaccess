@@ -2,6 +2,7 @@
 
 namespace App\Client\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Client\Model\Client;
 use Core\GlobalFunc;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -64,6 +65,12 @@ class ClientController extends GlobalFunc
             'isPic' => $request->request->get('isPic')
         ];
         $create = $this->model->create($dataClient);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah Data client pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/registrasi');
     }
@@ -100,6 +107,12 @@ class ClientController extends GlobalFunc
         $namaBank = $request->request->get('namaBank');
 
         $update = $this->model->update($idBank, $namaBank);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui Data client pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/registrasi');
     }
@@ -112,6 +125,12 @@ class ClientController extends GlobalFunc
         $idBank = $request->attributes->get('id');
 
         $delete = $this->model->delete($idBank);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus Data client pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/registrasi');
     }

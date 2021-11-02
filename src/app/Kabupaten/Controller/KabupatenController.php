@@ -31,6 +31,7 @@ class KabupatenController extends GlobalFunc
     {
         $provinsi = new Provinsi();
         $data_provinsi = $provinsi->selectAll();
+
        
        return $this->render_template('admin/master/kabupaten/create', ['provinsi' => $data_provinsi]);
     }
@@ -38,6 +39,12 @@ class KabupatenController extends GlobalFunc
     public function store(Request $request)
     {
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan kabupaten  pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/kabupaten');
     }
@@ -64,6 +71,12 @@ class KabupatenController extends GlobalFunc
     {
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui kabupaten  pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/kabupaten');
     }
@@ -72,6 +85,12 @@ class KabupatenController extends GlobalFunc
     {
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus kabupaten  pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/kabupaten');
     }

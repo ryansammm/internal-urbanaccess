@@ -2,6 +2,7 @@
 
 namespace App\LayananInternet\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\LayananInternet\Model\LayananInternet;
 use Core\GlobalFunc;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,6 +45,12 @@ class LayananInternetController extends GlobalFunc
         }
         $create = $this->model->create($request->request);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Layanan Internet pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create , $idUser);
+
         return new RedirectResponse('/layanan-internet');
     }
 
@@ -77,6 +84,12 @@ class LayananInternetController extends GlobalFunc
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Layanan Internet pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
         return new RedirectResponse('/layanan-internet');
     }
 
@@ -87,6 +100,12 @@ class LayananInternetController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Layanan Internet pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/layanan-internet');
     }

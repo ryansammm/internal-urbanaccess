@@ -2,6 +2,7 @@
 
 namespace App\Aktivasi\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Aktivasi\Model\Aktivasi;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\LayananInternet\Model\LayananInternet;
@@ -88,6 +89,12 @@ class AktivasiController extends GlobalFunc
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
         $aktivasi_create = $this->model->create($datas, $datas['nomorRegistrasi']);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan aktivasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $aktivasi_create, $idUser);
 
 
         return new RedirectResponse('/aktivasi/dokumentasi/' . $id);
@@ -167,7 +174,12 @@ class AktivasiController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
         $update = $this->model->update($id, $datas);
-
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui aktivasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/vendor');
     }
@@ -180,6 +192,12 @@ class AktivasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus aktivasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 
 

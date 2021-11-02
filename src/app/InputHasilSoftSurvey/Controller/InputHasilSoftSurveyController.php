@@ -2,6 +2,7 @@
 
 namespace App\InputHasilSoftSurvey\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\InputHasilSoftSurvey\Model\InputHasilSoftSurvey;
 use App\Minat\Model\Minat;
 use App\MinatLayanan\Model\MinatLayanan;
@@ -70,6 +71,12 @@ class InputHasilSoftSurveyController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah input hasil soft survey pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/input-hasil-soft-survey');
     }
@@ -185,6 +192,12 @@ class InputHasilSoftSurveyController extends GlobalFunc
         $status = '3';
         $minat = new Minat();
         $minat_status = $minat->updateStatus($id, $status);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui input hasil soft survey pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 
         return new RedirectResponse('/input-hasil-soft-survey');

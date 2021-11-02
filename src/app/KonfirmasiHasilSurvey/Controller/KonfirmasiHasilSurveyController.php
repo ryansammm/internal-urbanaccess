@@ -2,6 +2,7 @@
 
 namespace App\KonfirmasiHasilSurvey\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\KonfirmasiHasilSurvey\Model\KonfirmasiHasilSurvey;
 use App\LayananInternetDetail\Model\LayananInternetDetail;
 use App\Minat\Model\Minat;
@@ -61,6 +62,12 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan  Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/reseller');
     }
@@ -127,6 +134,13 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         $message = "Hasil survey dari vendor <b>" . $data_vendor_detail['namaVendor'] . "</b> atas nama <b>" . $data_minat['namapemohon'] . "</b> telah dikonfirmasi.";
         // dd($message);
         $kirim = $user->telegram($message, $ambilUser['chatId']);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah konfirmasi  Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $data_vendor_detail, $idUser);
+
 
 
         return new RedirectResponse('/konfirmasi-hasil-survey');
@@ -139,6 +153,12 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/reseller');
     }

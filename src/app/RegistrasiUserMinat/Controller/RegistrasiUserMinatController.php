@@ -2,6 +2,7 @@
 
 namespace App\RegistrasiUserMinat\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Client\Model\Client;
 use App\FeeSales\Model\FeeSales;
 use App\GroupKontak\Model\GroupKontak;
@@ -340,6 +341,12 @@ class RegistrasiUserMinatController extends GlobalFunc
         $minat = new Minat();
         $minat_status = $minat->updateStatus($kodeMinat, $status);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Registrasi User minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create , $idUser);
+
 
         return new RedirectResponse('/registrasi-user-minat');
     }
@@ -370,6 +377,12 @@ class RegistrasiUserMinatController extends GlobalFunc
 
         $update = $this->model->update($idBank, $namaBank);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Registrasi User minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
         return new RedirectResponse('/registrasi');
     }
 
@@ -381,6 +394,12 @@ class RegistrasiUserMinatController extends GlobalFunc
         $idBank = $request->attributes->get('id');
 
         $delete = $this->model->delete($idBank);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Registrasi User minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/registrasi');
     }

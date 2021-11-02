@@ -2,6 +2,7 @@
 
 namespace App\KecepatanInternet\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\KecepatanInternet\Model\KecepatanInternet;
 use App\LayananInternet\Model\LayananInternet;
 use Core\GlobalFunc;
@@ -47,6 +48,12 @@ class KecepatanInternetController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan kecepatan internet  pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
     }
@@ -80,6 +87,12 @@ class KecepatanInternetController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui kecepatan internet pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
     }
@@ -91,6 +104,12 @@ class KecepatanInternetController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus kecepatan internet pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
     }

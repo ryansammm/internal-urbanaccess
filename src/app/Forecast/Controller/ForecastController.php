@@ -2,6 +2,7 @@
 
 namespace App\Forecast\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Forecast\Model\Forecast;
 use App\Minat\Model\Minat;
 use Core\GlobalFunc;
@@ -80,6 +81,12 @@ class ForecastController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan forecast pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/forecast');
     }
@@ -113,6 +120,12 @@ class ForecastController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui forecast pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/forecast');
     }

@@ -405,6 +405,12 @@ class MinatController extends GlobalFunc
         ];
         $create_group_kontak_email = $group_kontak->create($data_group_kontak_email);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_data_layanan, $idUser);
+
         return new RedirectResponse('/minat');
     }
 
@@ -438,6 +444,11 @@ class MinatController extends GlobalFunc
         $user_request = new UserRequestSurvey();
         $delete_user_request = $user_request->delete($id);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $minat_layanan_delete, $idUser);
 
 
         return new RedirectResponse('/minat');

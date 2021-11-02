@@ -2,6 +2,7 @@
 
 namespace App\InputHasilSurveyOnsite\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\InputHasilSurveyOnsite\Model\InputHasilSurveyOnsite;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\LayananInternet\Model\LayananInternet;
@@ -62,6 +63,12 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah input hasil survey onsite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/input-hasil-survey-onsite/dokumentasi/{id}');
     }
@@ -128,6 +135,12 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         $message = urlencode("Berikut hasil survey on site. \n \nTanggal Hasil : \n" . date('d F Y', strtotime($datas['tanggalHasil'])) . "\n\nSales :\n" . $nama_sales . "\n\nPIC :\n" . $data_minat['namapemohon'] . "\n\nAlamat : \n" . $data_minat['alamat'] . " RT." . $data_minat['rt'] . " RW." . $data_minat['rw'] . " Kel." . $data_minat['nameKelurahan'] . ", Kec." .  $data_minat['nameKecamatan'] . ", Kab." .  substr(strstr($data_minat['nameKabupaten'], " "), 1)  . "\n\nPerkiraan koordinat : \n " . $data_minat['latitude'] . "," . $data_minat['longtitude']  . "\n\nLayanan : \n" . $data_minat_layanan['namaLayanan'] . " " .  $data_minat_layanan['kecepatan'] . " Mbps\n  \nJarak : \n" . $datas['jarak']) . "m";
 
         $kirim = $user->telegram($message, $ambilUser['chatId']);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui input hasil survey onsite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $input_survey_onsite_update, $idUser);
 
         return new RedirectResponse('/input-hasil-survey-onsite/dokumentasi/' . $id);
     }
@@ -175,6 +188,12 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah Data Minat pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/input-hasil-survey-onsite');
     }

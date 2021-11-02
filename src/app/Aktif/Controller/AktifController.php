@@ -2,6 +2,7 @@
 
 namespace App\Aktif\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Aktif\Model\Aktif;
 use App\Aktivasi\Model\Aktivasi;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
@@ -52,6 +53,7 @@ class AktifController extends GlobalFunc
 
         $internet_user_layanan = new InternetUserLayanan();
         $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
+    
 
         return $this->render_template('admin/master/aktivasi/create', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan]);
     }
@@ -83,6 +85,12 @@ class AktifController extends GlobalFunc
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
         $aktif_create = $this->model->create($datas, $id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah aktif pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $aktif_create, $idUser);
 
 
         return new RedirectResponse('/aktif');
@@ -126,6 +134,12 @@ class AktifController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
         $update = $this->model->update($id, $datas);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui aktif pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 
         return new RedirectResponse('/vendor');
@@ -139,6 +153,12 @@ class AktifController extends GlobalFunc
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus aktif pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 
 
