@@ -134,7 +134,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama Penanggung Jawab *</label>
-                                        <input type="text" class="form-control" name="namauserRegistrasi" value="<?= $data_minat['namapemohon'] ?>" required>
+                                        <input type="text" class="form-control namauserRegistrasi" name="namauserRegistrasi" value="<?= $data_minat['namapemohon'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -143,19 +143,19 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp *</label>
-                                        <input type="text" class="form-control" name="telpkontak" value="<?= $data_kontak_telp['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control telpkontakuser" name="telpkontak" value="<?= $data_kontak_telp['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp *</label>
-                                        <input type="text" class="form-control" name="whatsappkontak" value="<?= $data_kontak_whatsapp['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control whatsappkontakuser" name="whatsappkontak" value="<?= $data_kontak_whatsapp['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email *</label>
-                                        <input type="text" class="form-control" name="emailkontak" value="<?= $data_kontak_email['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control emailkontakuser" name="emailkontak" value="<?= $data_kontak_email['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK </label>
-                                        <input type="text" class="form-control" name="nikUserRegistrasi">
+                                        <input type="text" class="form-control nikUserRegistrasi" name="nikUserRegistrasi">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -385,13 +385,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK PIC Keuangan</label>
-                                        <input type="text" class="form-control" name="nikPicKeuangan" required>
+                                        <input type="text" class="form-control nikPicKeuangan" name="nikPicKeuangan" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama PIC Keuangan </label>
-                                        <input type="text" class="form-control" name="namaPicKeuangan" required>
+                                        <input type="text" class="form-control namaPicKeuangan" name="namaPicKeuangan" required>
                                     </div>
                                 </div>
                             </div>
@@ -399,26 +399,26 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICKeuangan" required>
+                                        <input type="text" class="form-control noTelpPICKeuangan" name="noTelpPICKeuangan" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICKeuangan" required>
+                                        <input type="text" class="form-control noWaPICKeuangan" name="noWaPICKeuangan" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICKeuangan" required>
+                                        <input type="text" class="form-control emailPICKeuangan" name="emailPICKeuangan" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="cekKeuangan">
+                                        <input class="form-check-input" type="checkbox" value="1" id="cekKeuangan">
                                         <label class="form-check-label" for="cekKeuangan">
                                             Data yang digunakan sama
                                         </label>
@@ -434,13 +434,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK PIC Teknis</label>
-                                        <input type="text" class="form-control" name="nikPicTeknis" required>
+                                        <input type="text" class="form-control nikPicTeknis" name="nikPicTeknis" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama PIC Teknis </label>
-                                        <input type="text" class="form-control" name="namaPicTeknis" required>
+                                        <input type="text" class="form-control namaPicTeknis" name="namaPicTeknis" required>
                                     </div>
                                 </div>
                             </div>
@@ -448,19 +448,19 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICTeknis" required>
+                                        <input type="text" class="form-control noTelpPICTeknis" name="noTelpPICTeknis" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICTeknis" required>
+                                        <input type="text" class="form-control noWaPICTeknis" name="noWaPICTeknis" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICTeknis" required>
+                                        <input type="text" class="form-control emailPICTeknis" name="emailPICTeknis" required>
                                     </div>
                                 </div>
                             </div>
@@ -519,14 +519,14 @@
                                         <label for="first-name-vertical">Biaya Registrasi</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayaregistrasiLayanan">
+                                            <input type="text" class="form-control number biayaregistrasiLayanan" name="biayaregistrasiLayanan">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Registrasi</label>
-                                        <select name="ppnbiayainstalasi" id="" class="form-select" required>
+                                        <select name="ppnbiayainstalasi" id="" class="form-select ppnbiayainstalasi" required>
                                             <option value="">-- PPN --</option>
                                             <option value="1">Ya</option>
                                             <option value="2">Tidak</option>
@@ -538,14 +538,14 @@
                                         <label for="first-name-vertical">Biaya Bulanan</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number" name="biayabulananLayanan">
+                                            <input type="text" class="form-control number biayabulananLayanan" name="biayabulananLayanan">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">PPN Biaya Bulanan</label>
-                                        <select name="ppnbiayabulanan" id="" class="form-select" required>
+                                        <select name="ppnbiayabulanan" id="" class="form-select ppnbiayabulanan" required>
                                             <option value="">-- PPN --</option>
                                             <option value="1">Ya</option>
                                             <option value="2">Tidak</option>
@@ -845,6 +845,64 @@
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             });
         });
+
+        // hitung ppn biaya registrasi
+        var biayaregistrasiPPN = 0;
+        $('.ppnbiayainstalasi').on('change', function() {
+            var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+            var biayaregistrasiPPNAkhir = 0;
+            if ($(this).val() == '1') {
+                biayaregistrasiPPN = (biayaregistrasi*10)/100;
+                biayaregistrasiPPNAkhir = biayaregistrasi+biayaregistrasiPPN;
+            } else {
+                biayaregistrasiPPNAkhir = biayaregistrasi-biayaregistrasiPPN;
+                biayaregistrasiPPN = 0;
+            }
+            $('.biayaregistrasiLayanan').val(
+                biayaregistrasiPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            );
+        })
+
+        // hitung ppn biaya bulanan
+        var biayabulananPPN = 0;
+        $('.ppnbiayabulanan').on('change', function() {
+            var biayabulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
+            var biayabulananPPNAkhir = 0;
+            if ($(this).val() == '1') {
+                biayabulananPPN = (biayabulanan*10)/100;
+                biayabulananPPNAkhir = biayabulanan+biayabulananPPN;
+            } else {
+                biayabulananPPNAkhir = biayabulanan-biayabulananPPN;
+                biayabulananPPN = 0;
+            }
+            $('.biayabulananLayanan').val(
+                biayabulananPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            );
+        })
+
+        // copy data user ke pic keuangan
+        $('#cekKeuangan').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            if (isChecked) {
+                $('.nikPicKeuangan').val($('.nikUserRegistrasi').val())
+                $('.namaPicKeuangan').val($('.namauserRegistrasi').val())
+                $('.noTelpPICKeuangan').val($('.telpkontakuser').val())
+                $('.noWaPICKeuangan').val($('.whatsappkontakuser').val())
+                $('.emailPICKeuangan').val($('.emailkontakuser').val())
+            }
+        })
+
+        // copy data user ke pic teknis
+        $('#cekTeknis').on('click', function() {
+            var isChecked = $(this).is(':checked');
+            if (isChecked) {
+                $('.nikPicTeknis').val($('.nikUserRegistrasi').val())
+                $('.namaPicTeknis').val($('.namauserRegistrasi').val())
+                $('.noTelpPICTeknis').val($('.telpkontakuser').val())
+                $('.noWaPICTeknis').val($('.whatsappkontakuser').val())
+                $('.emailPICTeknis').val($('.emailkontakuser').val())
+            }
+        })
     });
 </script>
 
