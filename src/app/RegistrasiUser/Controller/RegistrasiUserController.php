@@ -146,7 +146,7 @@ class RegistrasiUserController extends GlobalFunc
 
 
         // dd($datas);
-        
+
 
 
         $internet_user_registrasi_create = $this->model->create($datas);
@@ -256,11 +256,12 @@ class RegistrasiUserController extends GlobalFunc
         $message = "Data user atas nama " . $datas['namauserRegistrasi'] . " dengan nomor registrasi " . $datas['noRegistrasi'] . " berhasil ditambahkan";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
+        // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Registrasi User pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $internet_user_vendor_create , $idUser);
+        $deskripsi = $nama . " telah menambah registrasi user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
 
         return new RedirectResponse('/registrasi-user');
     }
@@ -404,6 +405,9 @@ class RegistrasiUserController extends GlobalFunc
         $internet_user_layanan = new InternetUserLayanan();
         $internet_user_layanan_update = $internet_user_layanan->update($id, $datas);
 
+        $feesales = new FeeSales();
+        $feesales_update = $feesales->update($id, $datas);
+
         // Kontak
         $jeniskontak = new Kontak();
         $id_jenis_telp = $jeniskontak->namaKontak("Telepon")['idKontak'];
@@ -546,21 +550,21 @@ class RegistrasiUserController extends GlobalFunc
         $data_group_kontak_telp_pic_teknis = [
             'idRelation' => $datas['nikPicTeknis'],
             'idKontak' => $id_jenis_telp,
-            'isiKontak' => $datas['noTelpPICTeknik']
+            'isiKontak' => $datas['noTelpPICTeknis']
         ];
         $create_group_kontak_telp_teknis = $group_kontak->create($data_group_kontak_telp_pic_teknis);
 
         $data_group_kontak_whatsapp_pic_teknis = [
             'idRelation' => $datas['nikPicTeknis'],
             'idKontak' => $id_jenis_whatsapp,
-            'isiKontak' => $datas['noWaPICTeknik']
+            'isiKontak' => $datas['noWaPICTeknis']
         ];
         $create_group_kontak_whatsapp_teknis = $group_kontak->create($data_group_kontak_whatsapp_pic_teknis);
 
         $data_group_kontak_email_pic_teknis = [
             'idRelation' => $datas['nikPicTeknis'],
             'idKontak' => $id_jenis_email,
-            'isiKontak' => $datas['emailPICTeknik']
+            'isiKontak' => $datas['emailPICTeknis']
         ];
         $create_group_kontak_email_teknis = $group_kontak->create($data_group_kontak_email_pic_teknis);
 
@@ -579,7 +583,7 @@ class RegistrasiUserController extends GlobalFunc
         if ($_FILES['fileNPWP']['name'] != '') {
             $media = new Media();
             // select existing foto item
-            $selectItem = $media->selectOneMedia("WHERE idRelation = '$id'");
+            $selectItem = $media->selectOneMedia("WHERE idRelation = '$id' AND jenisdokumenMedia = 'foto-legalitas-user'");
             // delete existing foto item
             $deleteFotoItem = $media->delete($selectItem['idMedia']);
             // delete file foto item
@@ -588,6 +592,20 @@ class RegistrasiUserController extends GlobalFunc
             $idMedia = uniqid('med');
             $idUser = '1';
             $media->create($_FILES['fileNPWP'], $update, '1', 'foto-legalitas-user');
+        }
+
+        if ($_FILES['fileKTP']['name'] != '') {
+            $media = new Media();
+            // select existing foto item
+            $selectItemKtp = $media->selectOneMedia("WHERE idRelation = '$id' AND jenisdokumenMedia = 'foto-ktp'");
+            // delete existing foto item
+            $deleteFotoItemKtp = $media->delete($selectItemKtp['idMedia']);
+            // delete file foto item
+            $deleteFileFotoItamKtp = $media->deleteFile($selectItemKtp['pathMedia']);
+
+            $idMedia = uniqid('med');
+            $idUser = '1';
+            $media->create($_FILES['fileKTP'], $update, '1', 'foto-ktp');
         }
 
         $legalitas_vendor_create = [
@@ -606,11 +624,12 @@ class RegistrasiUserController extends GlobalFunc
         $aktif = new Aktif();
         $aktif_update = $aktif->update($id, $datas);
 
+        // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Registrasi User pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi,  $internet_user_layanan_update , $idUser);
+        $deskripsi = $nama . " telah memperbaharui registrasi user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $internet_user_layanan_update, $idUser);
 
 
         return new RedirectResponse('/registrasi-user');
@@ -626,6 +645,12 @@ class RegistrasiUserController extends GlobalFunc
         $detail = $this->model->selectOne($id);
 
         $delete = $this->model->delete($id);
+
+        $feesales = new FeeSales();
+        $feesales_delete = $feesales->delete($id);
+
+        $invoice = new Invoice();
+        $invoice_delete = $invoice->delete("WHERE noRegistrasi = '" . $id . "'");
 
         $internet_user_layanan = new InternetUserLayanan();
         $internet_user_layanan_delete = $internet_user_layanan->delete($id);
@@ -663,11 +688,13 @@ class RegistrasiUserController extends GlobalFunc
         $aktif = new Aktif();
         $aktif_delete = $aktif->delete($id);
 
+        // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Registrasi User pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi,  $internet_user_layanan_delete , $idUser);
+        $deskripsi = $nama . " telah menghapus registrasi user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
+
 
         return new RedirectResponse('/registrasi-user');
     }
@@ -682,17 +709,42 @@ class RegistrasiUserController extends GlobalFunc
         // dd($datas);
 
         $internet_user_layanan = new InternetUserLayanan();
-        $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
+        $data_internet_user_layanan = $internet_user_layanan->selectOneWhere("WHERE idInternetuserregistrasi = '" . $id . "'");
         // dd($data_internet_user_layanan);
 
+        $feesales = new FeeSales();
+        $data_feesales = $feesales->selectOne("WHERE idUser = '" . $id . "'");
+        // dd($data_feesales);
+
         $provinsi = new Provinsi();
-        $data_provinsi = $provinsi->selectAll();
+        $alamat_user = new InternetUserAlamat();
+        $alamat_pemasangan = $alamat_user->selectOne("WHERE noregistrasi = '" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $alamat_penagihan = $alamat_user->selectOne("WHERE noregistrasi = '" . $id . "' AND jenisAlamat = 'penagihan'");
+        // dd($alamat_pemasangan);
+
+        $invoice = new Invoice();
+        $data_invoice = $invoice->selectOne("WHERE noRegistrasi = '" . $id . "'");
+
+        if ($data_invoice['pengirimaninvoice'] == '1') {
+            $data_invoice['statusText'] = 'Softcopy';
+        } else if ($data_invoice['pengirimaninvoice'] == '2') {
+            $data_invoice['statusText'] = 'Hardcopy';
+        } else if ($data_invoice['pengirimaninvoice'] == '3') {
+            $data_invoice['statusText'] = 'Softcopy & Hardcopy';
+        }
+        // dd($data_invoice);
 
         // Kontak
         $jeniskontak = new Kontak();
         $id_jenis_telp = $jeniskontak->namaKontak("Telepon")['idKontak'];
         $id_jenis_whatsapp = $jeniskontak->namaKontak("Whatsapp")['idKontak'];
         $id_jenis_email = $jeniskontak->namaKontak("Email")['idKontak'];
+
+        $pic = new PIC();
+        $group_pic = new GroupPIC();
+        $data_group_pic_keuangan = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic = 'keuangan'");
+        $data_group_pic_teknis = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic = 'teknis'");
+        // dd($data_group_pic_keuangan);
 
         // Group Kontak Vendor
         $group_kontak = new GroupKontak();
@@ -701,11 +753,16 @@ class RegistrasiUserController extends GlobalFunc
         $data_kontak_email = $group_kontak->selectOne("WHERE idRelation = '" . $datas['noRegistrasi'] . "' AND idKontak = '" . $id_jenis_email . "'");
         // dd($data_kontak_telp);
 
-        // Group Kontak PIC
-        $data_kontak_telp_pic = $group_kontak->selectOne("WHERE idRelation = '" . $datas['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
-        $data_kontak_whatsapp_pic = $group_kontak->selectOne("WHERE idRelation = '" . $datas['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
-        $data_kontak_email_pic = $group_kontak->selectOne("WHERE idRelation = '" . $datas['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
-        // dd($data_kontak_telp_pic);
+        // Group Kontak PIC Keuangan
+        $data_kontak_telp_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
+        $data_kontak_whatsapp_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
+        $data_kontak_email_pic_keuangan = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_keuangan['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
+        // dd($data_kontak_telp_pic_keuangan);
+
+        // Group Kontak PIC Teknis
+        $data_kontak_telp_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_telp . "'");
+        $data_kontak_whatsapp_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_whatsapp . "'");
+        $data_kontak_email_pic_teknis = $group_kontak->selectOne("WHERE idRelation = '" . $data_group_pic_teknis['nikPic'] . "' AND idKontak = '" . $id_jenis_email . "'");
 
         // Legalitas
         $legalitas = new Legalitas();
@@ -719,10 +776,14 @@ class RegistrasiUserController extends GlobalFunc
         $media = new Media();
 
         // Media Vendor
-        $path_media_dokumentasi = $media->selectALLMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'dokumentasi'");
-        // dd($path_media_dokumentasi);
+        $path_media_dokumentasi_aktivasi = $media->selectALLMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'dokumentasi-aktivasi'");
+        $path_media_dokumentasi_instalasi = $media->selectALLMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'dokumentasi-instalasi'");
+        // $path_media_dokumentasi_onsite = $media->selectALLMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'dokumentasi-onsite'");
+        // dd($path_media_dokumentasi_onsite);
 
-        $npwp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "'");
+        $npwp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'foto-legalitas-user'");
+        $ktp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'foto-ktp' ");
+        // dd($ktp);
 
         // Media Vendor
 
@@ -742,7 +803,7 @@ class RegistrasiUserController extends GlobalFunc
         $data_aktif = $aktif->selectOne("WHERE idRelation = '" . $id . "'");
         // dd($data_aktif);
 
-        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic' => $data_kontak_telp_pic, 'data_kontak_whatsapp_pic' => $data_kontak_whatsapp_pic, 'data_kontak_email_pic' => $data_kontak_email_pic, 'data_provinsi' => $data_provinsi, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'path_media_dokumentasi' => $path_media_dokumentasi]);
+        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic_keuangan' => $data_kontak_telp_pic_keuangan, 'data_kontak_whatsapp_pic_keuangan' => $data_kontak_whatsapp_pic_keuangan, 'data_kontak_email_pic_keuangan' => $data_kontak_email_pic_keuangan, 'data_kontak_telp_pic_teknis' => $data_kontak_telp_pic_teknis, 'data_kontak_whatsapp_pic_teknis' => $data_kontak_whatsapp_pic_teknis, 'data_kontak_email_pic_teknis' => $data_kontak_email_pic_teknis, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'path_media_dokumentasi_aktivasi' => $path_media_dokumentasi_aktivasi, 'data_feesales' => $data_feesales, 'alamat_pemasangan' => $alamat_pemasangan, 'alamat_penagihan' => $alamat_penagihan, 'data_invoice' => $data_invoice, 'data_group_pic_keuangan' => $data_group_pic_keuangan, 'data_group_pic_teknis' => $data_group_pic_teknis, 'ktp' => $ktp, 'path_media_dokumentasi_instalasi' => $path_media_dokumentasi_instalasi]);
     }
 
     public function status(Request $request)

@@ -66,7 +66,7 @@ class InternetUserAlamat extends GlobalFunc
 
     public function selectOne($where = "")
     {
-        $sql = "SELECT * FROM " . $this->table . " " . $where;
+        $sql = "SELECT *, provinsi.id as idProvinsi, provinsi.name as nameProvinsi, kabupaten.id as idKabupaten, kabupaten.name as nameKabupaten, kecamatan.id as idKecamatan, kecamatan.name as nameKecamatan, kelurahan.id as idKelurahan, kelurahan.name as nameKelurahan FROM " . $this->table . " LEFT JOIN provinsi ON provinsi.id = internetuseralamat.idProvinsi LEFT JOIN kabupaten ON kabupaten.id = internetuseralamat.idKabupaten LEFT JOIN kecamatan ON kecamatan.id = internetuseralamat.idKecamatan LEFT JOIN kelurahan ON kelurahan.id = internetuseralamat.idKelurahan " . $where;
         // dd($sql);
         try {
             $query = $this->conn->prepare($sql);

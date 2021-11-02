@@ -99,138 +99,28 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <h5>Data Layanan</h5>
-                    <div class="p-2">
-                        <!-- Data Kontak Vendor -->
                         <div class="row border border-1 rounded mb-3 p-2">
                             <div class="col-3">
                                 <div class="form-group2">
-                                    <label for="first-name-vertical">Layanan</label>
-                                    <h6><?= $data_internet_user_layanan['namaLayanan'] ?></h6>
+                                    <label for="first-name-vertical">Foto KTP</label>
+                                    <h6>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ktpMODAL">
+                                            Detail
+                                        </button>
+                                    </h6>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group2">
-                                    <label for="first-name-vertical">Kecepatan</label>
-                                    <h6><?= $data_internet_user_layanan['kecepatan'] ?> Mbps</h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Sales</label>
-                                    <h6><?= $datas['nameSales'] == NULL ? $datas['namaReseller'] : $datas['nameSales'] ?></h6>
+                                    <label for="first-name-vertical">Nomor Induk Kependudukan </label>
+                                    <h6><?= $data_legalitas_vendor['isiLegalitas'] ?></h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <h5>Alamat Pemasangan</h5>
-                    <div class="p-2">
-
                         <div class="row border border-1 rounded mb-3 p-2">
                             <div class="col-3">
                                 <div class="form-group2">
-                                    <label for="first-name-vertical">Provinsi</label>
-                                    <h6><?= $datas['nameProvinsi'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Kabupaten</label>
-                                    <h6><?= $datas['nameKabupaten'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Kecamatan</label>
-                                    <h6><?= $datas['nameKecamatan'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Kelurahan</label>
-                                    <h6><?= $datas['nameKelurahan'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Kode Pos</label>
-                                    <h6><?= $datas['kodepos'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">RT/RW</label>
-                                    <h6><?= $datas['rt'] ?>/<?= $datas['rw'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Koordinat</label>
-                                    <h6><?= $datas['latitude'] ?>,<?= $datas['longtitude'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Alamat *</label>
-                                    <h6><?= $datas['alamat'] ?></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <h5>Data PIC Internal</h5>
-                    <div class="p-2">
-
-                        <div class="row border border-1 rounded mb-3 p-2">
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">NIK PIC</label>
-                                    <h6><?= $datas['nikPic'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-9">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Nama PIC Internal </label>
-                                    <h6><?= $datas['namaPic'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">No. Telp </label>
-                                    <h6><?= $data_kontak_telp_pic['isiKontak'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Whatsapp </label>
-                                    <h6><?= $data_kontak_whatsapp_pic['isiKontak'] ?></h6>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group2">
-                                    <label for="first-name-vertical">Email </label>
-                                    <h6><?= $data_kontak_email_pic['isiKontak'] ?></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <h5>Persyaratan</h5>
-                    <div class="p-2">
-
-                        <!-- Data Kontak Vendor -->
-                        <div class="row border border-1 rounded mb-3 p-2">
-                            <div class="col-3">
-                                <div class="form-group2">
+                                    <label for="first-name-vertical">Foto NPWP</label>
                                     <h6>
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#npwmpMODAL">
                                             Detail
@@ -246,6 +136,241 @@
                             </div>
                         </div>
                     </div>
+
+                    <h5>Data Layanan</h5>
+                    <div class="p-2">
+                        <!-- Data Kontak Vendor -->
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Nama Layanan</label>
+                                    <h6><?= $data_internet_user_layanan['namaLayanan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kecepatan</label>
+                                    <h6><?= $data_internet_user_layanan['kecepatan'] ?> Mbps</h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Sales</label>
+                                    <h6><?= $datas['namaSales'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Fee Sales</label>
+                                    <h6>Rp.<?= $data_feesales['feeSales'] ?>,-</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Alamat Pemasangan</h5>
+                    <div class="p-2">
+
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Provinsi</label>
+                                    <h6><?= $alamat_pemasangan['nameProvinsi'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kabupaten</label>
+                                    <h6><?= $alamat_pemasangan['nameKabupaten'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kecamatan</label>
+                                    <h6><?= $alamat_pemasangan['nameKecamatan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kelurahan</label>
+                                    <h6><?= $alamat_pemasangan['nameKelurahan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kode Pos</label>
+                                    <h6><?= $alamat_pemasangan['kodepos'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">RT/RW</label>
+                                    <h6><?= $alamat_pemasangan['rt'] ?>/<?= $alamat_pemasangan['rw'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Koordinat</label>
+                                    <h6><?= $alamat_pemasangan['latitude'] ?>,<?= $alamat_pemasangan['longtitude'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Alamat</label>
+                                    <h6><?= $alamat_pemasangan['alamat'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h5>Alamat Penagihan</h5>
+                    <div class="p-2">
+
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Provinsi</label>
+                                    <h6><?= $alamat_penagihan['nameProvinsi'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kabupaten</label>
+                                    <h6><?= $alamat_penagihan['nameKabupaten'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kecamatan</label>
+                                    <h6><?= $alamat_penagihan['nameKecamatan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kelurahan</label>
+                                    <h6><?= $alamat_penagihan['nameKelurahan'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Kode Pos</label>
+                                    <h6><?= $alamat_penagihan['kodepos'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">RT/RW</label>
+                                    <h6><?= $alamat_penagihan['rt'] ?>/<?= $alamat_penagihan['rw'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Koordinat</label>
+                                    <h6><?= $alamat_penagihan['latitude'] ?>,<?= $alamat_penagihan['longtitude'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Alamat</label>
+                                    <h6><?= $alamat_penagihan['alamat'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h5>Invoice</h5>
+                    <div class="p-2">
+
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-6">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Metode Pengiriman Invoice</label>
+                                    <h6><?= $data_invoice['statusText'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <h5>Data PIC Keuangan</h5>
+                    <div class="p-2">
+
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">NIK PIC Keuangan</label>
+                                    <h6><?= $data_group_pic_keuangan['nikPic'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Nama PIC Keuangan </label>
+                                    <h6><?= $data_group_pic_keuangan['namaPic'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">No. Telp PIC Keuangan </label>
+                                    <h6><?= $data_kontak_telp_pic_keuangan['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Whatsapp PIC Keuangan </label>
+                                    <h6><?= $data_kontak_whatsapp_pic_keuangan['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Email PIC Keuangan </label>
+                                    <h6><?= $data_kontak_email_pic_keuangan['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Data PIC Teknis</h5>
+                    <div class="p-2">
+
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">NIK PIC Teknis</label>
+                                    <h6><?= $data_group_pic_teknis['nikPic'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Nama PIC Internal PIC Teknis</label>
+                                    <h6><?= $data_group_pic_teknis['namaPic'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">No. Telp PIC Teknis</label>
+                                    <h6><?= $data_kontak_telp_pic_teknis['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Whatsapp PIC Teknis</label>
+                                    <h6><?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Email PIC Teknis</label>
+                                    <h6><?= $data_kontak_email_pic_teknis['isiKontak'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
 
                     <h5>Data Vendor</h5>
@@ -274,14 +399,14 @@
                             <div class="col-3">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Biaya Registrasi</label>
-                                    <h6><?= "Rp " . number_format($data_internet_user_layanan['biayaregistrasiLayanan'], 2, ',', '.'); ?></h6>
+                                    <h6>Rp.<?= $data_internet_user_layanan['biayaregistrasiLayanan']; ?>,-</h6>
 
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Biaya Bulanan</label>
-                                    <h6><?= "Rp " . number_format($data_internet_user_layanan['biayabulananLayanan'], 2, ',', '.'); ?></h6>
+                                    <h6>Rp.<?= $data_internet_user_layanan['biayabulananLayanan']; ?>,-</h6>
                                 </div>
                             </div>
                             <div class="col-3">
@@ -378,11 +503,28 @@
                         </div>
                     </div>
 
-                    <h5>Dokumentasi</h5>
+                    <h5>Dokumentasi Instalasi</h5>
                     <div class="p-2">
                         <div class="row border border-1 rounded mb-3 p-2">
 
-                            <?php foreach ($path_media_dokumentasi as $key => $value) { ?>
+                            <?php foreach ($path_media_dokumentasi_instalasi as $key => $value) { ?>
+                                <div class="col">
+                                    <div class="gallery">
+                                        <figure>
+                                            <img src="/assets/media/<?= $value['pathMedia'] ?>" alt="" />
+                                        </figure>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+                        </div>
+                    </div>
+
+                    <h5>Dokumentasi Aktivasi</h5>
+                    <div class="p-2">
+                        <div class="row border border-1 rounded mb-3 p-2">
+
+                            <?php foreach ($path_media_dokumentasi_aktivasi as $key => $value) { ?>
                                 <div class="col">
                                     <div class="gallery">
                                         <figure>
@@ -417,6 +559,21 @@
             </div>
             <div class="modal-body">
                 <img src="/assets/media/<?= $npwp['pathMedia'] ?>" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal NPWP-->
+<div class="modal fade" id="ktpMODAL" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Foto KTP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="/assets/media/<?= $ktp['pathMedia'] ?>" class="img-fluid" alt="">
             </div>
         </div>
     </div>

@@ -406,14 +406,14 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">NIK PIC Keuangan</label>
-                                        <input type="text" class="form-control nikPicTeknik" name="nikPicTeknik" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
+                                        <label for="first-name-vertical">NIK PIC Teknis</label>
+                                        <input type="text" class="form-control" name="nikPicTeknis" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Nama PIC Keuangan </label>
-                                        <input type="text" class="form-control namaPicTeknik" name="namaPicTeknik" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
+                                        <label for="first-name-vertical">Nama PIC Teknis </label>
+                                        <input type="text" class="form-control" name="namaPicTeknis" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -421,19 +421,19 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control noTelpPICTeknik" name="noTelpPICTeknik" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="noTelpPICTeknis" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control noWaPICTeknik" name="noWaPICTeknik" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="noWaPICTeknis" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control emailPICTeknik" name="emailPICTeknik" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control" name="emailPICTeknis" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -834,10 +834,10 @@
             var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
             var biayaregistrasiPPNAkhir = 0;
             if ($(this).val() == '1') {
-                biayaregistrasiPPN = (biayaregistrasi*10)/100;
-                biayaregistrasiPPNAkhir = biayaregistrasi+biayaregistrasiPPN;
+                biayaregistrasiPPN = (biayaregistrasi * 10) / 100;
+                biayaregistrasiPPNAkhir = biayaregistrasi + biayaregistrasiPPN;
             } else {
-                biayaregistrasiPPNAkhir = biayaregistrasi-biayaregistrasiPPN;
+                biayaregistrasiPPNAkhir = biayaregistrasi - biayaregistrasiPPN;
                 biayaregistrasiPPN = 0;
             }
             $('.biayaregistrasiLayanan').val(
@@ -851,10 +851,10 @@
             var biayabulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
             var biayabulananPPNAkhir = 0;
             if ($(this).val() == '1') {
-                biayabulananPPN = (biayabulanan*10)/100;
-                biayabulananPPNAkhir = biayabulanan+biayabulananPPN;
+                biayabulananPPN = (biayabulanan * 10) / 100;
+                biayabulananPPNAkhir = biayabulanan + biayabulananPPN;
             } else {
-                biayabulananPPNAkhir = biayabulanan-biayabulananPPN;
+                biayabulananPPNAkhir = biayabulanan - biayabulananPPN;
                 biayabulananPPN = 0;
             }
             $('.biayabulananLayanan').val(

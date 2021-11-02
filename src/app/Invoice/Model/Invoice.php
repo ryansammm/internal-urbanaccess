@@ -72,10 +72,11 @@ class Invoice extends GlobalFunc
 
     public function update($id, $datas, $where)
     {
-        $pengirimaninvoice = $datas['pengirimaninvoice'];
+        $pengirimaninvoice = $datas['pengirimanInvoice'];
         $updatedAt = date('Y-m-d H:i:s');
 
         $sql = "UPDATE " . $this->table . " SET  pengirimaninvoice = '$pengirimaninvoice', updatedAt = '$updatedAt' " . $where;
+        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);

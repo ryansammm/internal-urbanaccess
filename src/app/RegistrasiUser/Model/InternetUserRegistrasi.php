@@ -106,14 +106,16 @@ class InternetUserRegistrasi extends GlobalFunc
         $nikUserRegistrasi = isset($datas['nikUserRegistrasi']) ? $datas['nikUserRegistrasi'] : NULL;
         $idUser =  isset($datas['idUser']) ? $datas['idUser'] : NULL;
         $jenisuserRegistrasi =  isset($datas['jenisuserRegistrasi']) ? $datas['jenisuserRegistrasi'] : NULL;
-        $statusRegistrasi =  isset($datas['statusRegistrasi']) ? $datas['statusRegistrasi'] : NULL;
         $namauserRegistrasi =  isset($datas['namauserRegistrasi']) ? $datas['namauserRegistrasi'] : NULL;
         $jabatanuserRegistrasi =  isset($datas['jabatanuserRegistrasi']) ? $datas['jabatanuserRegistrasi'] : NULL;
         $namabadanRegistrasi =  isset($datas['namabadanRegistrasi']) ? $datas['namabadanRegistrasi'] : NULL;
         $jenisusahaRegistrasi =  isset($datas['jenisusahaRegistrasi']) ? $datas['jenisusahaRegistrasi'] : NULL;
         $updatedAt = date('Y-m-d H:i:s');
+        $keterangan = $datas['keterangan'];
+        $nikPicKeuangan = $datas['nikPicKeuangan'];
+        $nikPicTeknis = $datas['nikPicTeknis'];
 
-        $sql = "UPDATE " . $this->table . " SET kodeformInternetregistrasi = '$kodeformInternetregistrasi', tanggalRegistrasi = '$tanggalRegistrasi', idSales = '$idSales', nikUserRegistrasi = '$nikUserRegistrasi', idUser = '$idUser', jenisuserRegistrasi = '$jenisuserRegistrasi', statusRegistrasi = '$statusRegistrasi', namauserRegistrasi = '$namauserRegistrasi', jabatanuserRegistrasi = '$jabatanuserRegistrasi', namabadanRegistrasi = '$namabadanRegistrasi', jenisusahaRegistrasi = '$jenisusahaRegistrasi', updatedAt = '$updatedAt' WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "UPDATE " . $this->table . " SET kodeformInternetregistrasi = '$kodeformInternetregistrasi', tanggalRegistrasi = '$tanggalRegistrasi', idSales = '$idSales', nikUserRegistrasi = '$nikUserRegistrasi', idUser = '$idUser', jenisuserRegistrasi = '$jenisuserRegistrasi', namauserRegistrasi = '$namauserRegistrasi', jabatanuserRegistrasi = '$jabatanuserRegistrasi', namabadanRegistrasi = '$namabadanRegistrasi', jenisusahaRegistrasi = '$jenisusahaRegistrasi', updatedAt = '$updatedAt', keterangan ='$keterangan', nikPicKeuangan = '$nikPicKeuangan', nikPicTeknis = '$nikPicTeknis' WHERE " . $this->primaryKey . " = '$id'";
 
         try {
             $data = $this->conn->prepare($sql);
