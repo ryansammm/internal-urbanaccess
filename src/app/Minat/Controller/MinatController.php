@@ -35,7 +35,6 @@ class MinatController extends GlobalFunc
 
     public function index(Request $request)
     {
-
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
@@ -71,8 +70,6 @@ class MinatController extends GlobalFunc
             }
         }
 
-
-
         return $this->render_template('admin/master/minat/index', ['datas' => $datas]);
     }
 
@@ -84,8 +81,6 @@ class MinatController extends GlobalFunc
 
         $id = $request->attributes->get('id');
         $datas = $this->model->selectOne($id);
-        // dd($datas);
-
 
         if ($datas['status'] == '1') {
             $datas['statusText'] = 'Minat';
@@ -163,8 +158,6 @@ class MinatController extends GlobalFunc
         return $this->render_template('admin/master/minat/create', ['kode_minat' => $kode_minat, 'provinsi' => $data_provinsi, 'layanan' => $data_layanan, 'kecepatan' => $data_kecepatan, 'data_sales' => $data_sales]);
     }
 
-
-
     public function store(Request $request)
     {
         if ($request->getSession()->get('username') == null) {
@@ -172,7 +165,6 @@ class MinatController extends GlobalFunc
         }
 
         $datas = $request->request->all();
-
 
         // $layanan = new LayananInternet();
         // $data_layanan = $layanan->selectOne("WHERE idLayananinternet  =  '" . $datas['idLayanan'] . "'");
@@ -243,17 +235,19 @@ class MinatController extends GlobalFunc
         // ]);
         // $createChronology = $chronology->create($message, $produk);
 
-
-
         $user = new Users();
-
         $namaUser = $_SESSION['_sf2_attributes']['namaUser'];
-
 
         $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "" . $namaUser . " telah menambahkan data peminat baru atas nama <b>" . $datas['namaPemohon'] . "</b> dengan layanan <b>" . $data_layanan['namaLayanan'] . " " . $data_layanan_detail['kecepatan'] . " Mbps</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
-        // dd($kirim);
+
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Minat pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_data_layanan, $idUser);
 
         return new RedirectResponse('/minat');
     }

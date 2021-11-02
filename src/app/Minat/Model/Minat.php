@@ -75,7 +75,6 @@ class Minat extends GlobalFunc
         $keterangan = NULL;
 
         $sql = "INSERT INTO " . $this->table . " VALUES ('$id','$kodeMinat', '$namaPemohon', '$latitude', '$longtitude', '$nomorTrancking', '$status', '$tercover', '$idSales', '$idMitra', '$alamat', '$rt', '$rw', '$idProvinsi', '$idKabupaten', '$idKecamatan', '$idKelurahan','$kodepos', '$tanggalRequest', '$createdAt', '$updatedAt','$keterangan')";
-        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);
