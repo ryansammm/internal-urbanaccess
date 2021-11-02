@@ -170,6 +170,11 @@ class AppPermissions
             'aliasPermission' => 'user-management',
             'url' => '/user-management'
         ],
+        [
+            'menu' => 'Riwayat',
+            'aliasPermission' => 'riwayat',
+            'url' => '/riwayat'
+        ],
 
     ];
 
@@ -178,7 +183,8 @@ class AppPermissions
         return $this->permissions;
     }
 
-    public function getOnePermission($alias) {
+    public function getOnePermission($alias)
+    {
         foreach ($this->permissions as $key => $value) {
             if ($value['aliasPermission'] == $alias) {
                 return $value;

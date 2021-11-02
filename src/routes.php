@@ -562,5 +562,9 @@ $routes->add('UrbanUltimateDelete', new Route('/urban-ultimate/{id}/delete', [
 ]));
 
 
+$routes->add('Riwayat', new Route('/riwayat', [
+    '_controller' => 'App\Riwayat\Controller\RiwayatController::index',
+]));
+
 
 return $routes;
