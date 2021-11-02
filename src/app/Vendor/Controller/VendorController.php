@@ -2,6 +2,7 @@
 
 namespace App\Vendor\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\GroupKontak\Model\GroupKontak;
 use App\GroupLegalitas\Model\GroupLegalitas;
 use App\GroupPersyaratan\Model\GroupPersyaratan;
@@ -219,6 +220,12 @@ class VendorController extends GlobalFunc
         $file_upload_pic_npwp_create = $media->create($file_npwp_vendor, $group_persyaratan_vendor_npwp_create, '1', 'foto-legalitas-vendor');
         $file_upload_pic_npwp_create = $media->create($file_npwp_pic, $group_persyaratan_pic_npwp_create, '1', 'foto-legalitas-pic');
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_vendor , $idUser);
+
         return new RedirectResponse('/vendor');
     }
 
@@ -398,6 +405,12 @@ class VendorController extends GlobalFunc
         ];
         $group_persyaratan_pic_npwp_create = $group_legalitas->create($group_persyaratan_pic_npwp_data);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
         return new RedirectResponse('/vendor');
     }
 
@@ -437,6 +450,12 @@ class VendorController extends GlobalFunc
 
         $group_pic = new GroupPIC();
         $group_pic_delete = $group_pic->delete("WHERE idRelation = '" . $detail['idVendor'] . "'");
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/vendor');
     }

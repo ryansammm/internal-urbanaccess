@@ -35,6 +35,12 @@ class ProvinsiController extends GlobalFunc
     {
         $create = $this->model->create($request->request);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data provinsi pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create , $idUser);
+
         return new RedirectResponse('/provinsi');
     }
 
@@ -59,6 +65,12 @@ class ProvinsiController extends GlobalFunc
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah Mengubah Data Provinsi pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
         return new RedirectResponse('/provinsi');
     }
 
@@ -66,6 +78,12 @@ class ProvinsiController extends GlobalFunc
     {
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah Menghapus Data Provinsi pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/provinsi');
     }

@@ -2,6 +2,7 @@
 
 namespace App\RequestSurveyVendor\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\GroupKontak\Model\GroupKontak;
 use App\InputHasilSoftSurvey\Model\InputHasilSoftSurvey;
 use App\Minat\Model\Minat;
@@ -59,6 +60,12 @@ class RequestSurveyVendorController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create , $idUser);
 
         return new RedirectResponse('/reseller');
     }
@@ -140,7 +147,7 @@ class RequestSurveyVendorController extends GlobalFunc
 
 
         // dd($data_minat);
-
+        $update = $this->model->update($id, $request->request);
 
         $tglRequest = date("d-m-Y");
         $id = $request->attributes->get('id');
@@ -192,7 +199,11 @@ class RequestSurveyVendorController extends GlobalFunc
         $mail = new PHPMailer();
 
 
-
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
 
         return new RedirectResponse('/request-survey-vendor');
     }
@@ -204,6 +215,12 @@ class RequestSurveyVendorController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/reseller');
     }

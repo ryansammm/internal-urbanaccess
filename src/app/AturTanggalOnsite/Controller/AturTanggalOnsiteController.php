@@ -2,6 +2,7 @@
 
 namespace App\AturTanggalOnsite\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\AturTanggalOnsite\Model\AturTanggalOnsite;
 use App\InputHasilSoftSurvey\Model\InputHasilSoftSurvey;
 use App\Minat\Model\Minat;
@@ -54,6 +55,12 @@ class AturTanggalOnsiteController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah atur tanggal onsite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/atur-tanggal-onsite');
     }
@@ -127,6 +134,12 @@ class AturTanggalOnsiteController extends GlobalFunc
         $message = "Jadwal survey on site atas nama <b>" . $data_minat['namapemohon'] . "</b> telah dijadwalkan pada tanggal <b>" . date('d F Y', strtotime($datas['tanggalRequest'])) . "</b>";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
 
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui tanggal onsite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $input_soft_survey_create, $idUser);
         return new RedirectResponse('/atur-tanggal-onsite');
     }
 
@@ -137,6 +150,13 @@ class AturTanggalOnsiteController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus tanggal onsite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
+        
 
         return new RedirectResponse('/atur-tanggal-onsite');
     }

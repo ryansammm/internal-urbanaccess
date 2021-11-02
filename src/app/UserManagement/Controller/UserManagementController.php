@@ -2,6 +2,7 @@
 
 namespace App\UserManagement\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
 use Core\GlobalFunc;
@@ -74,6 +75,11 @@ class UserManagementController extends GlobalFunc
         }
 
         // dd($pass1, $pass2);
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data User Management pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_user_management , $idUser);
 
 
         return new RedirectResponse('/user-management');
@@ -118,6 +124,11 @@ class UserManagementController extends GlobalFunc
         $datas = $request->request->all();
         $update = $this->model->update($id, $datas);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data User Management pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
 
         return new RedirectResponse('/vendor');
     }
@@ -131,7 +142,11 @@ class UserManagementController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
 
-
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data User Management pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/user-management');
     }

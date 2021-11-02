@@ -2,6 +2,7 @@
 
 namespace App\DataUser\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\DataUser\Model\DataUser;
 use Core\GlobalFunc;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,6 +46,12 @@ class DataUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambah Data user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/data-user');
     }
@@ -78,6 +85,12 @@ class DataUserController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah memperbaharui Data user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/data-user');
     }
@@ -89,6 +102,12 @@ class DataUserController extends GlobalFunc
         }
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus Data user pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/data-user');
     }

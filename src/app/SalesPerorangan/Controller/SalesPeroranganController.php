@@ -2,6 +2,7 @@
 
 namespace App\SalesPerorangan\Controller;
 
+use App\Chronology\Model\Chronology;
 use App\Bank\Model\Bank;
 use App\BankSales\Model\BankSales;
 use App\GroupKontak\Model\GroupKontak;
@@ -122,6 +123,12 @@ class SalesPeroranganController extends GlobalFunc
         $group_persyaratan_pic_npwp_create = $group_legalitas->create($group_persyaratan_pic_npwp_data);
         $media = new Media();
         $file_upload_pic_npwp_create = $media->create($file_npwp_pic, $group_persyaratan_pic_npwp_create, '1', 'foto-legalitas-pic');
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menambah Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_sales_perorangan , $idUser);
 
 
         return new RedirectResponse('/sales-perorangan');
@@ -335,6 +342,12 @@ class SalesPeroranganController extends GlobalFunc
         ];
         $group_persyaratan_pic_npwp_create = $group_legalitas->create($group_persyaratan_pic_npwp_data);
 
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah mengubah Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+
         return new RedirectResponse('/sales-perorangan');
     }
 
@@ -362,6 +375,12 @@ class SalesPeroranganController extends GlobalFunc
 
         $group_legalitas = new GroupLegalitas();
         $group_legalitas_delete_pic = $group_legalitas->delete("WHERE idRelation = '" . $detail['idSales'] . "'");
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama." telah menghapus Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
 
         return new RedirectResponse('/sales-perorangan');
     }

@@ -38,6 +38,12 @@ class KelurahanController extends GlobalFunc
     public function store(Request $request)
     {
         $create = $this->model->create($request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menambahkan kelurahan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/kelurahan');
     }
@@ -64,6 +70,12 @@ class KelurahanController extends GlobalFunc
     {
         $id = $request->attributes->get('id');
         $update = $this->model->update($id, $request->request);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah mengubah kelurahan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/kelurahan');
     }
@@ -72,6 +84,12 @@ class KelurahanController extends GlobalFunc
     {
         $id = $request->attributes->get('id');
         $delete = $this->model->delete($id);
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah menghapus kelurahan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/kelurahan');
     }
