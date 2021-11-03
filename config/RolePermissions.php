@@ -33,7 +33,7 @@ class RolePermissions
             'idRole' => 'omnxc78',
             'namaRole' => 'IKR',
             'aliasRole' => 'ikr',
-            'permissions' => ['atur-tanggal-onsite', 'input-hasil-survey-onsite', 'instalasi']
+            'permissions' => ['atur-tanggal-onsite', 'input-hasil-survey-onsite', 'konfirmasi-hasil-survey-onsite', 'instalasi']
         ],
         [
             'idRole' => 'jhs8721',
@@ -43,11 +43,13 @@ class RolePermissions
         ],
     ];
 
-    public function getAllRolePermissions() {
+    public function getAllRolePermissions()
+    {
         return $this->role_permissions;
     }
 
-    public function getRolePermissions($idRole) {
+    public function getRolePermissions($idRole)
+    {
         foreach ($this->role_permissions as $key => $value) {
             if ($value['idRole'] == $idRole) {
                 return $value['permissions'];

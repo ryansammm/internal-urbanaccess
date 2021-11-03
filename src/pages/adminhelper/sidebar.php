@@ -146,6 +146,11 @@
                                                 <a href="/input-hasil-survey-onsite">Input Hasil Survey</a>
                                             </li>
                                         <?php } ?>
+                                        <?php if ($isPermited($GLOBALS['userPermissions'], ['konfirmasi-hasil-survey-onsite'], 'required-one')) { ?>
+                                            <li class="submenu-item ">
+                                                <a href="/konfirmasi-hasil-survey-onsite">Konfirmasi Hasil Survey</a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                             <?php } ?>

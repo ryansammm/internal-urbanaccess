@@ -175,6 +175,11 @@ class AppPermissions
             'aliasPermission' => 'riwayat',
             'url' => '/riwayat'
         ],
+        [
+            'menu' => 'Konfirmasi Hasil Survey Onsite',
+            'aliasPermission' => 'konfirmasi-hasil-survey-onsite',
+            'url' => '/konfirmasi-hasil-survey-onsite'
+        ],
 
     ];
 
