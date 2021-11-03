@@ -407,13 +407,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">NIK PIC Teknis</label>
-                                        <input type="text" class="form-control" name="nikPicTeknis" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
+                                        <input type="text" class="form-control nikPicTeknis" name="nikPicTeknis" value="<?= $data_group_pic_teknis['nikPic'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Nama PIC Teknis </label>
-                                        <input type="text" class="form-control" name="namaPicTeknis" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
+                                        <input type="text" class="form-control namaPicTeknis" name="namaPicTeknis" value="<?= $data_group_pic_teknis['namaPic'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -421,19 +421,19 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">No. Telp </label>
-                                        <input type="text" class="form-control" name="noTelpPICTeknis" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noTelpPICTeknis" name="noTelpPICTeknis" value="<?= $data_kontak_telp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Whatsapp </label>
-                                        <input type="text" class="form-control" name="noWaPICTeknis" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control noWaPICTeknis" name="noWaPICTeknis" value="<?= $data_kontak_whatsapp_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Email </label>
-                                        <input type="text" class="form-control" name="emailPICTeknis" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
+                                        <input type="text" class="form-control emailPICTeknis" name="emailPICTeknis" value="<?= $data_kontak_email_pic_teknis['isiKontak'] ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -830,15 +830,22 @@
 
         // hitung ppn biaya registrasi
         var biayaregistrasiPPN = 0;
+
+        var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+        $('.biayaregistrasiLayanan').on('keyup', function() {
+            biayaregistrasi = parseInt($(this).val().replace(".", ""));
+        })
+
         $('.ppnbiayainstalasi').on('change', function() {
-            var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+            // var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
             var biayaregistrasiPPNAkhir = 0;
             if ($(this).val() == '1') {
                 biayaregistrasiPPN = (biayaregistrasi * 10) / 100;
                 biayaregistrasiPPNAkhir = biayaregistrasi + biayaregistrasiPPN;
             } else {
-                biayaregistrasiPPNAkhir = biayaregistrasi - biayaregistrasiPPN;
-                biayaregistrasiPPN = 0;
+                // biayaregistrasiPPNAkhir = biayaregistrasi - biayaregistrasiPPN;
+                // biayaregistrasiPPN = 0;
+                biayaregistrasiPPNAkhir = biayaregistrasi;
             }
             $('.biayaregistrasiLayanan').val(
                 biayaregistrasiPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -847,6 +854,12 @@
 
         // hitung ppn biaya bulanan
         var biayabulananPPN = 0;
+
+        var biayaAwalBulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
+        $('.biayabulananLayanan').on('keyup', function() {
+            biayaAwalBulanan = parseInt($(this).val().replace(".", ""));
+        })
+
         $('.ppnbiayabulanan').on('change', function() {
             var biayabulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
             var biayabulananPPNAkhir = 0;
@@ -854,8 +867,9 @@
                 biayabulananPPN = (biayabulanan * 10) / 100;
                 biayabulananPPNAkhir = biayabulanan + biayabulananPPN;
             } else {
-                biayabulananPPNAkhir = biayabulanan - biayabulananPPN;
-                biayabulananPPN = 0;
+                // biayabulananPPNAkhir = biayabulanan - biayabulananPPN;
+                // biayabulananPPN = 0;
+                biayabulananPPNAkhir = biayaAwalBulanan;
             }
             $('.biayabulananLayanan').val(
                 biayabulananPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -878,11 +892,11 @@
         $('#cekTeknis').on('click', function() {
             var isChecked = $(this).is(':checked');
             if (isChecked) {
-                $('.nikPicTeknik').val($('.nikUserRegistrasi').val())
-                $('.namaPicTeknik').val($('.namauserRegistrasi').val())
-                $('.noTelpPICTeknik').val($('.telpkontakuser').val())
-                $('.noWaPICTeknik').val($('.whatsappkontakuser').val())
-                $('.emailPICTeknik').val($('.emailkontakuser').val())
+                $('.nikPicTeknis').val($('.nikUserRegistrasi').val())
+                $('.namaPicTeknis').val($('.namauserRegistrasi').val())
+                $('.noTelpPICTeknis').val($('.telpkontakuser').val())
+                $('.noWaPICTeknis').val($('.whatsappkontakuser').val())
+                $('.emailPICTeknis').val($('.emailkontakuser').val())
             }
         })
     });

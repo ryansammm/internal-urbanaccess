@@ -223,8 +223,8 @@ class VendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_vendor , $idUser);
+        $deskripsi = $nama . " telah menambah Data pada menu Vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_vendor, $idUser);
 
         return new RedirectResponse('/vendor');
     }
@@ -408,8 +408,8 @@ class VendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah mengubah Data pada menu Vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/vendor');
     }
@@ -454,8 +454,8 @@ class VendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
+        $deskripsi = $nama . " telah menghapus Data pada menu Vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/vendor');
     }

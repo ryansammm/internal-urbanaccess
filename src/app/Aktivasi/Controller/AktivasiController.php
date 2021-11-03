@@ -93,7 +93,7 @@ class AktivasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan aktivasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memasukan data Aktivasi pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $aktivasi_create, $idUser);
 
 
@@ -178,7 +178,7 @@ class AktivasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui aktivasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memperbaharui data Aktivasi pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/vendor');

@@ -260,7 +260,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah registrasi user pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambah data Registrasi User pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
 
         return new RedirectResponse('/registrasi-user');
@@ -628,7 +628,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui registrasi user pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memperbaharui data pada menu Registrasi User pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_layanan_update, $idUser);
 
 
@@ -692,8 +692,8 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus registrasi user pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
+        $deskripsi = $nama . " telah menghapus data pada Menu Registrasi User pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
         return new RedirectResponse('/registrasi-user');

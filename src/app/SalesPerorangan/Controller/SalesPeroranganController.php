@@ -127,8 +127,8 @@ class SalesPeroranganController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_sales_perorangan , $idUser);
+        $deskripsi = $nama . " telah menambah Data pada menu Sales Perorangan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_sales_perorangan, $idUser);
 
 
         return new RedirectResponse('/sales-perorangan');
@@ -345,8 +345,8 @@ class SalesPeroranganController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah mengubah Data pada menu Sales Perorangan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/sales-perorangan');
     }
@@ -379,8 +379,8 @@ class SalesPeroranganController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Sales Perorangan pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
+        $deskripsi = $nama . " telah menghapus Data pada menu Sales Perorangan pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/sales-perorangan');
     }

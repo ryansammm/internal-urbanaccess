@@ -246,8 +246,8 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Minat pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_data_layanan, $idUser);
+        $deskripsi = $nama . " telah menambah Data Minat atas nama " . $datas['namaPemohon'] . " pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $datas['kodeMinat'], $idUser);
 
         return new RedirectResponse('/minat');
     }
@@ -408,7 +408,7 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Minat pada tanggal ".date('d M Y H:i:s');
+        $deskripsi = $nama . " telah mengubah Data Minat pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create_data_layanan, $idUser);
 
         return new RedirectResponse('/minat');
@@ -447,8 +447,8 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Minat pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $minat_layanan_delete, $idUser);
+        $deskripsi = $nama . " telah menghapus Data Minat pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
         return new RedirectResponse('/minat');

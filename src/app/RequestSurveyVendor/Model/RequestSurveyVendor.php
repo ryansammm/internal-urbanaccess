@@ -100,6 +100,7 @@ class RequestSurveyVendor extends GlobalFunc
         $ktpPassport = $datas->get('ktpPassport');
 
         $sql = "UPDATE " . $this->table . " SET nomorRegistrasi='$nomorRegistrasi', picRegistrasi='$picRegistrasi', tanggalRegistrasi='$tanggalRegistrasi', alamatpasangRegistrasi='$alamatpasangRegistrasi', mediakoneksiRegistrasi='$mediakoneksiRegistrasi', biayaRegistrasi='$biayaRegistrasi', bulananRegistrasi='$bulananRegistrasi', layananTambahan='$layananTambahan', fotorumahRegistrasi='$fotorumahRegistrasi', isPic='$isPic', ktpPassport='$ktpPassport' WHERE idSales='$id'";
+        // dd($sql);
 
         try {
             $data = $this->conn->prepare($sql);

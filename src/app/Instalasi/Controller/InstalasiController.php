@@ -87,7 +87,7 @@ class InstalasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memasukan data hasil Instalasi pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
 
@@ -106,6 +106,13 @@ class InstalasiController extends GlobalFunc
         $internet_user_registrasi = new InternetUserRegistrasi();
         $status = '2';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
+
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = $nama . " telah mengkonfirmasi data hasil Instalasi pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
+
 
         return new RedirectResponse('/instalasi');
     }
@@ -162,7 +169,7 @@ class InstalasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memperbaharui data Instalasi pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
         return new RedirectResponse('/instalasi');

@@ -164,8 +164,8 @@ class ResellerController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Reseller pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_reseller , $idUser);
+        $deskripsi = $nama . " telah menambah Data pada menu Reseller pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_reseller, $idUser);
 
         return new RedirectResponse('/reseller');
     }
@@ -417,8 +417,8 @@ class ResellerController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Reseller pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah mengubah Data pada menu Reseller pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 
         return new RedirectResponse('/reseller');
@@ -458,8 +458,8 @@ class ResellerController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Reseller pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $deletee , $idUser);
+        $deskripsi = $nama . " telah menghapus Data pada menu Reseller pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
         return new RedirectResponse('/reseller');

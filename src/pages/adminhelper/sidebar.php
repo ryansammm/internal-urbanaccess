@@ -273,7 +273,7 @@
                 <?php if ($isPermited($GLOBALS['userPermissions'], ['riwayat'], 'required-one')) { ?>
                     <li class="sidebar-item <?= $GLOBALS['url'] == '/riwayat'  ? 'oncom' : ''; ?> ">
                         <a href="/riwayat" class='sidebar-link'>
-                            <i class="fas fa-users-cog"></i>
+                            <i class="fas fa-history"></i>
                             <span>Riwayat</span>
                         </a>
                     </li>

@@ -64,8 +64,8 @@ class RequestSurveyVendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create , $idUser);
+        $deskripsi = $nama . " telah menambah Data Request Survey vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/reseller');
     }
@@ -123,6 +123,7 @@ class RequestSurveyVendorController extends GlobalFunc
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
+        $id = $request->attributes->get('id');
         $datas = $request->request->all();
         $datas_attribute = $request->attributes->get('id');
 
@@ -147,10 +148,10 @@ class RequestSurveyVendorController extends GlobalFunc
 
 
         // dd($data_minat);
-        $update = $this->model->update($id, $request->request);
+        // $update = $this->model->update($id, $request->request);
 
         $tglRequest = date("d-m-Y");
-        $id = $request->attributes->get('id');
+
 
         $vendor = new Vendor();
         $idVendor = $datas['idVendor'];
@@ -202,8 +203,8 @@ class RequestSurveyVendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah meelakukan Request Survey vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/request-survey-vendor');
     }
@@ -219,8 +220,8 @@ class RequestSurveyVendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data Request Survey vendor pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
+        $deskripsi = $nama . " telah menghapus Data pada menu Request Survey vendor pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/reseller');
     }

@@ -52,7 +52,7 @@ class KecepatanInternetController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan kecepatan internet  pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambahkan data pada menu Kecepatan Iinternet pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
@@ -91,7 +91,7 @@ class KecepatanInternetController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui kecepatan internet pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah memperbaharui data pada menu Kecepatan Internet pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
@@ -108,8 +108,8 @@ class KecepatanInternetController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus kecepatan internet pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
+        $deskripsi = $nama . " telah menghapus data pada menu Kecepatan Internet pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');
     }

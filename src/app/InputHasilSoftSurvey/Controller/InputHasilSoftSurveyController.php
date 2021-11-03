@@ -75,7 +75,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah input hasil soft survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambahkan hasil soft survey pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/input-hasil-soft-survey');
@@ -196,7 +196,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui input hasil soft survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambahkan data hasil Survey Onsite pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 

@@ -66,7 +66,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan  Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambahkan Hasil Survey pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/reseller');
@@ -138,7 +138,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah konfirmasi  Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah mengkonfirmasi Hasil Survey pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $data_vendor_detail, $idUser);
 
 

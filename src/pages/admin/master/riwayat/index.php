@@ -38,20 +38,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <?php foreach ($data_minat as $key => $value) { ?>
+                                <?php foreach ($datas as $key => $value) { ?>
                                     <tr>
                                         <td><?= $key += 1 ?></td>
-                                        <td><?= $value['kodeMinat'] ?></td>
-                                        <td><?= date('d-m-Y', strtotime($value['createdAt'])) ?></td>
-                                        <td><?= $value['namapemohon'] ?></td>
-                                        <td><?= $value['namaLayanan'] ?></td>
-                                        <td><?= $value['alamat'] ?></td>
-                                        <td><?= $value['statusText'] ?></td>
-                                        <td>
-                                            <a href="/minat/<?= $value['kodeMinat'] ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></a>
-                                        </td>
+                                        <td><?= $value['deskripsiChronology'] ?></td>
+                                        <td><?= date('d-m-Y', strtotime($value['dateCreate'])) ?></td>
                                     </tr>
-                                <?php } ?> -->
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Aktif\Controller;
+namespace App\Chronology\Controller;
 
-use App\Chronology\Model\Chronology;
 use App\Aktif\Model\Aktif;
 use App\Aktivasi\Model\Aktivasi;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\LayananInternet\Model\LayananInternet;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
+use App\Chronology\Model\Chronology;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
 use Core\GlobalFunc;
@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class AktifController extends GlobalFunc
+class ChronologyController extends GlobalFunc
 {
     public $model;
 
     public function __construct()
     {
-        $this->model = new Aktif();
+        $this->model = new Chronology();
     }
 
     public function index(Request $request)
@@ -33,12 +33,9 @@ class AktifController extends GlobalFunc
         }
 
         $datas = $this->model->selectAll();
+        // dd($datas);
 
-        $internet_user_registrasi = new InternetUserRegistrasi();
-        $data_internet_user_registrasi = $internet_user_registrasi->selectAll("WHERE statusRegistrasi = 3");
-        // dd($data_internet_user_registrasi);
-
-        return $this->render_template('admin/master/aktif/index', ['datas' => $datas, 'data_internet_user_registrasi' => $data_internet_user_registrasi]);
+        return $this->render_template('admin/master/riwayat/index', ['datas' => $datas]);
     }
 
     public function create(Request $request)
@@ -53,7 +50,6 @@ class AktifController extends GlobalFunc
 
         $internet_user_layanan = new InternetUserLayanan();
         $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
-
 
         return $this->render_template('admin/master/aktivasi/create', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan]);
     }
@@ -84,13 +80,7 @@ class AktifController extends GlobalFunc
         $status = '4';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
-        $aktif_create = $this->model->create($datas, $id);
-        // buat log aktivitas
-        $nama = $request->getSession()->get('namaUser');
-        $idUser = $request->getSession()->get('idUser');
-        $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan data Billing pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $aktif_create, $idUser);
+        // $aktif_create = $this->model->create($datas, $id);
 
 
         return new RedirectResponse('/aktif');
@@ -134,12 +124,6 @@ class AktifController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
         $update = $this->model->update($id, $datas);
-        // buat log aktivitas
-        $nama = $request->getSession()->get('namaUser');
-        $idUser = $request->getSession()->get('idUser');
-        $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui data Billing pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 
         return new RedirectResponse('/vendor');
@@ -153,12 +137,6 @@ class AktifController extends GlobalFunc
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
-        // buat log aktivitas
-        $nama = $request->getSession()->get('namaUser');
-        $idUser = $request->getSession()->get('idUser');
-        $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus aktif pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 
 
