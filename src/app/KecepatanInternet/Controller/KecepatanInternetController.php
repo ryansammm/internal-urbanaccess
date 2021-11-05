@@ -52,7 +52,7 @@ class KecepatanInternetController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan data pada menu Kecepatan Iinternet pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambahkan data pada menu Kecepatan Internet pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/kecepatan-internet');

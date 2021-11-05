@@ -249,8 +249,8 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah Data Minat atas nama " . $datas['namaPemohon'] . " pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $datas['kodeMinat'], $idUser);
+        $deskripsi = "<b>" . $nama . "</b> telah menambahkan data pada menu Data Minat atas nama <b>" . $datas['namaPemohon'] . "</b> pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/minat');
     }
@@ -420,8 +420,8 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah mengubah Data Minat pada tanggal " . date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_data_layanan, $idUser);
+        $deskripsi = "<b>" . $nama . "</b> telah memperpaharui data pada menu Data Minat atas nama <b>" . $datas['namaPemohon'] . "</b> pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/minat');
     }
@@ -435,10 +435,13 @@ class MinatController extends GlobalFunc
 
         $id = $request->attributes->get('id');
         // dd($id);
-
+        $datas = $request->request->all();
 
         $minat = new Minat();
+        $data_minat = $minat->selectOne($id);
+        // dd($data_minat);
         $minat_delete = $minat->delete($id);
+
 
         $minat_layanan = new MinatLayanan();
         $minat_layanan_delete = $minat_layanan->delete($id);
@@ -459,7 +462,7 @@ class MinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus Data Minat pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>" . $nama . "</b> telah menghapus data pada menu Data Minat atas nama <b>" . $data_minat['namapemohon'] . "</b>  pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 

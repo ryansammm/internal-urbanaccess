@@ -60,6 +60,7 @@ class RequestSurveyVendorController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        
 
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
@@ -203,7 +204,7 @@ class RequestSurveyVendorController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah meelakukan Request Survey vendor pada tanggal " . date('d M Y H:i:s');
+        $deskripsi ="<b>". $nama . "</b> telah melakukan Request Survey vendor pada menu Data Soft Survey atas nama <b>".$data_minat['namapemohon']. "</b> dengan nama vendor <b>". $data_vendor['namaVendor']. "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/request-survey-vendor');

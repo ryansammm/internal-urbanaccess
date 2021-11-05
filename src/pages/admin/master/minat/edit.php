@@ -88,7 +88,6 @@
                                                     <?php foreach ($data_kelurahan as $key => $value) { ?>
                                                         <option <?= $value['id'] == $detail['idKelurahan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                                     <?php } ?>
-
                                                 </select>
                                             </div>
                                         </div>

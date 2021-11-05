@@ -80,7 +80,10 @@ class AktifController extends GlobalFunc
         $id = $request->attributes->get('id');
         // dd($datas, $id);
 
+    
         $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
         $status = '4';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
@@ -89,7 +92,7 @@ class AktifController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan data Billing pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>". $nama . "</b> telah melakukan pembayaran pada menu Start Billing atas nama <b>". $internet_user_registrasi_data['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $aktif_create, $idUser);
 
 
