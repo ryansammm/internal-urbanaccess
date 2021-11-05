@@ -62,11 +62,16 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $create = $this->model->create($request->request);
+        $minat = new Minat();
+        $id = $request->attributes->get('id');
+        $data_vendor = $this->model->selectOne("WHERE id = '" . $id . "'");
+        $data_minat = $minat->selectOne($data_vendor['kodeMinat']);
+        
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menambahkan Hasil Survey pada menu Konfirmasi Hasil Survey atas nama <b>" . $data_minat['namapemohon'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $create, $idUser);
 
         return new RedirectResponse('/reseller');
@@ -138,7 +143,7 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah mengkonfirmasi Hasil Survey pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah melakukan konfirmasi Hasil Survey pada menu Data Soft Survey atas nama  <b>". $data_minat['namapemohon']. "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $data_vendor_detail, $idUser);
 
 

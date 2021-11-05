@@ -344,7 +344,7 @@ class RegistrasiUserMinatController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah melengkapi Data Registrasi User minat pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah melengkapi Data Registrasi User minat pada menu Registrasi User atas nama <b>".$datas['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
 
 

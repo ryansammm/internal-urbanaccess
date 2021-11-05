@@ -138,7 +138,7 @@ class AturTanggalOnsiteController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui Tanggal Survey Onsite pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah melakukan setting Tanggal Survey Onsite pada menu Survey On Site atas nama <b>".$data_minat['namapemohon']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $input_soft_survey_create, $idUser);
         return new RedirectResponse('/atur-tanggal-onsite');
     }

@@ -139,7 +139,7 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui input hasil survey onsite pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menambahkan data hasil survey pada menu Survey On Site atas nama <b>".$data_minat['namapemohon']. "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $input_survey_onsite_update, $idUser);
 
         return new RedirectResponse('/input-hasil-survey-onsite/dokumentasi/' . $id);
@@ -186,13 +186,18 @@ class InputHasilSurveyOnsiteController extends GlobalFunc
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
+        
         $id = $request->attributes->get('id');
+        
+        $detail = $this->model->selectOne("WHERE jenisSurvey = 2 AND id = '" . $id . "'");
         $delete = $this->model->delete($id);
+        $minat = new Minat();
+        $data_minat = $minat->selectOne($detail['kodeMinat']);
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah Data Minat pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menghapus Data Minat atas nama <b>". $data_minat['namapemohon']."</b>pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/input-hasil-survey-onsite');

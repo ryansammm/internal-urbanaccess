@@ -77,6 +77,10 @@ class InstalasiController extends GlobalFunc
 
 
         $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
+
+
         // $status = '2';
         // $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
         // dd($internet_user_registrasi_status);
@@ -87,7 +91,7 @@ class InstalasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memasukan data hasil Instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menambahkan data hasil Instalasi pada menu Instalasi atas nama <b>". $internet_user_registrasi_data['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
 
@@ -104,13 +108,15 @@ class InstalasiController extends GlobalFunc
         $id = $request->attributes->get('id');
 
         $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
         $status = '2';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah mengkonfirmasi data hasil Instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi ="<b>".$nama . "</b> telah mengkonfirmasi data hasil Instalasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b>  pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
@@ -162,14 +168,16 @@ class InstalasiController extends GlobalFunc
         $datas = $request->request->all();
         $id = $request->attributes->get('id');
         // dd($datas, $id);
-
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
 
         $instalasi_create = $this->model->update($datas, $id);
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui data Instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>" .$nama. "</b> telah memperbaharui data hasil Instalasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
 
         return new RedirectResponse('/instalasi');
@@ -183,12 +191,15 @@ class InstalasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
 
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus instalasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menghapus data hasil instalasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 
@@ -204,9 +215,17 @@ class InstalasiController extends GlobalFunc
         // dd($_FILES);
         $id = $request->attributes->get('id');
         // dd($id);
-
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
         $media = new Media();
         $media->create($_FILES['file'], $id, '1', 'dokumentasi-instalasi');
+        // buat log aktivitas
+        $nama = $request->getSession()->get('namaUser');
+        $idUser = $request->getSession()->get('idUser');
+        $chronology = new Chronology();
+        $deskripsi = "<b>".$nama . "</b> telah menambahkan dokumentasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
         return new JsonResponse([]);

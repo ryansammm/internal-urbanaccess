@@ -196,7 +196,7 @@ class InputHasilSoftSurveyController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambahkan data hasil Survey Onsite pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah menambahkan data hasil survey pada menu Data Soft Survey atas nama <b>" . $data_minat['namapemohon']. "</b> dengan nama vendor <b>".$data_vendor['namaVendor']. "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
 

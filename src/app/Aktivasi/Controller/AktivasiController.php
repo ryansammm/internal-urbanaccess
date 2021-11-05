@@ -84,7 +84,10 @@ class AktivasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         // dd($id);
 
+        
         $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
         $status = '3';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
@@ -93,7 +96,7 @@ class AktivasiController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memasukan data Aktivasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi ="<b>".$nama . "</b> telah melengkapi Data Aktivasi pada menu Aktivasi atas nama <b>". $internet_user_registrasi_data['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $aktivasi_create, $idUser);
 
 
@@ -174,11 +177,15 @@ class AktivasiController extends GlobalFunc
         $detail = $this->model->selectOne($id);
         $datas = $request->request->all();
         $update = $this->model->update($id, $datas);
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
+
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui data Aktivasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah memperbaharui data Aktivasi pada menu Aktivasi atas nama <b>". $internet_user_registrasi_data['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/vendor');
@@ -192,11 +199,15 @@ class AktivasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         $detail = $this->model->selectOne($id);
         $delete = $this->model->delete($id);
+        $internet_user_registrasi = new InternetUserRegistrasi();
+        $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
+        // dd($internet_user_registrasi_data['namauserRegistrasi']);
+
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus aktivasi pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>". $nama . "</b> telah menghapus data aktivasi pada menu Aktivasi atas nama <b>". $internet_user_registrasi_data['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
 

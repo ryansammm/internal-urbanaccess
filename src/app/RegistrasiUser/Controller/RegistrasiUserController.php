@@ -260,7 +260,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah data Registrasi User pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambah data Registrasi User atas nama <b>".$datas['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
 
         return new RedirectResponse('/registrasi-user');
@@ -628,7 +628,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah memperbaharui data pada menu Registrasi User pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>".$nama . "</b> telah memperbaharui data pada menu Data Registrasi User atas nama <b>".$datas['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_layanan_update, $idUser);
 
 
@@ -641,8 +641,10 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
+        
         // dd($id);
         $detail = $this->model->selectOne($id);
+        // dd($detail);
 
         $delete = $this->model->delete($id);
 
@@ -692,7 +694,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menghapus data pada Menu Registrasi User pada tanggal " . date('d M Y H:i:s');
+        $deskripsi ="<b>". $nama . "</b> telah menghapus data pada Menu Data Registrasi User atas nama <b>".$detail['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
