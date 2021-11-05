@@ -482,7 +482,7 @@ class RegistrasiUserController extends GlobalFunc
         $pic = new PIC();
         $group_pic = new GroupPIC();
         $group_pic_keuangan = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic= 'keuangan'");
-        $group_pic_teknis = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic= 'keuangan'");
+        $group_pic_teknis = $group_pic->selectOneJoin("WHERE idRelation = '" . $id . "' AND jenisPic= 'teknis'");
 
         // KEUANGAN
         // pic
@@ -579,6 +579,21 @@ class RegistrasiUserController extends GlobalFunc
         $data_legalitas = $legalitas->singkatanLegalitas("npwp")['idLegalitas'];
         $group_legalitas_delete_vendor = $group_legalitas->delete("WHERE idRelation = '" . $id . "'");
 
+        if ($_FILES['fileForm']['name'] != '') {
+            $media = new Media();
+            // select existing foto item
+            $selectItemForm = $media->selectOneMedia("WHERE idRelation = '$id' AND jenisdokumenMedia = 'file-form'");
+            // delete existing foto item
+            $deleteFotoItemForm = $media->delete($selectItemForm['idMedia']);
+            // dd($deleteFotoItemForm);
+            // delete file foto item
+            $deleteFileForm = $media->deleteFile($selectItemForm['pathMedia']);
+
+            $idMedia = uniqid('med');
+            $idUser = '1';
+            $media->create($_FILES['fileForm'], $update, '1', 'file-form');
+        }
+
         // Media Vendor
         if ($_FILES['fileNPWP']['name'] != '') {
             $media = new Media();
@@ -607,6 +622,8 @@ class RegistrasiUserController extends GlobalFunc
             $idUser = '1';
             $media->create($_FILES['fileKTP'], $update, '1', 'foto-ktp');
         }
+
+
 
         $legalitas_vendor_create = [
             'idRelation' => $id,
@@ -783,6 +800,7 @@ class RegistrasiUserController extends GlobalFunc
 
         $npwp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'foto-legalitas-user'");
         $ktp = $media->selectOneMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'foto-ktp' ");
+        $form = $media->selectOneMedia("WHERE idRelation = '" .  $id . "' AND jenisdokumenMedia = 'file-form' ");
         // dd($ktp);
 
         // Media Vendor
@@ -803,7 +821,7 @@ class RegistrasiUserController extends GlobalFunc
         $data_aktif = $aktif->selectOne("WHERE idRelation = '" . $id . "'");
         // dd($data_aktif);
 
-        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic_keuangan' => $data_kontak_telp_pic_keuangan, 'data_kontak_whatsapp_pic_keuangan' => $data_kontak_whatsapp_pic_keuangan, 'data_kontak_email_pic_keuangan' => $data_kontak_email_pic_keuangan, 'data_kontak_telp_pic_teknis' => $data_kontak_telp_pic_teknis, 'data_kontak_whatsapp_pic_teknis' => $data_kontak_whatsapp_pic_teknis, 'data_kontak_email_pic_teknis' => $data_kontak_email_pic_teknis, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'path_media_dokumentasi_aktivasi' => $path_media_dokumentasi_aktivasi, 'data_feesales' => $data_feesales, 'alamat_pemasangan' => $alamat_pemasangan, 'alamat_penagihan' => $alamat_penagihan, 'data_invoice' => $data_invoice, 'data_group_pic_keuangan' => $data_group_pic_keuangan, 'data_group_pic_teknis' => $data_group_pic_teknis, 'ktp' => $ktp, 'path_media_dokumentasi_instalasi' => $path_media_dokumentasi_instalasi]);
+        return $this->render_template('admin/master/registrasi/detail', ['datas' => $datas, 'data_internet_user_layanan' => $data_internet_user_layanan, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_kontak_telp_pic_keuangan' => $data_kontak_telp_pic_keuangan, 'data_kontak_whatsapp_pic_keuangan' => $data_kontak_whatsapp_pic_keuangan, 'data_kontak_email_pic_keuangan' => $data_kontak_email_pic_keuangan, 'data_kontak_telp_pic_teknis' => $data_kontak_telp_pic_teknis, 'data_kontak_whatsapp_pic_teknis' => $data_kontak_whatsapp_pic_teknis, 'data_kontak_email_pic_teknis' => $data_kontak_email_pic_teknis, 'data_legalitas_vendor' => $data_legalitas_vendor, 'npwp' => $npwp, 'data_internet_user_vendor' => $data_internet_user_vendor, 'data_instalasi' => $data_instalasi, 'data_aktivasi' => $data_aktivasi, 'data_aktif' => $data_aktif, 'path_media_dokumentasi_aktivasi' => $path_media_dokumentasi_aktivasi, 'data_feesales' => $data_feesales, 'alamat_pemasangan' => $alamat_pemasangan, 'alamat_penagihan' => $alamat_penagihan, 'data_invoice' => $data_invoice, 'data_group_pic_keuangan' => $data_group_pic_keuangan, 'data_group_pic_teknis' => $data_group_pic_teknis, 'ktp' => $ktp, 'path_media_dokumentasi_instalasi' => $path_media_dokumentasi_instalasi, 'form' => $form]);
     }
 
     public function status(Request $request)

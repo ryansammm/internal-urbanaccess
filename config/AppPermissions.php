@@ -77,7 +77,7 @@ class AppPermissions
         ],
         [
             'menu' => 'Input Hasil Survey',
-            'aliasPermission' => 'input-hasil-survey',
+            'aliasPermission' => 'input-hasil-soft-survey',
             'url' => '/input-hasil-soft-survey'
         ],
         [
@@ -91,8 +91,8 @@ class AppPermissions
             'url' => '/atur-tanggal-onsite'
         ],
         [
-            'menu' => 'Input Hasil Survey',
-            'aliasPermission' => 'Input Hasil Survey',
+            'menu' => 'Input Hasil Survey Onsite',
+            'aliasPermission' => 'input-hasil-survey-onsite',
             'url' => '/input-hasil-survey-onsite'
         ],
         [
@@ -111,8 +111,8 @@ class AppPermissions
             'url' => '/aktivasi'
         ],
         [
-            'menu' => 'Billing',
-            'aliasPermission' => 'Billing',
+            'menu' => 'Start Billing',
+            'aliasPermission' => 'aktif',
             'url' => '/aktif'
         ],
         [
@@ -174,11 +174,6 @@ class AppPermissions
             'menu' => 'Riwayat',
             'aliasPermission' => 'riwayat',
             'url' => '/riwayat'
-        ],
-        [
-            'menu' => 'Konfirmasi Hasil Survey Onsite',
-            'aliasPermission' => 'konfirmasi-hasil-survey-onsite',
-            'url' => '/konfirmasi-hasil-survey-onsite'
         ],
 
     ];

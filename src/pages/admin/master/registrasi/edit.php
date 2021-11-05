@@ -165,6 +165,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Unggah Form Registrasi </label>
+                                        <input type="file" class="form-control" name="fileForm" id="file" onchange="Filevalidation()">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <h5 class="mt-3">Alamat Pemasangan</h5>

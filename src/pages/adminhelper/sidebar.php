@@ -86,7 +86,7 @@
             <ul class="menu">
                 <!-- <li class="sidebar-title">Menu</li> -->
 
-                <?php if ($isPermited($GLOBALS['userPermissions'], ['minat', 'list-minat-per-status', 'request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey', 'atur-tanggal-onsite', 'input-hasil-survey-onsite', 'registrasi-user', 'instalasi', 'aktivasi', 'billing'], 'required-one')) { ?>
+                <?php if ($isPermited($GLOBALS['userPermissions'], ['minat', 'list-minat-per-status', 'request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey', 'atur-tanggal-onsite', 'input-hasil-survey-onsite', 'registrasi-user', 'instalasi', 'aktivasi', 'aktif'], 'required-one')) { ?>
                     <li class="sidebar-item has-sub">
                         <a href="#" class="sidebar-link  <?= strpos($GLOBALS['url'], '/minat')  !== false || strpos($GLOBALS['url'], '-survey')  !== false || strpos($GLOBALS['url'], '-onsite')  !== false || strpos($GLOBALS['url'], '-minat')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/instalasi')  !== false || strpos($GLOBALS['url'], '/aktivasi')  !== false || strpos($GLOBALS['url'], '/aktif')  !== false || strpos($GLOBALS['url'], '/registrasi-user-minat')  !== false ? 'oncom' : ''; ?>">
                             <i class="fas fa-file-alt"></i>
@@ -104,7 +104,7 @@
                                     <a href="/minat-status/1">List Minat Per Status</a>
                                 </li>
                             <?php } ?>
-                            <?php if ($isPermited($GLOBALS['userPermissions'], ['request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey'], 'required-one')) { ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['request-survey-vendor', 'input-hasil-soft-survey', 'konfirmasi-hasil-survey'], 'required-one')) { ?>
                                 <li class="sidebar-item has-sub submenu-item">
                                     <a href="form-layout.html" class="sidebar-link">
                                         <i class="icon-dropdown2 fas fa-caret-down"></i>
@@ -116,7 +116,7 @@
                                                 <a href="/request-survey-vendor">Request Survey Vendor</a>
                                             </li>
                                         <?php } ?>
-                                        <?php if ($isPermited($GLOBALS['userPermissions'], ['input-hasil-survey-soft'], 'required-one')) { ?>
+                                        <?php if ($isPermited($GLOBALS['userPermissions'], ['input-hasil-soft-survey'], 'required-one')) { ?>
                                             <li class="submenu-item ">
                                                 <a href="/input-hasil-soft-survey">Input Hasil Survey</a>
                                             </li>
@@ -146,11 +146,11 @@
                                                 <a href="/input-hasil-survey-onsite">Input Hasil Survey</a>
                                             </li>
                                         <?php } ?>
-                                        <?php if ($isPermited($GLOBALS['userPermissions'], ['konfirmasi-hasil-survey-onsite'], 'required-one')) { ?>
+                                        <!-- <?php if ($isPermited($GLOBALS['userPermissions'], ['konfirmasi-hasil-survey-onsite'], 'required-one')) { ?>
                                             <li class="submenu-item ">
                                                 <a href="/konfirmasi-hasil-survey-onsite">Konfirmasi Hasil Survey</a>
                                             </li>
-                                        <?php } ?>
+                                        <?php } ?> -->
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -169,7 +169,7 @@
                                     <a href="/aktivasi">Aktivasi</a>
                                 </li>
                             <?php } ?>
-                            <?php if ($isPermited($GLOBALS['userPermissions'], ['billing'], 'required-one')) { ?>
+                            <?php if ($isPermited($GLOBALS['userPermissions'], ['aktif'], 'required-one')) { ?>
                                 <li class="submenu-item">
                                     <a href="/aktif">Start Billing</a>
                                 </li>

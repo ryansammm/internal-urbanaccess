@@ -348,11 +348,6 @@ $routes->add('inputHasilSurveyOnsiteStore', new Route('/input-hasil-survey-onsit
     '_controller' => 'App\InputHasilSurveyOnsite\Controller\InputHasilSurveyOnsiteController::dokumentasiStore',
 ]));
 
-//Konfirmasi Hasil Survey Onsite
-$routes->add('konfirmasiHasilSurveyOnsite', new Route('/konfirmasi-hasil-survey-onsite', [
-    '_controller' => 'App\KonfirmasiHasilSurevyOnsite\Controller\KonfirmasiHasilSurveyOnsiteController::index',
-]));
-
 // Forecast
 $routes->add('forecast', new Route('/forecast', [
     '_controller' => 'App\Forecast\Controller\ForecastController::index',

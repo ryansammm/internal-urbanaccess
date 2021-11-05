@@ -6,6 +6,9 @@ use App\Chronology\Model\Chronology;
 use App\GroupKontak\Model\GroupKontak;
 use App\HargaItem\Model\HargaItem;
 use App\InternetUserAlamat\Model\InternetUserAlamat;
+use App\Kabupaten\Model\Kabupaten;
+use App\Kecamatan\Model\Kecamatan;
+use App\Kelurahan\Model\Kelurahan;
 use App\Kontak\Model\Kontak;
 use App\LayananInternet\Model\LayananInternet;
 use App\LayananInternetDetail\Model\LayananInternetDetail;
@@ -264,7 +267,15 @@ class MinatController extends GlobalFunc
         // dd($detail);
 
         $provinsi = new Provinsi();
+        $kabupaten = new Kabupaten();
+        $kecamatan = new Kecamatan();
+        $kelurahan = new Kelurahan();
+
+        // Alamat Pemasangan
         $data_provinsi = $provinsi->selectAll();
+        $data_kabupaten = $kabupaten->selectAll("WHERE idProvinsi = '" . $detail['idProvinsi'] . "'");
+        $data_kecamatan = $kecamatan->selectAll("WHERE idKabupaten = '" . $detail['idKabupaten'] . "'");
+        $data_kelurahan = $kelurahan->selectAll("WHERE idKecamatan = '" . $detail['idKecamatan'] . "'");
 
         $minat_layanan = new MinatLayanan();
         $data_minat_layanan = $minat_layanan->selectOne("WHERE idMinat = '" . $id . "'");
@@ -272,6 +283,7 @@ class MinatController extends GlobalFunc
         $layanan = $data_layanan->selectAll();
         $data_layanan_detail = new LayananInternetDetail();
         $layanan_detail = $data_layanan_detail->selectAll();
+        // dd($data_minat_layanan, $layanan, $layanan_detail);
 
         $reseller = new Reseller();
         $nama_reseller = $reseller->selectAll();
@@ -294,7 +306,7 @@ class MinatController extends GlobalFunc
         $data_kontak_email = $group_kontak->selectOne("WHERE idRelation = '" . $detail['kodeMinat'] . "' AND idKontak = '" . $id_jenis_email . "'");
 
 
-        return $this->render_template('admin/master/minat/edit', ['detail' => $detail, 'provinsi' => $data_provinsi, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_minat_layanan' => $data_minat_layanan, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales]);
+        return $this->render_template('admin/master/minat/edit', ['detail' => $detail, 'provinsi' => $data_provinsi, 'data_kontak_telp' => $data_kontak_telp, 'data_kontak_whatsapp' => $data_kontak_whatsapp, 'data_kontak_email' => $data_kontak_email, 'data_minat_layanan' => $data_minat_layanan, 'layanan' => $layanan, 'layanan_detail' => $layanan_detail, 'data_sales' => $data_sales, 'data_kabupaten' => $data_kabupaten, 'data_kecamatan' => $data_kecamatan, 'data_kelurahan' => $data_kelurahan]);
     }
 
     public function update(Request $request)

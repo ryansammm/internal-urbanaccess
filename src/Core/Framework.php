@@ -44,7 +44,7 @@ class Framework extends HttpKernel implements HttpKernelInterface
         $urlTujuan = $request->getPathInfo();
         $GLOBALS['url'] = $urlTujuan;
         $GLOBALS['aliasRole'] = $aliasRole;
-        
+
         $app_permissions_obj = new AppPermissions();
         $app_permissions = $app_permissions_obj->getPermissions();
 
@@ -59,6 +59,8 @@ class Framework extends HttpKernel implements HttpKernelInterface
             $role_permissions_obj = new RolePermissions();
             $role_permissions = $role_permissions_obj->getAllRolePermissions();
             $GLOBALS['userPermissions'] = $role_permissions_obj->getRolePermissions($idRole);
+
+            // dd($GLOBALS['userPermissions']);
 
             $hasPermissions = false;
             if (count($selectPermissions) > 0) {

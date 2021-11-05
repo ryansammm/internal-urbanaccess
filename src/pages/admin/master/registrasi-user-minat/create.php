@@ -190,6 +190,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Unggah Form Registrasi </label>
+                                        <input type="file" class="form-control" name="fileForm" id="file" onchange="Filevalidation()">
+                                        <span class="text-danger" style="font-size: 10pt;" id="errorFile"></span>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -848,15 +857,22 @@
 
         // hitung ppn biaya registrasi
         var biayaregistrasiPPN = 0;
+
+        var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+        $('.biayaregistrasiLayanan').on('keyup', function() {
+            biayaregistrasi = parseInt($(this).val().replace(".", ""));
+        })
+
         $('.ppnbiayainstalasi').on('change', function() {
-            var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
+            // var biayaregistrasi = parseInt($('.biayaregistrasiLayanan').val().replace(".", ""));
             var biayaregistrasiPPNAkhir = 0;
             if ($(this).val() == '1') {
-                biayaregistrasiPPN = (biayaregistrasi*10)/100;
-                biayaregistrasiPPNAkhir = biayaregistrasi+biayaregistrasiPPN;
+                biayaregistrasiPPN = (biayaregistrasi * 10) / 100;
+                biayaregistrasiPPNAkhir = biayaregistrasi + biayaregistrasiPPN;
             } else {
-                biayaregistrasiPPNAkhir = biayaregistrasi-biayaregistrasiPPN;
-                biayaregistrasiPPN = 0;
+                // biayaregistrasiPPNAkhir = biayaregistrasi - biayaregistrasiPPN;
+                // biayaregistrasiPPN = 0;
+                biayaregistrasiPPNAkhir = biayaregistrasi;
             }
             $('.biayaregistrasiLayanan').val(
                 biayaregistrasiPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -865,15 +881,22 @@
 
         // hitung ppn biaya bulanan
         var biayabulananPPN = 0;
+
+        var biayaAwalBulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
+        $('.biayabulananLayanan').on('keyup', function() {
+            biayaAwalBulanan = parseInt($(this).val().replace(".", ""));
+        })
+
         $('.ppnbiayabulanan').on('change', function() {
             var biayabulanan = parseInt($('.biayabulananLayanan').val().replace(".", ""));
             var biayabulananPPNAkhir = 0;
             if ($(this).val() == '1') {
-                biayabulananPPN = (biayabulanan*10)/100;
-                biayabulananPPNAkhir = biayabulanan+biayabulananPPN;
+                biayabulananPPN = (biayabulanan * 10) / 100;
+                biayabulananPPNAkhir = biayabulanan + biayabulananPPN;
             } else {
-                biayabulananPPNAkhir = biayabulanan-biayabulananPPN;
-                biayabulananPPN = 0;
+                // biayabulananPPNAkhir = biayabulanan - biayabulananPPN;
+                // biayabulananPPN = 0;
+                biayabulananPPNAkhir = biayaAwalBulanan;
             }
             $('.biayabulananLayanan').val(
                 biayabulananPPNAkhir.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")

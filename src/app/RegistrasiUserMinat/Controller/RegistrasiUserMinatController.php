@@ -328,6 +328,7 @@ class RegistrasiUserMinatController extends GlobalFunc
 
         $media = new Media();
         $media->create($_FILES['fileKTP'], $noRegistrasi, '1', 'foto-ktp');
+        $media->create($_FILES['fileForm'], $noRegistrasi, '1', 'file-form');
 
         $user = new Users();
         $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));

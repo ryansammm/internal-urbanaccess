@@ -21,7 +21,7 @@
                                     <td>Alamat</td>
                                     <td>Status</td>
 
-                                    <?php if ($_SESSION['idRole'] == 'admin-010') { ?>
+                                    <?php if ($_SESSION['idRole'] != 'mitra-010') { ?>
                                         <td>Aksi</td>
                                     <?php } ?>
 
@@ -39,7 +39,7 @@
                                         <td><?= $value['alamat'] ?></td>
                                         <td><?= $value['hasil'] == 1 ? "Tercover" : "Tidak Tercover" ?></td>
 
-                                        <?php if ($_SESSION['idRole'] == 'admin-010') { ?>
+                                        <?php if ($_SESSION['idRole'] != 'mitra-010') { ?>
                                             <td>
                                                 <a class="detail btn btn-sm btn-outline-primary" href="" data-id="<?= $value['id'] ?>" data-idVendor="<?= $value['idVendor'] ?>" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="far fa-calendar-check"></i></a>
                                             </td>

@@ -13,7 +13,7 @@
                     </div>
                     <div class="col">
                         <div class="d-flex justify-content-end">
-                            <a href="/vendor/<?= $datas['idVendor'] ?>/edit" class="btn btn-sm btn-primary float-right"><i class="bi bi-pencil"></i> Edit </a>
+                            <a href="/vendor/<?= $datas['idVendor'] ?>/edit" class="btn btn-sm btn-primary float-right"><i class="fas fa-edit"></i> Edit </a>
                         </div>
                     </div>
                 </div>

@@ -21,25 +21,31 @@ class RolePermissions
             'idRole' => '98sjdhas',
             'namaRole' => 'Administrasi Penjualan',
             'aliasRole' => 'administrasi-penjualan',
-            'permissions' => ['request-survey-vendor', 'input-hasil-survey-soft', 'konfirmasi-hasil-survey']
+            'permissions' => ['request-survey-vendor', 'input-hasil-soft-survey', 'konfirmasi-hasil-survey']
         ],
         [
             'idRole' => 'asd9jh',
             'namaRole' => 'Administrasi',
             'aliasRole' => 'administrasi',
-            'permissions' => ['minat', 'list-minat-per-status']
+            'permissions' => ['minat', 'list-minat-per-status', 'registrasi-user']
         ],
         [
             'idRole' => 'omnxc78',
             'namaRole' => 'IKR',
             'aliasRole' => 'ikr',
-            'permissions' => ['atur-tanggal-onsite', 'input-hasil-survey-onsite', 'konfirmasi-hasil-survey-onsite', 'instalasi']
+            'permissions' => ['atur-tanggal-onsite', 'input-hasil-survey-onsite', 'instalasi']
         ],
         [
             'idRole' => 'jhs8721',
             'namaRole' => 'Teknis',
             'aliasRole' => 'teknis',
             'permissions' => ['aktivasi']
+        ],
+        [
+            'idRole' => 'ytuy77',
+            'namaRole' => 'Billing',
+            'aliasRole' => 'billing',
+            'permissions' => ['aktif']
         ],
     ];
 

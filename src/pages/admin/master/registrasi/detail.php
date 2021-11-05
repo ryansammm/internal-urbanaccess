@@ -105,7 +105,7 @@
                                     <label for="first-name-vertical">Foto KTP</label>
                                     <h6>
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ktpMODAL">
-                                            Detail
+                                            Lihat
                                         </button>
                                     </h6>
                                 </div>
@@ -123,7 +123,7 @@
                                     <label for="first-name-vertical">Foto NPWP</label>
                                     <h6>
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#npwmpMODAL">
-                                            Detail
+                                            Lihat
                                         </button>
                                     </h6>
                                 </div>
@@ -132,6 +132,18 @@
                                 <div class="form-group2">
                                     <label for="first-name-vertical">NPWP </label>
                                     <h6><?= $data_legalitas_vendor['isiLegalitas'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border border-1 rounded mb-3 p-2">
+                            <div class="col-3">
+                                <div class="form-group2">
+                                    <label for="first-name-vertical">Form Registrasi</label>
+                                    <h6>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#formMODAL">
+                                            Lihat
+                                        </button>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -574,6 +586,22 @@
             </div>
             <div class="modal-body">
                 <img src="/assets/media/<?= $ktp['pathMedia'] ?>" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form-->
+<div class="modal fade" id="formMODAL" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Registrasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <iframe src="/assets/media/<?= $form['pathMedia'] ?>"></iframe> -->
+                <embed src="/assets/media/<?= $form['pathMedia'] ?>" frameborder="0" width="100%" height="400px">
             </div>
         </div>
     </div>

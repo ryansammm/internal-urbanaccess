@@ -61,24 +61,34 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kabupaten *</label>
-                                                <select name="idKabupaten" id="kabupaten" class="form-control" disabled required>
+                                                <select name="idKabupaten" id="kabupaten" class="form-control" required>
                                                     <option value=""> -- Pilih Kabupaten -- </option>
+                                                    <?php foreach ($data_kabupaten as $key => $value) { ?>
+                                                        <option <?= $value['id'] == $detail['idKabupaten'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kecamatan *</label>
-                                                <select name="idKecamatan" id="kecamatan" class="form-control" disabled required>
+                                                <select name="idKecamatan" id="kecamatan" class="form-control" required>
                                                     <option value=""> -- Pilih Kecamatan -- </option>
+                                                    <?php foreach ($data_kecamatan as $key => $value) { ?>
+                                                        <option <?= $value['id'] == $detail['idKecamatan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kelurahan *</label>
-                                                <select name="idKelurahan" id="kelurahan" class="form-control" disabled required>
+                                                <select name="idKelurahan" id="kelurahan" class="form-control" required>
                                                     <option value=""> -- Pilih Kelurahan -- </option>
+                                                    <?php foreach ($data_kelurahan as $key => $value) { ?>
+                                                        <option <?= $value['id'] == $detail['idKelurahan'] ? 'selected' : '' ?> value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                    <?php } ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -156,7 +166,7 @@
                                                 <label for="first-name-vertical">Layanan</label>
                                                 <select name="idLayanan" id="layanan" class="form-control">
                                                     <?php foreach ($layanan as $key => $value) { ?>
-                                                        <option <?= $value['idLayananinternet'] == $data_minat_layanan['idLayanan'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $data_minat_layanan['namaLayanan'] ?></option>
+                                                        <option <?= $value['idLayananinternet'] == $data_minat_layanan['idLayanan'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['namaLayanan'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -166,7 +176,7 @@
                                                 <label for="first-name-vertical">Kecepatan</label>
                                                 <select name="idLayanandetail" id="layanan" class="form-control">
                                                     <?php foreach ($layanan_detail as $key => $value) { ?>
-                                                        <option <?= $value['idLayananinternet'] == $value['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?></option>
+                                                        <option <?= $value['idLayananinternetdetail'] == $data_minat_layanan['idLayanandetail'] ? 'selected' : '' ?> value="<?= $value['idLayananinternetdetail'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
