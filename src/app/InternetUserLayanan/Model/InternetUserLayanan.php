@@ -39,8 +39,8 @@ class InternetUserLayanan extends GlobalFunc
         $idLayanandetail = $datas['idLayanandetail'];
         $biayaregistrasiLayanan = $datas['biayaregistrasiLayanan'];
         $biayabulananLayanan = $datas['biayabulananLayanan'];
-        $biayadasarregistrasiLayanan =  isset($datas['biayadasarregistrasiLayanan']) ? $datas['biayadasarregistrasiLayanan'] : NULL;
-        $biayadasarbulananLayanan =  isset($datas['biayadasarbulananLayanan']) ? $datas['biayadasarbulananLayanan'] : NULL;
+        $biayadasarregistrasiLayanan = $datas['biayadasarregistrasiLayanan'];
+        $biayadasarbulananLayanan = $datas['biayadasarbulananLayanan'];
         $ppnbiayaregistrasi = $datas['ppnbiayaregistrasi'];
         $ppnbiayabulanan = $datas['ppnbiayabulanan'];
         $statusLayanan = $datas['statusLayanan'];

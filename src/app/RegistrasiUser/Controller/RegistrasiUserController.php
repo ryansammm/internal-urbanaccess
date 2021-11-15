@@ -136,7 +136,10 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        // dd($datas);
+
+        // dd($datas, $dataLayananInternet, $dataLayananInternetDetail);
+
+
         $noRegistrasi = $datas['noRegistrasi'];
 
         $datas['statusRegistrasi'] = '4';
@@ -145,8 +148,18 @@ class RegistrasiUserController extends GlobalFunc
         $internet_user_registrasi_create = $this->model->create($datas);
 
 
-        /* ---------------------------- Layanan Internet ---------------------------- */
+        /* -------------------------- Internet User Layanan ------------------------- */
+        $layananInternet = new LayananInternet;
+        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas['idLayanan'] . "'");
+        $layananInternetDetail = new LayananInternetDetail;
+        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetail = '" . $datas['idLayanandetail'] . "'");
         $internet_user_layanan = new InternetUserLayanan();
+
+        $data_internet_layanan = [
+            'biayaregistrasiLayanan' => $dataLayananInternet['biayaregistrasi'],
+        ];
+        $internetUserLayananCreate = $layananInternet->create($noRegistrasi, $data_internet_layanan);
+
         $internet_user_layanan_create = $internet_user_layanan->create($noRegistrasi, $datas);
 
 

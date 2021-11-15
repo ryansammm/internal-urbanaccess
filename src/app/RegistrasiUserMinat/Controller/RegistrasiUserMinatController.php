@@ -145,6 +145,14 @@ class RegistrasiUserMinatController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
+        // dd($datas);
+
+        /* -------------------------- Interner User Layanan ------------------------- */
+        $layananInternet = new LayananInternet;
+        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas . "'");
+        $layananInternetDetail = new LayananInternetDetail;
+        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetai '" . $datas . "'");
+        /* -------------------------------------------------------------------------- */
 
 
         /* ---------------------------- Nomor Registrasi ---------------------------- */
@@ -368,6 +376,14 @@ class RegistrasiUserMinatController extends GlobalFunc
         $internet_user_vendor = new InternetUserVendor();
         $datas['namaVendor'] = $data_vendor['namaVendor'];
         $internet_user_vendor_create = $internet_user_vendor->create($noRegistrasi, $datas);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* -------------------------- Interner User Layanan ------------------------- */
+        $layananInternet = new LayananInternet;
+        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas . "'");
+        $layananInternetDetail = new LayananInternetDetail;
+        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetai '" . $datas . "'");
         /* -------------------------------------------------------------------------- */
 
 
