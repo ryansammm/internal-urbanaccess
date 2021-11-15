@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 09:43 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Nov 15, 2021 at 01:18 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -37,13 +36,6 @@ CREATE TABLE `aktif` (
   `updateAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `aktif`
---
-
-INSERT INTO `aktif` (`idAktif`, `idRelation`, `tanggalPembayaran`, `jumlahPembayaran`, `createdAt`, `updateAt`) VALUES
-('id-617ee19ecde3c', '101021001', '2021-11-12', '10.000', '2021-10-31 12:34:06', '2021-10-31 12:34:06');
-
 -- --------------------------------------------------------
 
 --
@@ -62,13 +54,6 @@ CREATE TABLE `aktivasi` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updateAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `aktivasi`
---
-
-INSERT INTO `aktivasi` (`idAktivasi`, `idRelation`, `tglAktivasi`, `idLayanan`, `vlan`, `macAddress`, `serialNumber`, `jenisIp`, `createdAt`, `updateAt`) VALUES
-('id-617ee161b48cc', '101021001', '2021-11-01', 'lyn6106a4daa91d0', '123', '2342523', '234', '2', '2021-10-31 12:33:05', '2021-10-31 12:33:05');
 
 -- --------------------------------------------------------
 
@@ -109,19 +94,6 @@ CREATE TABLE `banksales` (
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `banksales`
---
-
-INSERT INTO `banksales` (`idBanksales`, `idBank`, `idRelation`, `norekeningBanksales`, `createdAt`, `updatedAt`) VALUES
-('idBanksales615436acd2871', '1', 'idSales615436acbf1d2', '4287871923', '2021-09-29 09:49:32', '2021-09-29 09:49:32'),
-('idBanksales6154370b59d2b', '3', 'idSales6154370b4f0bf', '428723248373', '2021-09-29 09:51:07', '2021-09-29 09:51:07'),
-('idBanksales61566eeaec12b', '3', 'idSales61566eeacd4ab', '98121340394', '2021-10-01 02:14:02', '2021-10-01 02:14:02'),
-('idBanksales615a66aabad38', '', 'idSales61566e5739802', '9812381340394', '2021-10-04 02:27:54', '2021-10-04 02:27:54'),
-('idBanksales616186523f71f', '2', 'idSales616186521b2ab', '123123123', '2021-10-09 12:08:50', '2021-10-09 12:08:50'),
-('idBanksales61619dc991029', '', 'idSales61619dc98e3ee', '', '2021-10-09 13:48:57', '2021-10-09 13:48:57'),
-('idBanksales61775cea6a46b', '1', 'idSales61775cea396b3', '123123123', '2021-10-25 20:42:02', '2021-10-25 20:42:02');
-
 -- --------------------------------------------------------
 
 --
@@ -132,7 +104,8 @@ CREATE TABLE `chronology` (
   `idChronology` varchar(255) NOT NULL,
   `deskripsiChronology` text NOT NULL,
   `idTables` varchar(255) NOT NULL,
-  `dateCreate` date NOT NULL
+  `dateCreate` date NOT NULL,
+  `idUser` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -168,15 +141,8 @@ CREATE TABLE `feesales` (
   `idUser` varchar(255) NOT NULL,
   `feeSales` varchar(255) NOT NULL,
   `createdAt` timestamp NULL DEFAULT NULL,
-  `updateAt` timestamp NULL DEFAULT NULL
+  `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feesales`
---
-
-INSERT INTO `feesales` (`idFeeSales`, `idSales`, `idUser`, `feeSales`, `createdAt`, `updateAt`) VALUES
-('fee-617ee0f60598e', 'idSales61775cea396b3', 'Ryan Samsudin_Link. Talun', '100.000', '2021-10-31 12:31:18', '2021-10-31 12:31:18');
 
 -- --------------------------------------------------------
 
@@ -193,24 +159,6 @@ CREATE TABLE `groupkontak` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `groupkontak`
---
-
-INSERT INTO `groupkontak` (`idGroupKontak`, `idRelation`, `idKontak`, `isiKontak`, `createdAt`, `updatedAt`) VALUES
-('igk617edf9abc9f5', 'M-617edf7aaaeb0', '1', '084563453', '2021-10-31 19:25:30', '2021-10-31 19:25:30'),
-('igk617edf9abd049', 'M-617edf7aaaeb0', '2', '086876535463', '2021-10-31 19:25:30', '2021-10-31 19:25:30'),
-('igk617edf9abd731', 'M-617edf7aaaeb0', '3', 'r@mail.com', '2021-10-31 19:25:30', '2021-10-31 19:25:30'),
-('igk617ee0f61eab0', '101021001', '1', '084563453', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f61f4ba', '101021001', '2', '086876535463', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f61febf', '101021001', '3', 'r@mail.com', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f636114', '978000', '1', '1245123', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f636c22', '978000', '2', '52352341', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f63760d', '978000', '3', 'ar@mail.co', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f6392d6', '568456', '1', '056788', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f639dd9', '568456', '2', '0856756', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('igk617ee0f63a496', '568456', '3', 'ryan@mail.co', '2021-10-31 19:31:18', '2021-10-31 19:31:18');
-
 -- --------------------------------------------------------
 
 --
@@ -226,13 +174,6 @@ CREATE TABLE `grouplegalitas` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `grouplegalitas`
---
-
-INSERT INTO `grouplegalitas` (`idGrouplegalitas`, `idRelation`, `idLegalitas`, `isiLegalitas`, `createdAt`, `updatedAt`) VALUES
-('idGrouplegalitas617ee0f643279', '101021001', 'Lg-0243', '1314343243', '2021-10-31 19:31:18', '2021-10-31 19:31:18');
-
 -- --------------------------------------------------------
 
 --
@@ -246,14 +187,6 @@ CREATE TABLE `grouppic` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `grouppic`
---
-
-INSERT INTO `grouppic` (`idGrouppic`, `nikPic`, `idRelation`, `createdAt`, `updatedAt`) VALUES
-('gpc617ee0f6351b1', '978000', '101021001', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('gpc617ee0f6388e7', '568456', '101021001', '2021-10-31 19:31:18', '2021-10-31 19:31:18');
 
 -- --------------------------------------------------------
 
@@ -269,13 +202,6 @@ CREATE TABLE `instalasi` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updateAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `instalasi`
---
-
-INSERT INTO `instalasi` (`idInstalasi`, `noRegistrasi`, `tglInstalasi`, `jarak`, `createdAt`, `updateAt`) VALUES
-('id-617ee103ba9c9', '101021001', '2021-11-19', '500', '2021-10-31 12:31:31', '2021-10-31 12:31:51');
 
 -- --------------------------------------------------------
 
@@ -301,14 +227,6 @@ CREATE TABLE `internetuseralamat` (
   `jenisAlamat` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `internetuseralamat`
---
-
-INSERT INTO `internetuseralamat` (`idInternetuserregistrasi`, `noRegistrasi`, `alamat`, `rt`, `rw`, `idProvinsi`, `idKabupaten`, `idKecamatan`, `idKelurahan`, `kodepos`, `latitude`, `longtitude`, `createdAt`, `updatedAt`, `jenisAlamat`) VALUES
-('id617ee0f60c898', '101021001', 'Link. Talun', '13', '13', '34', '3401', '3401100', '3401100002', '13241', '-6.930516636619437', '107.62496085428755', '2021-10-31 19:31:18', '2021-10-31 19:31:18', 'pemasangan'),
-('id617ee0f60cf56', '101021001', 'Jalan Apa Aja yang ada Tangkal Caunya', '33', '44', '51', '3471', '3401110', '3401100005', '11111', '353453', '346367', '2021-10-31 19:31:18', '2021-10-31 19:31:18', 'penagihan');
-
 -- --------------------------------------------------------
 
 --
@@ -319,10 +237,10 @@ CREATE TABLE `internetuserlayanan` (
   `idInternetuserregistrasi` varchar(255) NOT NULL,
   `idLayanan` varchar(255) NOT NULL,
   `idLayanandetail` varchar(255) NOT NULL,
-  `biayaregistrasiLayanan` int(11) NOT NULL,
-  `biayabulananLayanan` int(11) NOT NULL,
-  `biayadasarregistrasiLayanan` int(11) NOT NULL,
-  `biayadasarbulananLayanan` int(11) NOT NULL,
+  `biayaregistrasiLayanan` varchar(11) NOT NULL,
+  `biayabulananLayanan` varchar(11) NOT NULL,
+  `biayadasarregistrasiLayanan` varchar(11) NOT NULL,
+  `biayadasarbulananLayanan` varchar(11) NOT NULL,
   `ppnbiayaregistrasi` char(1) NOT NULL COMMENT '1 = Ya, 2 =Tidak',
   `ppnbiayabulanan` char(1) NOT NULL COMMENT '1 = Ya, 2 =Tidak',
   `statusLayanan` char(1) NOT NULL,
@@ -331,13 +249,6 @@ CREATE TABLE `internetuserlayanan` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `internetuserlayanan`
---
-
-INSERT INTO `internetuserlayanan` (`idInternetuserregistrasi`, `idLayanan`, `idLayanandetail`, `biayaregistrasiLayanan`, `biayabulananLayanan`, `biayadasarregistrasiLayanan`, `biayadasarbulananLayanan`, `ppnbiayaregistrasi`, `ppnbiayabulanan`, `statusLayanan`, `mediakoneksiLayanan`, `ippublicLayanan`, `createdAt`, `updatedAt`) VALUES
-('101021001', 'lyn6106a4daa91d0', 'lyn6106a4daa91d0', 10, 100, 0, 0, '', '1', '', '', '', '2021-10-31 19:31:18', '2021-10-31 19:31:18');
 
 -- --------------------------------------------------------
 
@@ -360,15 +271,10 @@ CREATE TABLE `internetuserregistrasi` (
   `jenisusahaRegistrasi` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `keterangan` varchar(255) DEFAULT NULL
+  `keterangan` varchar(255) DEFAULT NULL,
+  `nikPicKeuangan` varchar(20) DEFAULT NULL,
+  `nikPicTeknis` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `internetuserregistrasi`
---
-
-INSERT INTO `internetuserregistrasi` (`noRegistrasi`, `kodeformInternetregistrasi`, `tanggalRegistrasi`, `idSales`, `nikUserRegistrasi`, `idUser`, `jenisuserRegistrasi`, `statusRegistrasi`, `namauserRegistrasi`, `jabatanuserRegistrasi`, `namabadanRegistrasi`, `jenisusahaRegistrasi`, `createdAt`, `updatedAt`, `keterangan`) VALUES
-('101021001', '617ee03edba2d', '2021-10-31', 'idSales61775cea396b3', '0123912938', 'Ryan Samsudin_Link. Talun', '1', '4', 'Ryan Samsudin', '', '', '', '2021-10-31 19:31:18', '2021-10-31 19:31:18', 'Lumayan Bagus');
 
 -- --------------------------------------------------------
 
@@ -382,20 +288,13 @@ CREATE TABLE `internetuservendor` (
   `namaVendor` varchar(255) NOT NULL,
   `jenislinkVendor` char(2) NOT NULL DEFAULT '0' COMMENT '1=link utama, 2= link backup',
   `mediakoneksiVendor` char(2) NOT NULL DEFAULT '0' COMMENT '1=fiber optic, 2=wireless',
-  `biayaregistrasi` int(11) NOT NULL,
-  `biayabulanan` int(11) NOT NULL,
+  `biayaregistrasi` varchar(11) NOT NULL,
+  `biayabulanan` varchar(11) NOT NULL,
   `ppnbiayainstalasi` char(2) NOT NULL COMMENT '1=Ya, 2=Tidak',
   `ppnbiayabulanan` char(2) NOT NULL COMMENT '1=Ya, 2=Tidak ',
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `internetuservendor`
---
-
-INSERT INTO `internetuservendor` (`idInternetuserregistrasi`, `idVendor`, `namaVendor`, `jenislinkVendor`, `mediakoneksiVendor`, `biayaregistrasi`, `biayabulanan`, `ppnbiayainstalasi`, `ppnbiayabulanan`, `createdAt`, `updatedAt`) VALUES
-('101021001', 'idVendor61775e739d874', 'Bagus', '1', '1', 0, 0, '1', '1', '2021-10-31 12:31:18', '2021-10-31 12:31:18');
 
 -- --------------------------------------------------------
 
@@ -410,13 +309,6 @@ CREATE TABLE `invoice` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `invoice`
---
-
-INSERT INTO `invoice` (`id`, `noRegistrasi`, `pengirimaninvoice`, `createdAt`, `updatedAt`) VALUES
-('id617ee0f6007d5', '101021001', '1', '2021-10-31 12:31:18', '2021-10-31 12:31:18');
 
 -- --------------------------------------------------------
 
@@ -39363,7 +39255,7 @@ INSERT INTO `kelurahan` (`id`, `idKecamatan`, `name`) VALUES
 ('3273080001', '3273080', 'WATES'),
 ('3273080003', '3273080', 'BATUNUNGGAL'),
 ('3273080004', '3273080', 'KUJANGSARI'),
-('3273090001', '3273090', 'CIJAURA'),
+('3273090001', '3273090', 'CIJAWURA'),
 ('3273090002', '3273090', 'MARGASARI'),
 ('3273090003', '3273090', 'SEKEJATI'),
 ('3273090004', '3273090', 'JATI SARI'),
@@ -87598,7 +87490,8 @@ INSERT INTO `kelurahan` (`id`, `idKecamatan`, `name`) VALUES
 ('9471040004', '9471040', 'TRIKORA'),
 ('9471040005', '9471040', 'ANGKASAPURA'),
 ('9471040007', '9471040', 'TANJUNG RIA'),
-('9471040008', '9471040', 'KAMPUNG KAYOBATU');
+('9471040008', '9471040', 'KAMPUNG KAYOBATU'),
+('9471040009', '3273160', 'GUMURUH');
 
 -- --------------------------------------------------------
 
@@ -87672,6 +87565,10 @@ CREATE TABLE `layananinternetdetail` (
 
 INSERT INTO `layananinternetdetail` (`idLayananinternetdetail`, `idLayananinternet`, `kecepatan`, `biayadasarbulanan`, `biayabulanan`, `ppn`, `createdAt`, `updatedAt`) VALUES
 ('ldt615430c54f8d6', 'lyn6154306ccd17f', '20', 1000000, 1000000, '2', '2021-09-29 16:24:21', '2021-09-29 16:24:21'),
+('ldt619240b1145b5', 'lyn6106a4daa91d0', '100', 123123, 12312412, '1', '2021-11-15 18:12:49', '2021-11-15 18:12:49'),
+('ldt619240ba6b0cf', 'lyn6106a4daa91d0', '20', 1241231, 123123, '1', '2021-11-15 18:12:58', '2021-11-15 18:12:58'),
+('ldt619240c42368a', 'lyn6154306ccd17f', '40', 2342352, 234253, '1', '2021-11-15 18:13:08', '2021-11-15 18:13:08'),
+('ldt619240cff2a59', 'lyn6154306ccd17f', '60', 342352, 2645453, '1', '2021-11-15 18:13:19', '2021-11-15 18:13:19'),
 ('lyndtl', 'lyn6106a4daa91d0', '10', 286000, 286000, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -87693,7 +87590,8 @@ CREATE TABLE `legalitas` (
 --
 
 INSERT INTO `legalitas` (`idLegalitas`, `namaLegalitas`, `singkatanLegalitas`, `createdAt`, `updatedAt`) VALUES
-('Lg-0243', 'NPWP', 'npwp', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+('Lg-0243', 'NPWP', 'npwp', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('Lg-0244', 'KTP', 'ktp', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -87710,19 +87608,6 @@ CREATE TABLE `media` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `media`
---
-
-INSERT INTO `media` (`idMedia`, `pathMedia`, `idRelation`, `idEntity`, `jenisdokumenMedia`, `createdAt`, `updatedAt`) VALUES
-('med617edf9abe4fb', 'screenshot (3)617edf9abe506.png', 'M-617edf7aaaeb0', '1', 'foto-lokasi', '2021-10-31 19:25:30', '2021-10-31 19:25:30'),
-('med617edffbf1a65', '123617edffbf1a6e.png', 'id617edfc737bb9', '1', 'dokumentasi-onsite', '2021-10-31 19:27:07', '2021-10-31 19:27:07'),
-('med617ee0f648ebc', 'screenshot (3)617ee0f648ed4.png', '101021001', '1', 'foto-ktp', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('med617ee124a2675', 'screenshot (4)617ee124a2684.png', '101021001', '1', 'dokumentasi-instalasi', '2021-10-31 19:32:04', '2021-10-31 19:32:04'),
-('med617ee124bf8dc', 'screenshot (5)617ee124bf8e7.png', '101021001', '1', 'dokumentasi-instalasi', '2021-10-31 19:32:04', '2021-10-31 19:32:04'),
-('med617ee124d28d3', 'screenshot (6)617ee124d28de.png', '101021001', '1', 'dokumentasi-instalasi', '2021-10-31 19:32:04', '2021-10-31 19:32:04'),
-('med617ee18534f66', 'internal_review1617ee18534f6e.png', '101021001', '1', 'dokumentasi-aktivasi', '2021-10-31 19:33:41', '2021-10-31 19:33:41');
 
 -- --------------------------------------------------------
 
@@ -87755,14 +87640,6 @@ CREATE TABLE `minat` (
   `keterangan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `minat`
---
-
-INSERT INTO `minat` (`idMinat`, `kodeMinat`, `namapemohon`, `latitude`, `longtitude`, `nomortracking`, `status`, `tercover`, `idSales`, `idMitra`, `alamat`, `rt`, `rw`, `idProvinsi`, `idKabupaten`, `idKecamatan`, `idKelurahan`, `kodepos`, `tanggalRequest`, `createdAt`, `updatedAt`, `keterangan`) VALUES
-('M-617d30fedce7e', 'M-617d30c8174d9', 'Tes', '-6.930516636619437', '107.62496085428755', '', '7', '', 'idSales61775cea396b3', '', 'Bagus', '13', '13', '35', '3518', '3518160', '3518160003', '3214', '2021-10-31 03:14:35', '2021-10-30 13:48:14', '2021-10-30 13:48:14', ''),
-('M-617edf9abb70f', 'M-617edf7aaaeb0', 'Ryan Samsudin', '-6.930516636619437', '107.62496085428755', '', '7', '', 'idSales61775cea396b3', '', 'Link. Talun', '13', '13', '34', '3401', '3401100', '3401100002', '13241', '2021-10-31 12:31:19', '2021-10-31 19:25:30', '2021-10-31 19:25:30', '');
-
 -- --------------------------------------------------------
 
 --
@@ -87784,14 +87661,6 @@ CREATE TABLE `minatlayanan` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `minatlayanan`
---
-
-INSERT INTO `minatlayanan` (`idMinatlayanan`, `idMinat`, `idLayanan`, `idLayanandetail`, `biayaregistrasiLayanan`, `biayabulananLayanan`, `biayadasarregistrasiLayanan`, `biayadasarbulananLayanan`, `ppnbiayaregistrasiLayanan`, `ppnbiayabulananLayanan`, `createdAt`, `updatedAt`) VALUES
-('mln617d30feea1a9', 'M-617d30c8174d9', 'lyn6106a4daa91d0', 'lyndtl', 500000, 286000, 500000, 286000, '1', '1', '2021-10-30 13:48:14', '2021-10-30 13:48:14'),
-('mln617edf9ac43ba', 'M-617edf7aaaeb0', 'lyn6106a4daa91d0', 'lyndtl', 500000, 286000, 500000, 286000, '1', '1', '2021-10-31 19:25:30', '2021-10-31 19:25:30');
-
 -- --------------------------------------------------------
 
 --
@@ -87809,14 +87678,6 @@ CREATE TABLE `pic` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pic`
---
-
-INSERT INTO `pic` (`idPic`, `nikPic`, `namaPic`, `jenisPic`, `tanggallahirPic`, `statusPic`, `jabatanPic`, `createdAt`, `updatedAt`) VALUES
-('idPIC617ee0f6348ff', '978000', 'Pic Keuangan', 'keuangan', '0000-00-00', '1', '', '2021-10-31 19:31:18', '2021-10-31 19:31:18'),
-('idPIC617ee0f638027', '568456', 'Pic Teknis', 'teknis', '0000-00-00', '1', '', '2021-10-31 19:31:18', '2021-10-31 19:31:18');
 
 -- --------------------------------------------------------
 
@@ -87910,7 +87771,8 @@ INSERT INTO `roles` (`idRole`, `namaRole`, `aliasRole`) VALUES
 ('asd9jh', 'Administrasi', 'administrasi'),
 ('jhs8721', 'Teknis', 'teknis'),
 ('mitra-010', 'Mitra', 'mitra'),
-('omnxc78', 'IKR', 'ikr');
+('omnxc78', 'IKR', 'ikr'),
+('ytuy77', 'Billing', 'billing');
 
 -- --------------------------------------------------------
 
@@ -87937,7 +87799,9 @@ CREATE TABLE `salesalamat` (
 --
 
 INSERT INTO `salesalamat` (`idSalesalamat`, `idSales`, `idProvinsi`, `idKabupaten`, `idKecamatan`, `idKelurahan`, `kodeposSalesalamat`, `alamatSales`, `status`, `createdAt`, `updatedAt`) VALUES
-('idSalesalamat61775cea47d11', 'idSales61775cea396b3', '51', '5102', '5102070', '5102070015', '12312', 'efaefe', '1', '2021-10-25 20:42:02', '2021-10-25 20:42:02');
+('idSalesalamat61775cea47d11', 'idSales61775cea396b3', '51', '5102', '5102070', '5102070015', '12312', 'efaefe', '1', '2021-10-25 20:42:02', '2021-10-25 20:42:02'),
+('idSalesalamat6180068f3d289', 'idSales6180068f3247d', '35', '3514', '3514160', '3514160014', '23423', 'efsf', '1', '2021-11-01 09:23:59', '2021-11-01 09:23:59'),
+('idSalesalamat6180068f3d9f3', 'idSales6180068f3247d', '33', '3313', '3313140', '3313140003', '23423', 'efsefsefef', '2', '2021-11-01 09:23:59', '2021-11-01 09:23:59');
 
 -- --------------------------------------------------------
 
@@ -87956,6 +87820,13 @@ CREATE TABLE `salesperorangan` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesperorangan`
+--
+
+INSERT INTO `salesperorangan` (`idSales`, `nikSales`, `namaSales`, `tanggalbergabungSales`, `kelaminSales`, `tempatLahir`, `tanggalLahir`, `createdAt`, `updatedAt`) VALUES
+('idSales6180068f3247d', '23423', '4234', '0000-00-00', '2', 'erewf', '0000-00-00', '2021-11-01 09:23:59', '2021-11-01 09:23:59');
 
 -- --------------------------------------------------------
 
@@ -88002,14 +87873,6 @@ CREATE TABLE `userrequestsurvey` (
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `userrequestsurvey`
---
-
-INSERT INTO `userrequestsurvey` (`id`, `idVendor`, `kodeMinat`, `tanggalRequest`, `tanggalHasil`, `hasil`, `jarak`, `biayaInstalasi`, `keterangan`, `jenisSurvey`, `status`, `createdAt`, `updatedAt`) VALUES
-('id617edfa3ea04b', 'idVendor61775e739d874', 'M-617edf7aaaeb0', '0000-00-00 00:00:00', '2021-11-01', '1', '300', '1.313', 'Bagus', '1', '1', '2021-10-31 12:25:39', '2021-10-31 12:25:57'),
-('id617edfc737bb9', 'idVendor61775e739d874', 'M-617edf7aaaeb0', '2021-10-31 17:00:00', '2021-11-01', '', '1000', '', 'Bagus', '2', '', '2021-10-31 12:26:15', '2021-10-31 12:27:01');
-
 -- --------------------------------------------------------
 
 --
@@ -88035,20 +87898,21 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`idUser`, `idRole`, `nikUser`, `namaUser`, `username`, `password`, `chatId`, `createdAt`, `updatedAt`) VALUES
 ('id120931', 'admin-010', '98078123910', 'Urban Access', 'admin', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
 ('id12354', 'mitra-010', '1414', 'Pataruman', 'pataruman', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
-('id617f968694765', 'asd9jh', '10101001', 'Evilia', 'evilia', '$2y$10$4k.exr.PUPkO3hZYEczOB.8Hr86adWocbTDWX8rId1QOXLniZwcrm', '-1001571974882', '2021-11-01 01:25:58', '2021-11-01 01:25:58'),
-('id617f96bff092b', '98sjdhas', '10101001', 'Panji', 'panji', '$2y$10$068fOe4VMUIBYc6chAgYK.fyJWoomlrwL8KTRU6n51IGBNt5vNIEe', '-1001571974882', '2021-11-01 01:26:56', '2021-11-01 01:26:56'),
-('id617f96d7b375e', 'omnxc78', 'Ibnu', 'Ibnu', 'ibnu', '$2y$10$99ixYo66jpmHaeOW6vP1xuNOKu70PbtYujDcxuodhXEjVRM3ZJgTO', '-1001571974882', '2021-11-01 01:27:19', '2021-11-01 01:27:19'),
-('id617f96ee3cea2', 'omnxc78', '10101001', 'Budi', 'budi', '$2y$10$w4vQ/EvPAAVy1T3m8U2I1errx0bbBHwyFzzF5LlunorBv20r28RzS', '-1001571974882', '2021-11-01 01:27:42', '2021-11-01 01:27:42'),
-('id617f9701aeb58', 'omnxc78', '10101001', 'Andi', 'andi', '$2y$10$iUQIKuz8DCotc2sFl50IAOraxWG3TauLXtCB59kAaIHTB1Ydbgq7m', '-1001571974882', '2021-11-01 01:28:01', '2021-11-01 01:28:01'),
-('id617f97465685b', 'jhs8721', '10101001', 'Ilham', 'ilham', '$2y$10$amYYsapNMHxm666yf78diORSLevCs4N0QCBKgpCVmtpN8HiH8aP3i', '-1001571974882', '2021-11-01 01:29:10', '2021-11-01 01:29:10'),
-('id617f975478d83', 'jhs8721', '10101001', 'Diass', 'diass', '$2y$10$oiKOpMke6dvg4vf7HiilUucpaPj8mSZukXzATI8IJ9o4sXla3LKti', '-1001571974882', '2021-11-01 01:29:24', '2021-11-01 01:29:24'),
-('id617f976561535', 'jhs8721', '10101001', 'Dicky', 'dicky', '$2y$10$2RQJlikcBSIoh9g/Qp7U/e8s2M0IVgEuh9xER6yJTIPYcZCXr6GD.', '-1001571974882', '2021-11-01 01:29:41', '2021-11-01 01:29:41'),
+('id617f968694765', 'asd9jh', '10101001', 'Evilia', 'evilia', '$2y$10$4k.exr.PUPkO3hZYEczOB.8Hr86adWocbTDWX8rId1QOXLniZwcrm', '-1001571974882', '2021-10-31 18:25:58', '2021-10-31 18:25:58'),
+('id617f96bff092b', '98sjdhas', '10101001', 'Panji', 'panji', '$2y$10$068fOe4VMUIBYc6chAgYK.fyJWoomlrwL8KTRU6n51IGBNt5vNIEe', '-1001571974882', '2021-10-31 18:26:56', '2021-10-31 18:26:56'),
+('id617f96d7b375e', 'omnxc78', 'Ibnu', 'Ibnu', 'ibnu', '$2y$10$99ixYo66jpmHaeOW6vP1xuNOKu70PbtYujDcxuodhXEjVRM3ZJgTO', '-1001571974882', '2021-10-31 18:27:19', '2021-10-31 18:27:19'),
+('id617f96ee3cea2', 'omnxc78', '10101001', 'Budi', 'budi', '$2y$10$w4vQ/EvPAAVy1T3m8U2I1errx0bbBHwyFzzF5LlunorBv20r28RzS', '-1001571974882', '2021-10-31 18:27:42', '2021-10-31 18:27:42'),
+('id617f9701aeb58', 'omnxc78', '10101001', 'Andi', 'andi', '$2y$10$iUQIKuz8DCotc2sFl50IAOraxWG3TauLXtCB59kAaIHTB1Ydbgq7m', '-1001571974882', '2021-10-31 18:28:01', '2021-10-31 18:28:01'),
+('id617f97465685b', 'jhs8721', '10101001', 'Ilham', 'ilham', '$2y$10$amYYsapNMHxm666yf78diORSLevCs4N0QCBKgpCVmtpN8HiH8aP3i', '-1001571974882', '2021-10-31 18:29:10', '2021-10-31 18:29:10'),
+('id617f975478d83', 'jhs8721', '10101001', 'Diass', 'diass', '$2y$10$oiKOpMke6dvg4vf7HiilUucpaPj8mSZukXzATI8IJ9o4sXla3LKti', '-1001571974882', '2021-10-31 18:29:24', '2021-10-31 18:29:24'),
+('id617f976561535', 'jhs8721', '10101001', 'Dicky', 'dicky', '$2y$10$2RQJlikcBSIoh9g/Qp7U/e8s2M0IVgEuh9xER6yJTIPYcZCXr6GD.', '-1001571974882', '2021-10-31 18:29:41', '2021-10-31 18:29:41'),
 ('id843334', 'mitra-010', '73563453', 'Arthaguna', 'arthaguna', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
 ('id910876', 'mitra-010', '7434537', 'Aswani', 'aswani', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
 ('id91234', 'mitra-010', '2323423', 'Tristek Media Kreasindo (TMK)', 'tmk', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
 ('id917685', 'mitra-010', '34637345', 'Sinergi Nusa Inovatif', 'sni', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
 ('id94301', 'admin-010', '345345', 'Urban Access', 'urban', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
-('id94334', 'mitra-010', '2345457456', 'Distribution Point International (Dipointer)', 'dipointer', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL);
+('id94334', 'mitra-010', '2345457456', 'Distribution Point International (Dipointer)', 'dipointer', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL),
+('id989032', 'ytuy77', '87459', 'Ade Suci Hernawati', 'ade', '$2y$10$rkiappIPSzPR4j38.jmHFucb140ebGlzsHUy4ulRzsI/ygkWusXYW', '-1001571974882', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -88069,7 +87933,9 @@ CREATE TABLE `vendor` (
 --
 
 INSERT INTO `vendor` (`idVendor`, `namaVendor`, `kodeVendor`, `createdAt`, `updatedAt`) VALUES
-('idVendor61775e739d874', 'Bagus', 'V-61775e5240684', '2021-10-26 03:48:35', '2021-10-26 10:47:58');
+('idVendor61775e739d874', 'Bagus', 'V-61775e5240684', '2021-10-26 03:48:35', '2021-10-26 10:47:58'),
+('idVendor617f4f3be1eb6', 'Tidak Bagus', 'V-617f4f1eba7d7', '2021-11-01 03:21:47', '2021-11-01 03:21:47'),
+('idVendor6182414fc7814', 'awd', 'V-6182413302010', '2021-11-03 08:59:11', '2021-11-03 08:59:11');
 
 -- --------------------------------------------------------
 
@@ -88094,7 +87960,9 @@ CREATE TABLE `vendoralamat` (
 --
 
 INSERT INTO `vendoralamat` (`idVendor`, `alamatVendor`, `idProvinsi`, `idKabupaten`, `idKecamatan`, `idKelurahan`, `kodeposVendor`, `createdAt`, `updatedAt`) VALUES
-('idVendor61775e739d874', 'asd', '51', '', '', '', '24352', '2021-10-26 03:48:35', '2021-10-26 10:47:58');
+('idVendor61775e739d874', 'asd', '51', '', '', '', '24352', '2021-10-26 03:48:35', '2021-10-26 10:47:58'),
+('idVendor617f4f3be1eb6', 'Jln. Maleer No.53', '51', '5102', '5102070', '5102070015', '87236', '2021-11-01 03:21:47', '2021-11-01 03:21:47'),
+('idVendor6182414fc7814', 'asd', '12', '1202', '1202053', '1202053007', 'asdas', '2021-11-03 08:59:11', '2021-11-03 08:59:11');
 
 --
 -- Indexes for dumped tables
@@ -88111,12 +87979,6 @@ ALTER TABLE `aktif`
 --
 ALTER TABLE `aktivasi`
   ADD PRIMARY KEY (`idAktivasi`);
-
---
--- Indexes for table `bank`
---
-ALTER TABLE `bank`
-  ADD PRIMARY KEY (`idBank`);
 
 --
 -- Indexes for table `banksales`

@@ -146,11 +146,15 @@ class RegistrasiUserMinatController extends GlobalFunc
         }
         $datas = $request->request->all();
 
-        $noRegistrasi = $this->noRegistrasi($datas);
 
+        /* ---------------------------- Nomor Registrasi ---------------------------- */
+        $noRegistrasi = $this->noRegistrasi($datas);
         $datas['noRegistrasi'] = $noRegistrasi;
+        /* -------------------------------------------------------------------------- */
+
 
         $datas['statusRegistrasi'] = '4';
+
 
         /* ---------------------------- Registrasi Create --------------------------- */
         $internet_user_registrasi_create = $this->model->create($datas);
