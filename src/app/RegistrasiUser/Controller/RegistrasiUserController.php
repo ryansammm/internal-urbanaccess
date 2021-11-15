@@ -137,7 +137,7 @@ class RegistrasiUserController extends GlobalFunc
         }
         $datas = $request->request->all();
 
-        // dd($datas, $dataLayananInternet, $dataLayananInternetDetail);
+        // dd($datas);
 
 
         $noRegistrasi = $datas['noRegistrasi'];

@@ -40,9 +40,7 @@
                                     <div class="form-group">
                                         <label for="first-name-vertical">Kecepatan *</label>
                                         <select name="idLayanandetail" id="kecepatan" class="form-select" required>
-                                            <?php foreach ($layanan_detail as $key => $value) { ?>
-                                                <option <?= $value['idLayananinternetdetail'] == $data_minat_layanan['idLayanandetail'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
-                                            <?php } ?>
+                                            <option value="">-- Pilih Kecepatan --</option>
                                         </select>
                                     </div>
                                 </div>

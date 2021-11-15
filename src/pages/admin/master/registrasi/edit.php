@@ -500,7 +500,7 @@
                                         <label for="first-name-vertical">Biaya Registrasi</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number biayaregistrasiLayanan" name="biayaregistrasiLayanan" value="<?= $data_internet_user_layanan['biayaregistrasiLayanan'] ?>" required>
+                                            <input type="text" class="form-control number biayaregistrasiLayanan" name="biayaregistrasiLayanan" value="<?= $data_internet_user_vendor['biayaregistrasi'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -519,7 +519,7 @@
                                         <label for="first-name-vertical">Biaya Bulanan</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RP.</span>
-                                            <input type="text" class="form-control number biayabulananLayanan" name="biayabulananLayanan" value="<?= $data_internet_user_layanan['biayabulananLayanan'] ?>" required>
+                                            <input type="text" class="form-control number biayabulananLayanan" name="biayabulananLayanan" value="<?= $data_internet_user_vendor['biayabulanan'] ?>" required>
                                         </div>
                                     </div>
                                 </div>

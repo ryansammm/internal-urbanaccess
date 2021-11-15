@@ -411,14 +411,14 @@
                             <div class="col-3">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Biaya Registrasi</label>
-                                    <h6>Rp.<?= $data_internet_user_layanan['biayaregistrasiLayanan']; ?>,-</h6>
+                                    <h6>Rp.<?= $data_internet_user_vendor['biayaregistrasi']; ?>,-</h6>
 
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group2">
                                     <label for="first-name-vertical">Biaya Bulanan</label>
-                                    <h6>Rp.<?= $data_internet_user_layanan['biayabulananLayanan']; ?>,-</h6>
+                                    <h6>Rp.<?= $data_internet_user_vendor['biayabulanan']; ?>,-</h6>
                                 </div>
                             </div>
                             <div class="col-3">

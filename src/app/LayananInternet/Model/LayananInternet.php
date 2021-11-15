@@ -36,6 +36,7 @@ class LayananInternet extends GlobalFunc
     public function selectOne($where = "")
     {
         $sql = "SELECT * FROM " . $this->table . " " . $where;
+        // dd($sql);
 
         try {
             $query = $this->conn->prepare($sql);

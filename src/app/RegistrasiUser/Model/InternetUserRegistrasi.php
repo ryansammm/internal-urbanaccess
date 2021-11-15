@@ -48,7 +48,7 @@ class InternetUserRegistrasi extends GlobalFunc
         $namauserRegistrasi = $datas['namauserRegistrasi'];
         $jabatanuserRegistrasi =  isset($datas['jabatanuserRegistrasi']) ? $datas['jabatanuserRegistrasi'] : NULL;
         $namabadanRegistrasi =  isset($datas['namabadanRegistrasi']) ? $datas['namabadanRegistrasi'] : NULL;
-        $jenisusahaRegistrasi = $datas['jenisusahaRegistrasi'];
+        $jenisusahaRegistrasi =  isset($datas['jenisusahaRegistrasi']) ? $datas['jenisusahaRegistrasi'] : NULL;
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
         $keterangan = $datas['keterangan'];

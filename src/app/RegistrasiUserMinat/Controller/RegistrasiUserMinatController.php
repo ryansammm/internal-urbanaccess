@@ -177,6 +177,8 @@ class RegistrasiUserMinatController extends GlobalFunc
             'ppnbiayabulanan' => $dataLayananInternetDetail['ppn'],
         ];
         $internetUserLayananCreate = $internet_user_layanan->create($noRegistrasi, $data_internet_layanan, $datas);
+
+
         /* -------------------------------- Fee Sales ------------------------------- */
         $fee_sales = new FeeSales();
         $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);
@@ -380,14 +382,6 @@ class RegistrasiUserMinatController extends GlobalFunc
         $internet_user_vendor = new InternetUserVendor();
         $datas['namaVendor'] = $data_vendor['namaVendor'];
         $internet_user_vendor_create = $internet_user_vendor->create($noRegistrasi, $datas);
-        /* -------------------------------------------------------------------------- */
-
-
-        /* -------------------------- Interner User Layanan ------------------------- */
-        $layananInternet = new LayananInternet;
-        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas . "'");
-        $layananInternetDetail = new LayananInternetDetail;
-        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetai '" . $datas . "'");
         /* -------------------------------------------------------------------------- */
 
 

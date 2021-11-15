@@ -35,19 +35,20 @@ class InternetUserVendor extends GlobalFunc
 
     public function create($idInternetuserregistrasi, $datas)
     {
+        // dd($datas);
         $idVendor = $datas['idVendor'];
         $namaVendor = $datas['namaVendor'];
         $jenislinkVendor = $datas['jenislinkVendor'];
         $mediakoneksiVendor = $datas['mediakoneksiVendor'];
-        $biayaregistrasi = $datas['biayaregistrasi'];
-        $biayabulanan = $datas['biayabulanan'];
+        $biayaregistrasi = $datas['biayaregistrasiLayanan'];
+        $biayabulanan = $datas['biayabulananLayanan'];
         $ppnbiayainstalasi = $datas['ppnbiayainstalasi'];
         $ppnbiayabulanan = $datas['ppnbiayabulanan'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO " . $this->table . " VALUES ('$idInternetuserregistrasi','$idVendor', '$namaVendor', '$jenislinkVendor', '$mediakoneksiVendor', '$biayaregistrasi', '$biayabulanan', '$ppnbiayainstalasi', '$ppnbiayabulanan', '$createdAt', '$updatedAt')";
-
+        // dd($sql);
         try {
             $data = $this->conn->prepare($sql);
             $data->execute();
