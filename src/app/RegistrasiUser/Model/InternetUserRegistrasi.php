@@ -44,15 +44,18 @@ class InternetUserRegistrasi extends GlobalFunc
         $nikUserRegistrasi = $datas['nikUserRegistrasi'];
         $idUser = $datas['idUser'];
         $jenisuserRegistrasi = $datas['jenisuserRegistrasi'];
-        $statusRegistrasi = $datas['statusRegistrasi'];
+        $statusRegistrasi =  isset($datas['statusRegistrasi']) ? $datas['statusRegistrasi'] : NULL;
         $namauserRegistrasi = $datas['namauserRegistrasi'];
-        $jabatanuserRegistrasi = $datas['jabatanuserRegistrasi'];
-        $namabadanRegistrasi = $datas['namabadanRegistrasi'];
+        $jabatanuserRegistrasi =  isset($datas['jabatanuserRegistrasi']) ? $datas['jabatanuserRegistrasi'] : NULL;
+        $namabadanRegistrasi =  isset($datas['namabadanRegistrasi']) ? $datas['namabadanRegistrasi'] : NULL;
         $jenisusahaRegistrasi = $datas['jenisusahaRegistrasi'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
+        $keterangan = $datas['keterangan'];
+        $nikPicKeuangan = $datas['nikPicKeuangan'];
+        $nikPicTeknis = $datas['nikPicTeknis'];
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$noRegistrasi','$kodeformInternetregistrasi', '$tanggalRegistrasi', '$idSales', '$nikUserRegistrasi', '$idUser', '$jenisuserRegistrasi', '$statusRegistrasi', '$namauserRegistrasi', '$jabatanuserRegistrasi', '$namabadanRegistrasi', '$jenisusahaRegistrasi', '$createdAt', '$updatedAt','$keterangan','$nikPicKeuangan','$nikPicTeknis')";
         // dd($sql);
         try {
             $data = $this->conn->prepare($sql);

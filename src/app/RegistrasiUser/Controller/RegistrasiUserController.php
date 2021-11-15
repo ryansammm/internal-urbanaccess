@@ -107,7 +107,7 @@ class RegistrasiUserController extends GlobalFunc
         $layanan = $data_layanan->selectAll();
         $data_layanan_detail = new LayananInternetDetail();
         $layanan_detail = $data_layanan_detail->selectAll();
-        // dd($data_minat);
+        // dd($layanan_detail[1]['idLayananinternetdetail']);
 
         $provinsi = new Provinsi();
         $data_provinsi = $provinsi->selectAll();
@@ -137,35 +137,25 @@ class RegistrasiUserController extends GlobalFunc
         }
         $datas = $request->request->all();
         // dd($datas);
+        $noRegistrasi = $datas['noRegistrasi'];
 
-        // Nomor Registrasi
-        $noRegistrasi = $this->noRegistrasi($datas);
+        $datas['statusRegistrasi'] = '4';
 
-        $datas['noRegistrasi'] = $noRegistrasi;
-        // dd($datas);
-
-
-        // dd($datas);
-
-
-
+        /* ---------------------------- Registrasi Create --------------------------- */
         $internet_user_registrasi_create = $this->model->create($datas);
 
-        $internet_user_alamat = new InternetUserAlamat();
-        $internet_user_alamat_create = $internet_user_alamat->create($noRegistrasi, $datas);
 
+        /* ---------------------------- Layanan Internet ---------------------------- */
         $internet_user_layanan = new InternetUserLayanan();
         $internet_user_layanan_create = $internet_user_layanan->create($noRegistrasi, $datas);
-        // dd($internet_user_layanan_create);
-
-        $vendor = new Vendor();
-        $data_vendor = $vendor->selectOne($datas['idVendor']);
-
-        $internet_user_vendor = new InternetUserVendor();
-        $datas['namaVendor'] = $data_vendor['namaVendor'];
-        $internet_user_vendor_create = $internet_user_vendor->create($noRegistrasi, $datas);
 
 
+        /* -------------------------------- Fee Sales ------------------------------- */
+        $fee_sales = new FeeSales();
+        $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);
+
+
+        /* ------------------------------- Kontak User ------------------------------ */
         $jeniskontak = new Kontak();
         $id_jenis_telp = $jeniskontak->namaKontak("Telepon")['idKontak'];
         $id_jenis_whatsapp = $jeniskontak->namaKontak("Whatsapp")['idKontak'];
@@ -173,7 +163,7 @@ class RegistrasiUserController extends GlobalFunc
 
         $group_kontak = new GroupKontak();
 
-        // create kontak minat telepon
+        // Telepon
         $data_group_kontak_telp = [
             'idRelation' => $noRegistrasi,
             'idKontak' => $id_jenis_telp,
@@ -181,7 +171,7 @@ class RegistrasiUserController extends GlobalFunc
         ];
         $create_group_kontak_telp = $group_kontak->create($data_group_kontak_telp);
 
-        // create kontak minat whatsapp
+        // Whatsapp
         $data_group_kontak_whatsapp = [
             'idRelation' => $noRegistrasi,
             'idKontak' => $id_jenis_whatsapp,
@@ -189,81 +179,218 @@ class RegistrasiUserController extends GlobalFunc
         ];
         $create_group_kontak_whatsapp = $group_kontak->create($data_group_kontak_whatsapp);
 
-        // create kontak minat email
+        // Email
         $data_group_kontak_email = [
             'idRelation' => $noRegistrasi,
             'idKontak' => $id_jenis_email,
             'isiKontak' => $datas['emailkontak']
         ];
         $create_group_kontak_email = $group_kontak->create($data_group_kontak_email);
+        /* -------------------------------------------------------------------------- */
 
-        // create pic internal
+
+        /* --------------------------- Foto dan Nomor KTP --------------------------- */
+        $media = new Media();
+        $media->create($_FILES['fileKTP'], $noRegistrasi, '1', 'foto-ktp');
+
+        $legalitas = new Legalitas();
+        $group_legalitas = new GroupLegalitas();
+        $data_legalitas_ktp = $legalitas->singkatanLegalitas("ktp")['idLegalitas'];
+
+        $file_ktp = $_FILES['fileKTP'];
+        $legalitas_ktp_create = [
+            'idRelation' => $noRegistrasi,
+            'idLegalitas' => $data_legalitas_ktp,
+            'isiLegalitas' => $datas['nikUserRegistrasi']
+        ];
+        $group_persyaratan_ktp_create = $group_legalitas->create($legalitas_ktp_create);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* --------------------------- Foto dan Nomor NPWP -------------------------- */
+        $media->create($_FILES['fileNPWP'], $noRegistrasi, '1', 'foto-legalitas-user');
+        $data_legalitas_npwp = $legalitas->singkatanLegalitas("npwp")['idLegalitas'];
+
+        $file_npwp = $_FILES['fileNPWP'];
+        $legalitas_npwp_create = [
+            'idRelation' => $noRegistrasi,
+            'idLegalitas' => $data_legalitas_npwp,
+            'isiLegalitas' => $datas['noNPWP']
+        ];
+        $group_persyaratan_ktp_create = $group_legalitas->create($legalitas_npwp_create);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ----------------------------- Form Registrasi ---------------------------- */
+        $media->create($_FILES['fileForm'], $noRegistrasi, '1', 'file-form');
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ---------------------------- Alamat Pemasangan --------------------------- */
+        $internet_user_alamat = new InternetUserAlamat();
+        $data_alamat_pemasangan = [
+            'alamat' => $datas['alamatPemasangan'],
+            'rt' => $datas['rtPemasangan'],
+            'rw' => $datas['rwPemasangan'],
+            'idProvinsi' => $datas['idProvinsiPemasangan'],
+            'idKabupaten' => $datas['idKabupatenPemasangan'],
+            'idKecamatan' => $datas['idKecamatanPemasangan'],
+            'idKelurahan' => $datas['idKelurahanPemasangan'],
+            'kodepos' => $datas['kodeposPemasangan'],
+            'koordinat' => $datas['koordinatPemasangan'],
+            'jenisAlamat' => 'pemasangan',
+        ];
+        $create_alamat_pemasangan = $internet_user_alamat->create($noRegistrasi, $data_alamat_pemasangan);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ---------------------------- Alamat Penagihan ---------------------------- */
+        $data_alamat_penagihan = [
+            'alamat' => $datas['alamatPenagihan'],
+            'rt' => $datas['rtPenagihan'],
+            'rw' => $datas['rwPenagihan'],
+            'idProvinsi' => $datas['idProvinsiPenagihan'],
+            'idKabupaten' => $datas['idKabupatenPenagihan'],
+            'idKecamatan' => $datas['idKecamatanPenagihan'],
+            'idKelurahan' => $datas['idKelurahanPenagihan'],
+            'kodepos' => $datas['kodeposPenagihan'],
+            'koordinat' => $datas['koordinatPenagihan'],
+            'jenisAlamat' => 'penagihan',
+        ];
+        $create_alamat_penagihan = $internet_user_alamat->create($noRegistrasi, $data_alamat_penagihan);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* --------------------------------- Invoice -------------------------------- */
+        $invoice = new Invoice();
+        $invoice_create = $invoice->create($noRegistrasi, $datas);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ---------------------------- Data PIC Keuangan --------------------------- */
         $pic_vendor = new PIC();
-        $datas['statusPic'] = '1';
-        $pic_vendor_create = $pic_vendor->create($datas);
-
-        // create group pic vendor
         $group_pic_vendor = new GroupPIC();
+
+        $data_pic_keuangan = [
+            'nikPic' =>  $datas['nikPicKeuangan'],
+            'namaPic' =>  $datas['namaPicKeuangan'],
+            'jenisPic' => 'keuangan',
+            'statusPic' => '1'
+        ];
+        $pic_vendor_create = $pic_vendor->create($data_pic_keuangan);
+
         $group_pic_vendor_data = [
-            'nikPic' => $datas['nikPic'],
+            'nikPic' => $datas['nikPicKeuangan'],
             'idRelation' => $noRegistrasi
         ];
         $group_pic_vendor_create = $group_pic_vendor->create($group_pic_vendor_data);
 
-        // kontak telepon pic vendor
         $group_kontak_pic_vendor_telp = [
             'idRelation' => $pic_vendor_create,
             'idKontak' => $id_jenis_telp,
-            'isiKontak' => $datas['noTelpPIC']
+            'isiKontak' => $datas['noTelpPICKeuangan']
         ];
         $create_kontak_pic_vendor_telp_create = $group_kontak->create($group_kontak_pic_vendor_telp);
 
-        // kontak telepon pic vendor
         $group_kontak_pic_vendor_wa = [
             'idRelation' => $pic_vendor_create,
             'idKontak' => $id_jenis_whatsapp,
-            'isiKontak' => $datas['noWaPIC']
+            'isiKontak' => $datas['noWaPICKeuangan']
         ];
         $create_kontak_pic_vendor_wa_create = $group_kontak->create($group_kontak_pic_vendor_wa);
 
-        // kontak email pic vendor
         $group_kontak_pic_vendor_email = [
             'idRelation' => $pic_vendor_create,
             'idKontak' => $id_jenis_email,
-            'isiKontak' => $datas['emailPIC']
+            'isiKontak' => $datas['emailPICKeuangan']
         ];
         $create_kontak_pic_vendor_email_create = $group_kontak->create($group_kontak_pic_vendor_email);
+        /* -------------------------------------------------------------------------- */
 
-        // Legalitas
-        $legalitas = new Legalitas();
-        $group_legalitas = new GroupLegalitas();
-        $data_legalitas = $legalitas->singkatanLegalitas("npwp")['idLegalitas'];
 
-        $file_npwp_vendor = $_FILES['fileNPWP'];
-        $legalitas_vendor_create = [
-            'idRelation' => $noRegistrasi,
-            'idLegalitas' => $data_legalitas,
-            'isiLegalitas' => $datas['noNPWP']
+        /* ----------------------------- Data PIC Teknis ---------------------------- */
+        $data_pic_teknis = [
+            'nikPic' =>  $datas['nikPicTeknis'],
+            'namaPic' =>  $datas['namaPicTeknis'],
+            'jenisPic' => 'teknis',
+            'statusPic' => '1'
         ];
-        $group_persyaratan_vendor_npwp_create = $group_legalitas->create($legalitas_vendor_create);
+        $pic_vendor_create_teknis = $pic_vendor->create($data_pic_teknis);
 
-        $media = new Media();
-        $media->create($_FILES['fileNPWP'], $noRegistrasi, '1', 'foto-legalitas-user');
+        $group_pic_vendor_data_teknis = [
+            'nikPic' => $datas['nikPicTeknis'],
+            'idRelation' => $noRegistrasi
+        ];
+        $group_pic_vendor_create_teknis = $group_pic_vendor->create($group_pic_vendor_data_teknis);
+
+        $group_kontak_pic_vendor_telp_teknis = [
+            'idRelation' => $pic_vendor_create_teknis,
+            'idKontak' => $id_jenis_telp,
+            'isiKontak' => $datas['noTelpPICTeknis']
+        ];
+        $create_kontak_pic_vendor_telp_create_teknis = $group_kontak->create($group_kontak_pic_vendor_telp_teknis);
+
+        $group_kontak_pic_vendor_wa_teknis = [
+            'idRelation' => $pic_vendor_create_teknis,
+            'idKontak' => $id_jenis_whatsapp,
+            'isiKontak' => $datas['noWaPICTeknis']
+        ];
+        $create_kontak_pic_vendor_wa_create_teknis = $group_kontak->create($group_kontak_pic_vendor_wa_teknis);
+
+        $group_kontak_pic_vendor_email_teknis = [
+            'idRelation' => $pic_vendor_create_teknis,
+            'idKontak' => $id_jenis_email,
+            'isiKontak' => $datas['emailPICTeknis']
+        ];
+        $create_kontak_pic_vendor_email_create_teknis = $group_kontak->create($group_kontak_pic_vendor_email_teknis);
+        /* -------------------------------------------------------------------------- */
 
 
+        /* ------------------------------- Data Vendor ------------------------------ */
+        $vendor = new Vendor();
+        $data_vendor = $vendor->selectOne($datas['idVendor']);
+
+        $internet_user_vendor = new InternetUserVendor();
+        $datas['namaVendor'] = $data_vendor['namaVendor'];
+        $internet_user_vendor_create = $internet_user_vendor->create($noRegistrasi, $datas);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ----------------------------- Data Instalasi ----------------------------- */
+        $instalasi = new Instalasi();
+        $instalasi_create = $instalasi->create($datas, $noRegistrasi);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ------------------------------ Data Aktivasi ----------------------------- */
+        $aktivasi = new Aktivasi();
+        $aktivasi_create = $aktivasi->create($datas, $noRegistrasi);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ------------------------------ Data Billing ------------------------------ */
+        $aktif = new Aktif();
+        $aktif_create = $aktif->create($datas, $noRegistrasi);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* ------------------------------ Bot Telegram ------------------------------ */
         $user = new Users();
         $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
         $message = "Data user atas nama " . $datas['namauserRegistrasi'] . " dengan nomor registrasi " . $datas['noRegistrasi'] . " berhasil ditambahkan";
         $kirim = $user->telegram($message, $ambilUser['chatId']);
+        /* -------------------------------------------------------------------------- */
 
-        // buat log aktivitas
+
+        /* ------------------------------- Chronology ------------------------------- */
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama . " telah menambah data Registrasi User atas nama <b>".$datas['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = $nama . " telah menambah data Registrasi User atas nama <b>" . $datas['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
+        /* -------------------------------------------------------------------------- */
 
-        return new RedirectResponse('/registrasi-user');
+        return new RedirectResponse('/registrasi-user/dokumentasi-instalasi/' . $noRegistrasi);
     }
 
 
@@ -645,7 +772,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = "<b>".$nama . "</b> telah memperbaharui data pada menu Data Registrasi User atas nama <b>".$datas['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>" . $nama . "</b> telah memperbaharui data pada menu Data Registrasi User atas nama <b>" . $datas['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $internet_user_layanan_update, $idUser);
 
 
@@ -658,7 +785,7 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
-        
+
         // dd($id);
         $detail = $this->model->selectOne($id);
         // dd($detail);
@@ -711,7 +838,7 @@ class RegistrasiUserController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi ="<b>". $nama . "</b> telah menghapus data pada Menu Data Registrasi User atas nama <b>".$detail['namauserRegistrasi']."</b> pada tanggal " . date('d M Y H:i:s');
+        $deskripsi = "<b>" . $nama . "</b> telah menghapus data pada Menu Data Registrasi User atas nama <b>" . $detail['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $id, $idUser);
 
 
@@ -882,5 +1009,37 @@ class RegistrasiUserController extends GlobalFunc
 
 
         return $this->render_template('admin/master/urban/ultimate', ['datas' => $datas]);
+    }
+
+
+    public function dokumentasiAktivasi(Request $request)
+    {
+        if ($request->getSession()->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+        $data_layanan = new LayananInternet();
+        $layanan = $data_layanan->selectAll();
+        $data_layanan_detail = new LayananInternetDetail();
+        $layanan_detail = $data_layanan_detail->selectAll();
+
+        $internet_user_layanan = new InternetUserLayanan();
+        $data_internet_user_layanan = $internet_user_layanan->selectOne($id);
+
+        return $this->render_template('admin/master/registrasi/dokumentasi-aktivasi', ['id' => $id, 'layanan' => $layanan, 'data_internet_user_layanan' => $data_internet_user_layanan, 'layanan_detail' => $layanan_detail]);
+    }
+
+    public function dokumentasiInstalasi(Request $request)
+    {
+        if ($request->getSession()->get('username') == null) {
+            return new RedirectResponse("/admin");
+        }
+        $id = $request->attributes->get('id');
+        // dd($id);
+
+
+        return $this->render_template('admin/master/registrasi/dokumentasi-instalasi', ['id' => $id]);
     }
 }

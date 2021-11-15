@@ -38,6 +38,7 @@
                                     <td>Nama</td>
                                     <td>Layanan</td>
                                     <td>Alamat</td>
+                                    <td>Koordinat</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -50,6 +51,7 @@
                                         <td><?= $value['namapemohon'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['alamat'] ?></td>
+                                        <td><?= $value['latitude'] ?>,<?= $value['longtitude'] ?></td>
                                         <td>
                                             <a class="vendor btn btn-sm btn-outline-primary " data-id="<?= $value['kodeMinat'] ?>" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-user-plus"></i></a>
                                         </td>

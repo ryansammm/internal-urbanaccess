@@ -34,7 +34,7 @@ $(document).ready(function () {
           const element = data[index];
           optionKecepatan +=
             '<option value="' +
-            element.idLayananinternet +
+            element.idLayananinternetdetail +
             '">' +
             element.kecepatan +
             " Mbps</option>";

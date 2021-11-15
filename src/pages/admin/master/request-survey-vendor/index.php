@@ -27,7 +27,7 @@
                                         <td><?= $value['namapemohon'] ?></td>
                                         <td><?= $value['namaLayanan'] ?></td>
                                         <td><?= $value['alamat'] ?></td>
-                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $datas['0']['idMinat'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
+                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['kodeMinat'] ?>" data-nama="<?= $value['namapemohon'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -56,7 +56,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="first-name-vertical">Nama</label>
-                            <input type="text" class="form-control" name="namapemohon" value="<?= $value['namapemohon'] ?>" required readonly>
+                            <input type="text" class="form-control namaPemohon" name="namapemohon" value="" required readonly>
                         </div>
                     </div>
                     <div class="col">
@@ -115,6 +115,15 @@
         var vendor = $(this).val()
         $('.btn-list-vendor').val(vendor)
     })
+
+
+    $(document).on('click', '.btn-update', function() {
+        var modal = $('#updateModal');
+        var nama = $(this).attr('data-nama');
+        modal.find('.namaPemohon').val(nama)
+        // console.log(nama)
+    })
+
 </script>
 
 <script src="/assets/js/main.js"></script>

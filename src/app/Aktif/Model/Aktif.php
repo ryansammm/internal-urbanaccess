@@ -37,7 +37,6 @@ class Aktif extends GlobalFunc
     public function create($datas, $idRelation)
     {
         $idAktif = uniqid('id-');
-        $idRelation = $idRelation;
         $tanggalBayar = $datas['tanggalPembayaran'];
         $jumlahPembayaran = $datas['jumlahPembayaran'];
         $createdAt = date('Y-m-d H:i:s');

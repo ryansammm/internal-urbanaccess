@@ -37,7 +37,6 @@ class Instalasi extends GlobalFunc
     public function create($datas, $noRegistrasi)
     {
         $idInstalasi = uniqid('id-');
-        $noRegistrasi = $noRegistrasi;
         $tglInstalasi = $datas['tglInstalasi'];
         $jarak = $datas['jarak'];
         $createdAt = date('Y-m-d H:i:s');

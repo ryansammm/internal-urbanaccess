@@ -136,6 +136,7 @@ $routes->add('registrasiMinatDelete', new Route('/registrasi-user-minat/{id}/del
     '_controller' => 'App\RegistrasiUserMinat\Controller\RegistrasiUserMinatController::delete',
 ]));
 
+
 // CRUD regirstasi
 $routes->add('registrasi', new Route('/registrasi-user', [
     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::index',
@@ -160,6 +161,12 @@ $routes->add('registrasiStatus', new Route('/registrasi-user/{id}/status', [
 ]));
 $routes->add('registrasiDelete', new Route('/registrasi-user/{id}/delete', [
     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::delete',
+]));
+$routes->add('registrasiDokumentasiInstalasi', new Route('/registrasi-user/dokumentasi-instalasi/{id}', [
+    '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::dokumentasiInstalasi',
+]));
+$routes->add('registrasiDokumentasiAktivasi', new Route('/registrasi-user/dokumentasi-aktivasi/{id}', [
+    '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::dokumentasiAktivasi',
 ]));
 
 // Data User

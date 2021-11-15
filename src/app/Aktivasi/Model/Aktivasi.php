@@ -37,7 +37,6 @@ class Aktivasi extends GlobalFunc
     public function create($datas, $noRegistrasi)
     {
         $idAktivasi = uniqid('id-');
-        $noRegistrasi = $noRegistrasi;
         $tglAktivasi = $datas['tglAktivasi'];
         $idLayanan = $datas['idLayanan'];
         $vlan = $datas['vlan'];

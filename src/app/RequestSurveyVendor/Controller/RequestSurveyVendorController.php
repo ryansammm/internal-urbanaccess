@@ -36,6 +36,7 @@ class RequestSurveyVendorController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $this->model->selectAll("WHERE status = 1");
+        // dd($datas);
 
         $vendor = new Vendor();
         $data_vendor = $vendor->selectAll();
