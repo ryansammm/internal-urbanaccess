@@ -153,14 +153,19 @@ class RegistrasiUserController extends GlobalFunc
         $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas['idLayanan'] . "'");
         $layananInternetDetail = new LayananInternetDetail;
         $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetail = '" . $datas['idLayanandetail'] . "'");
+
         $internet_user_layanan = new InternetUserLayanan();
 
         $data_internet_layanan = [
             'biayaregistrasiLayanan' => $dataLayananInternet['biayaregistrasi'],
+            'biayabulananLayanan' => $dataLayananInternetDetail['biayabulanan'],
+            'biayadasarregistrasiLayanan' => $dataLayananInternet['biayadasarregistrasiLayanan'],
+            'biayadasarbulananLayanan' => $dataLayananInternetDetail['biayadasarbulanan'],
+            'ppnbiayaregistrasi' => $dataLayananInternet['ppn'],
+            'ppnbiayabulanan' => $dataLayananInternetDetail['ppn'],
         ];
-        $internetUserLayananCreate = $layananInternet->create($noRegistrasi, $data_internet_layanan);
-
-        $internet_user_layanan_create = $internet_user_layanan->create($noRegistrasi, $datas);
+        $internetUserLayananCreate = $internet_user_layanan->create($noRegistrasi, $data_internet_layanan, $datas);
+        /* -------------------------------------------------------------------------- */
 
 
         /* -------------------------------- Fee Sales ------------------------------- */

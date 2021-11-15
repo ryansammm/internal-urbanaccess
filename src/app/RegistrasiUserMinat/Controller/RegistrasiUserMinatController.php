@@ -145,14 +145,6 @@ class RegistrasiUserMinatController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        // dd($datas);
-
-        /* -------------------------- Interner User Layanan ------------------------- */
-        $layananInternet = new LayananInternet;
-        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas . "'");
-        $layananInternetDetail = new LayananInternetDetail;
-        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetai '" . $datas . "'");
-        /* -------------------------------------------------------------------------- */
 
 
         /* ---------------------------- Nomor Registrasi ---------------------------- */
@@ -169,10 +161,22 @@ class RegistrasiUserMinatController extends GlobalFunc
 
 
         /* ---------------------------- Layanan Internet ---------------------------- */
+        $layananInternet = new LayananInternet;
+        $dataLayananInternet = $layananInternet->selectOne("WHERE idLayananinternet = '" . $datas['idLayanan'] . "'");
+        $layananInternetDetail = new LayananInternetDetail;
+        $dataLayananInternetDetail = $layananInternetDetail->selectOne("WHERE idLayananinternetdetail = '" . $datas['idLayanandetail'] . "'");
+
         $internet_user_layanan = new InternetUserLayanan();
-        $internet_user_layanan_create = $internet_user_layanan->create($noRegistrasi, $datas);
 
-
+        $data_internet_layanan = [
+            'biayaregistrasiLayanan' => $dataLayananInternet['biayaregistrasi'],
+            'biayabulananLayanan' => $dataLayananInternetDetail['biayabulanan'],
+            'biayadasarregistrasiLayanan' => $dataLayananInternet['biayadasarregistrasiLayanan'],
+            'biayadasarbulananLayanan' => $dataLayananInternetDetail['biayadasarbulanan'],
+            'ppnbiayaregistrasi' => $dataLayananInternet['ppn'],
+            'ppnbiayabulanan' => $dataLayananInternetDetail['ppn'],
+        ];
+        $internetUserLayananCreate = $internet_user_layanan->create($noRegistrasi, $data_internet_layanan, $datas);
         /* -------------------------------- Fee Sales ------------------------------- */
         $fee_sales = new FeeSales();
         $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);

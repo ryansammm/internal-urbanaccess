@@ -33,19 +33,19 @@ class InternetUserLayanan extends GlobalFunc
         }
     }
 
-    public function create($idInternetuserregistrasi, $datas)
+    public function create($idInternetuserregistrasi, $data_internet_layanan, $datas)
     {
         $idLayanan = $datas['idLayanan'];
         $idLayanandetail = $datas['idLayanandetail'];
-        $biayaregistrasiLayanan = $datas['biayaregistrasiLayanan'];
-        $biayabulananLayanan = $datas['biayabulananLayanan'];
-        $biayadasarregistrasiLayanan = $datas['biayadasarregistrasiLayanan'];
-        $biayadasarbulananLayanan = $datas['biayadasarbulananLayanan'];
-        $ppnbiayaregistrasi = $datas['ppnbiayaregistrasi'];
-        $ppnbiayabulanan = $datas['ppnbiayabulanan'];
-        $statusLayanan = $datas['statusLayanan'];
-        $mediakoneksiLayanan = $datas['mediakoneksiLayanan'];
-        $ippublicLayanan = $datas['ippublicLayanan'];
+        $biayaregistrasiLayanan = $data_internet_layanan['biayaregistrasiLayanan'];
+        $biayabulananLayanan = $data_internet_layanan['biayabulananLayanan'];
+        $biayadasarregistrasiLayanan = $data_internet_layanan['biayadasarregistrasiLayanan'];
+        $biayadasarbulananLayanan = $data_internet_layanan['biayadasarbulananLayanan'];
+        $ppnbiayaregistrasi = $data_internet_layanan['ppnbiayaregistrasi'];
+        $ppnbiayabulanan = $data_internet_layanan['ppnbiayabulanan'];
+        $statusLayanan = NULL;
+        $mediakoneksiLayanan = NULL;
+        $ippublicLayanan = NULL;
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
