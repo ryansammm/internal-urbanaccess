@@ -78,8 +78,8 @@ class UserManagementController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data User Management pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $create_user_management , $idUser);
+        $deskripsi = $nama . " telah menambah Data User Management pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $create_user_management, $idUser);
 
 
         return new RedirectResponse('/user-management');
@@ -127,8 +127,8 @@ class UserManagementController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data User Management pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah mengubah Data User Management pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/vendor');
     }
@@ -145,8 +145,8 @@ class UserManagementController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data User Management pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
+        $deskripsi = $nama . " telah menghapus Data User Management pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/user-management');
     }

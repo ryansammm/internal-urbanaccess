@@ -260,8 +260,8 @@ class UrbanLiteController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menambah Data UrbanLite pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create , $idUser);
+        $deskripsi = $nama . " telah menambah Data UrbanLite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $internet_user_registrasi_create, $idUser);
 
 
         return new RedirectResponse('/registrasi-user-minat');
@@ -296,8 +296,8 @@ class UrbanLiteController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah mengubah Data UrbanLite pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $update , $idUser);
+        $deskripsi = $nama . " telah mengubah Data UrbanLite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $update, $idUser);
 
         return new RedirectResponse('/registrasi');
     }
@@ -314,8 +314,8 @@ class UrbanLiteController extends GlobalFunc
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
-        $deskripsi = $nama." telah menghapus Data UrbanLite pada tanggal ".date('d M Y H:i:s');
-        $data_chronology = $chronology->create($deskripsi, $delete , $idUser);
+        $deskripsi = $nama . " telah menghapus Data UrbanLite pada tanggal " . date('d M Y H:i:s');
+        $data_chronology = $chronology->create($deskripsi, $delete, $idUser);
 
         return new RedirectResponse('/registrasi');
     }

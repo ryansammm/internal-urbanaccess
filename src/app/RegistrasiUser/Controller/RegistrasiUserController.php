@@ -812,7 +812,6 @@ class RegistrasiUserController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $id = $request->attributes->get('id');
-
         // dd($id);
         $detail = $this->model->selectOne($id);
         // dd($detail);

@@ -84,7 +84,6 @@ class AktivasiController extends GlobalFunc
         $id = $request->attributes->get('id');
         // dd($id);
 
-
         $internet_user_registrasi = new InternetUserRegistrasi();
         $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
         // dd($internet_user_registrasi_data['namauserRegistrasi']);

@@ -44,7 +44,7 @@ class Framework extends HttpKernel implements HttpKernelInterface
         $urlTujuan = $request->getPathInfo();
         $GLOBALS['url'] = $urlTujuan;
         $GLOBALS['aliasRole'] = $aliasRole;
-        
+
         $app_permissions_obj = new AppPermissions();
         $app_permissions = $app_permissions_obj->getPermissions();
 

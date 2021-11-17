@@ -67,7 +67,7 @@ class LoginController extends GlobalFunc
                     $data_app_permission = $app_permissions->getOnePermission($data_role_permissions[0]);
                     $urlTujuan = $data['aliasRole'] == 'admin' ? '/minat' : $data_app_permission['url'];
 
-                    return header("Location: ".$urlTujuan);
+                    return header("Location: " . $urlTujuan);
                 } else {
 
                     $request->getSession()->getFlashBag()->add('errors', 'Password salah!');

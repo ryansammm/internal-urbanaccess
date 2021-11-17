@@ -123,7 +123,6 @@
         modal.find('.namaPemohon').val(nama)
         // console.log(nama)
     })
-
 </script>
 
 <script src="/assets/js/main.js"></script>

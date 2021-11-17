@@ -777,7 +777,6 @@
 <script src="/assets/js/BsMultiSelect.min.js"></script>
 <script src="/assets/js/registrasi-user.js"></script>
 
-
 <script>
     $(document).ready(function() {
 

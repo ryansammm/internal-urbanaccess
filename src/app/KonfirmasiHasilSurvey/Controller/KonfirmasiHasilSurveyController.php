@@ -66,7 +66,6 @@ class KonfirmasiHasilSurveyController extends GlobalFunc
         $id = $request->attributes->get('id');
         $data_vendor = $this->model->selectOne("WHERE id = '" . $id . "'");
         $data_minat = $minat->selectOne($data_vendor['kodeMinat']);
-
         // buat log aktivitas
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');

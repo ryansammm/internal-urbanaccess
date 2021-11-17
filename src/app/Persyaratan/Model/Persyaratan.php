@@ -17,7 +17,7 @@ class Persyaratan extends GlobalFunc
 
     public function selectAll()
     {
-        $sql = "SELECT * FROM \"".$this->table."\"";
+        $sql = "SELECT * FROM \"" . $this->table . "\"";
         $query = pg_query($this->conn, $sql);
         $datas = [];
         while ($item = pg_fetch_assoc($query)) {
@@ -29,7 +29,7 @@ class Persyaratan extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT * FROM \"".$this->table."\" WHERE \"idPersyaratan\" = '$id'";
+        $sql = "SELECT * FROM \"" . $this->table . "\" WHERE \"idPersyaratan\" = '$id'";
 
         $query = pg_query($this->conn, $sql);
         $data = pg_fetch_assoc($query);
@@ -43,7 +43,7 @@ class Persyaratan extends GlobalFunc
         $namaPersyaratan = $this->esc_str($this->conn, $data['namaPersyaratan']);
         $dateCreate = date('Y-m-d');
 
-        $sql = "INSERT INTO \"".$this->table."\" VALUES ('$idPersyaratan', '$namaPersyaratan', '$dateCreate')";
+        $sql = "INSERT INTO \"" . $this->table . "\" VALUES ('$idPersyaratan', '$namaPersyaratan', '$dateCreate')";
         $query = pg_query($sql);
 
         return $idPersyaratan;
@@ -53,7 +53,7 @@ class Persyaratan extends GlobalFunc
     {
         $namaBank = $this->esc_str($this->conn, $namaBank);
 
-        $sql = "UPDATE ".$this->table." SET \"namaBank\"='$namaBank' WHERE \"idPersyaratan\"='$idLayanan'";
+        $sql = "UPDATE " . $this->table . " SET \"namaBank\"='$namaBank' WHERE \"idPersyaratan\"='$idLayanan'";
         $query = pg_query($sql);
 
         return pg_affected_rows($query);
@@ -61,7 +61,7 @@ class Persyaratan extends GlobalFunc
 
     public function delete($idLayanan)
     {
-        $sql = "DELETE FROM ".$this->table." WHERE \"idPersyaratan\"='$idLayanan'";
+        $sql = "DELETE FROM " . $this->table . " WHERE \"idPersyaratan\"='$idLayanan'";
         $query = pg_query($sql);
 
         return pg_affected_rows($query);

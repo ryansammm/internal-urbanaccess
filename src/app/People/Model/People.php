@@ -17,7 +17,7 @@ class People extends GlobalFunc
 
     public function selectAll()
     {
-        $sql = "SELECT * FROM \"".$this->table."\"";
+        $sql = "SELECT * FROM \"" . $this->table . "\"";
         $query = pg_query($this->conn, $sql);
         $datas = [];
         while ($item = pg_fetch_assoc($query)) {
@@ -29,7 +29,7 @@ class People extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT * FROM \"".$this->table."\" WHERE \"idPeople\" = '$id'";
+        $sql = "SELECT * FROM \"" . $this->table . "\" WHERE \"idPeople\" = '$id'";
 
         $query = pg_query($this->conn, $sql);
         $data = pg_fetch_assoc($query);
@@ -59,7 +59,7 @@ class People extends GlobalFunc
         $idUser = $this->esc_str($this->conn, $data['idUser']);
         $dateCreate = date('Y-m-d');
 
-        $sql = "INSERT INTO \"".$this->table."\" VALUES ('$idPeople', '$namaPeople', '$nikPeople', '$nipPeople', '$alamatPeople', '$idProvinsi', '$idKabupaten', '$idKecamatan', '$idKelurahan', '$telponPeople', '$mobilePeople', '$emailPeople', '$websitePeople', '$fotoPeople', '$idJabatan', '$idPendidikan', '$idSosialmedia', '$idUser', '$dateCreate')";
+        $sql = "INSERT INTO \"" . $this->table . "\" VALUES ('$idPeople', '$namaPeople', '$nikPeople', '$nipPeople', '$alamatPeople', '$idProvinsi', '$idKabupaten', '$idKecamatan', '$idKelurahan', '$telponPeople', '$mobilePeople', '$emailPeople', '$websitePeople', '$fotoPeople', '$idJabatan', '$idPendidikan', '$idSosialmedia', '$idUser', '$dateCreate')";
         $query = pg_query($sql);
 
         return $idPeople;
@@ -69,7 +69,7 @@ class People extends GlobalFunc
     {
         $namaBank = $this->esc_str($this->conn, $namaBank);
 
-        $sql = "UPDATE ".$this->table." SET \"namaBank\"='$namaBank' WHERE \"idClient\"='$idClient'";
+        $sql = "UPDATE " . $this->table . " SET \"namaBank\"='$namaBank' WHERE \"idClient\"='$idClient'";
         $query = pg_query($sql);
 
         return pg_affected_rows($query);
@@ -77,7 +77,7 @@ class People extends GlobalFunc
 
     public function delete($idClient)
     {
-        $sql = "DELETE FROM ".$this->table." WHERE \"idClient\"='$idClient'";
+        $sql = "DELETE FROM " . $this->table . " WHERE \"idClient\"='$idClient'";
         $query = pg_query($sql);
 
         return pg_affected_rows($query);
