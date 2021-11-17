@@ -1,0 +1,44 @@
+body{
+	background:url(../../media/bg.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#auth{
+	height:100vh;
+	overflow-x:hidden;
+}
+#auth #auth-right{
+	height:100%;
+	background:url(../../media/asset2.png),
+	linear-gradient(90deg,#2d499d,#3f5491);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#auth #auth-left{
+	padding:5rem 8rem;
+	/*background:url(../../media/bg.png);
+	background-repeat: no-repeat;
+	background-size: cover;*/
+}
+#auth #auth-left .auth-title{
+	font-size:4rem;
+	margin-bottom:1rem;
+}
+#auth #auth-left .auth-subtitle{
+	font-size:1.7rem;
+	line-height:2.5rem;
+	color:#a8aebb
+}
+#auth #auth-left .auth-logo{
+	margin-bottom:7rem;
+}
+#auth #auth-left .auth-logo img{
+	height:2rem;
+}
+a:hover{
+	color: #ffcc00;
+}
+@media screen and (max-width:767px){
+	#auth #auth-left{
+		padding:5rem;
+}}

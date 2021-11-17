@@ -1,0 +1,5 @@
+body{
+	background-image: url(../../media/bg.png);
+	background-size: cover;
+	background-position: fixed;
+}
