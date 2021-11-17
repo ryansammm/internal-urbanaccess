@@ -136,6 +136,7 @@ $routes->add('registrasiMinatDelete', new Route('/registrasi-user-minat/{id}/del
     '_controller' => 'App\RegistrasiUserMinat\Controller\RegistrasiUserMinatController::delete',
 ]));
 
+
 // CRUD regirstasi
 $routes->add('registrasi', new Route('/registrasi-user', [
     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::index',

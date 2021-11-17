@@ -276,7 +276,66 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Kode Pos *</label>
+                                        <input type="text" class="form-control" name="kodeposPenagihan" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RT *</label>
+                                        <input type="text" class="form-control" name="rtPenagihan" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">RW *</label>
+                                        <input type="text" class="form-control" name="rwPenagihan" required>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Koordinat</label>
+                                        <input type="text" class="form-control" name="koordinatPenagihan" id="koordinat">
+                                        <span class="text-danger" style="font-size: 10pt;" id="error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">Alamat *</label>
+                                        <textarea name="alamatPenagihan" id="" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metode Pengiriman invoice -->
+                        <h5 class="mt-3">Metode Pengiriman Invoice</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
                                 <div class="col-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Softcopy</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Hardcopy</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pengirimanInvoice" id="inlineRadio3" value="3">
+                                        <label class="form-check-label" for="inlineRadio3">Softcopy & Hardcopy</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data PIC Keuangan -->
+                        <h5 class="mt-3">Data PIC Keuangan</h5>
+                        <div class="card-body border border-1 rounded">
+                            <div class="row">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Kecamatan *</label>
                                         <select name="idKecamatanPenagihan" id="kecamatanPenagihan" class="form-select" disabled>
@@ -776,6 +835,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="/assets/js/BsMultiSelect.min.js"></script>
 <script src="/assets/js/registrasi-user.js"></script>
+
 
 <script>
     $(document).ready(function() {

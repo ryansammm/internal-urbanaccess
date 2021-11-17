@@ -174,6 +174,9 @@ class RegistrasiUserController extends GlobalFunc
         $fee_sales = new FeeSales();
         $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);
 
+        /* -------------------------------- Fee Sales ------------------------------- */
+        $fee_sales = new FeeSales();
+        $fee_sales_create = $fee_sales->create($noRegistrasi, $datas);
 
         /* ------------------------------- Kontak User ------------------------------ */
         $jeniskontak = new Kontak();
