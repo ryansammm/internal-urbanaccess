@@ -75,6 +75,11 @@ class RegistrasiUserController extends GlobalFunc
             ->where('namaLayanan', 'LIKE', '%' . $layanan . '%')
             ->where('kabupaten.name', 'LIKE', '%' . $kota . '%')
             // ->where('statusRegistrasi', $status)
+            ->where(function ($query) use ($status) {
+                if ($status != NULL) {
+                    $query->where('statusRegistrasi', $status);
+                }
+            })
             ->join('LEFT', 'internetuserlayanan',  'internetuserlayanan.idInternetuserregistrasi', ' =', 'internetuserregistrasi.noRegistrasi')
             ->join('LEFT', 'layananinternet',  'layananinternet.idLayananinternet', '=', 'internetuserlayanan.idLayanan')
             ->join('LEFT', 'layananinternetdetail',  'layananinternetdetail.idLayananinternetdetail', '=', 'internetuserlayanan.idLayanandetail')
@@ -118,7 +123,7 @@ class RegistrasiUserController extends GlobalFunc
         //     }
         // }
 
-        return $this->render_template('admin/master/registrasi/index', ['datas' => $datas]);
+        return $this->render_template('admin/master/registrasi/index', ['datas' => $datas, 'status' => $status]);
     }
 
 

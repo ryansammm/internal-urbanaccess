@@ -104,7 +104,7 @@ class QueryBuilder extends Query
                 $this->sql .= $value;
             }
         }
-
+        // dd($this->sql);
 
         return $this->exec_get_one();
     }
@@ -120,6 +120,7 @@ class QueryBuilder extends Query
         $number_of_page = ceil($countRows / $result_per_page);
 
         $datas = $this->limit($result_per_page, $page_first_result)->get();
+        // dd($this->sql);
 
         $pagination = [
             'current_page' => intval($page),

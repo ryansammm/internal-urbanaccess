@@ -89,8 +89,11 @@ class Query
     public function whereGroup()
     {
         $param = func_get_args();
+        $statusObject = ['object' => false, 'empty' => false];
 
         if (gettype($param[0]) == 'object') {
+            $statusObject['object'] = true;
+
             if ($this->query['where'] == "") {
                 $this->query['where'] = " WHERE ";
             } elseif ($this->query['where'] == " WHERE ") {
@@ -98,12 +101,22 @@ class Query
             } elseif (substr($this->query['where'], -1) == "(") {
                 $this->query['where'] .= "";
             } else {
-                $this->query['where'] .= " ".$param[1]." ";
+                $this->query['where'] .= " " . $param[1] . " ";
             }
             $this->query['where'] .= "(";
             $param[0]($this);
             $this->query['where'] .= ")";
+
+            $karakter_terakhir = substr($this->query['where'], -7);
+            $operator_karakter_terakhir = strpos($karakter_terakhir, $param[1]);
+
+            if (strpos($karakter_terakhir, '()')) {
+                $statusObject['empty'] = true;
+                $this->query['where'] = explode($karakter_terakhir, $this->query['where'])[0];
+            }
         }
+
+        return $statusObject;
     }
 
     /**
@@ -116,16 +129,16 @@ class Query
     {
         $param = func_get_args();
 
-        $this->whereGroup($param[0], 'AND');
+        $whereGroup = $this->whereGroup($param[0], 'AND');
 
         if ($this->query['where'] == "") {
             $this->query['where'] = " WHERE ";
-        } elseif ( (gettype($param[0]) == 'object' && (substr($this->query['where'], -1) == "(" || substr($this->query['where'], -1) == ")")) || (gettype($param[0]) != 'object' && substr($this->query['where'], -1) == "(")) {
+        } elseif ((gettype($param[0]) == 'object' && (substr($this->query['where'], -1) == "(" || substr($this->query['where'], -1) == ")")) || (gettype($param[0]) != 'object' && substr($this->query['where'], -1) == "(") || ($whereGroup['object'] && $whereGroup['empty'])) {
             $this->query['where'] .= "";
         } else {
             $this->query['where'] .= " AND ";
         }
-        
+
         if (gettype($param[0]) != 'object') {
             $this->generateWhere($param);
         }
@@ -147,12 +160,12 @@ class Query
 
         if ($this->query['where'] == "") {
             die("Cannot use 'OR' statement");
-        } elseif ( (gettype($param[0]) == 'object' && (substr($this->query['where'], -1) == "(" || substr($this->query['where'], -1) == ")")) || (gettype($param[0]) != 'object' && substr($this->query['where'], -1) == "(")) {
+        } elseif ((gettype($param[0]) == 'object' && (substr($this->query['where'], -1) == "(" || substr($this->query['where'], -1) == ")")) || (gettype($param[0]) != 'object' && substr($this->query['where'], -1) == "(")) {
             $this->query['where'] .= "";
         } else {
             $this->query['where'] .= " OR ";
         }
-        
+
         if (gettype($param[0]) != 'object') {
             $this->generateWhere($param);
         }
@@ -248,12 +261,12 @@ class Query
     public function generateSql()
     {
         if (!isset($this->table)) {
-            echo "There is no <b>\$table</b> property in <b>".get_class($this)."</b>";
+            echo "There is no <b>\$table</b> property in <b>" . get_class($this) . "</b>";
             die();
         }
 
         if (isset($this->table) && $this->table == '') {
-            echo "The <b>\$table</b> property must be filled with Model table name in <b>".get_class($this)."</b>";
+            echo "The <b>\$table</b> property must be filled with Model table name in <b>" . get_class($this) . "</b>";
             die();
         }
 
@@ -294,7 +307,7 @@ class Query
         $queryString = '';
         foreach ($datas as $key => $value) {
             $queryString .= $key > 0 ? '&' : '';
-            $queryString .= $key.'='.$value;
+            $queryString .= $key . '=' . $value;
         }
 
         $this->queryString = $queryString;

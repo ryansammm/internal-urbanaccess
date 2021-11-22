@@ -15,12 +15,12 @@
                     <div class="col-md-2 col-4 d-flex justify-content-end mt-3">
                         <input class="form-control" type="text" placeholder="Kota" aria-label="Kota" name="namaKota">
                     </div>
-                    <!-- <div class="col-md-2 col-4 d-flex justify-content-end mt-3">
+                    <div class="col-md-2 col-4 d-flex justify-content-end mt-3">
                         <select class="form-select" id="basicSelect" name="statusRegistrasi">
-                            <option value="4">Aktif</option>
-                            <option value="5">Dimatikan</option>
+                            <option value="4" <?= $status == '4' ? 'selected' : '' ?>>Aktif</option>
+                            <option value="5" <?= $status == '5' ? 'selected' : '' ?>>Dimatikan</option>
                         </select>
-                    </div> -->
+                    </div>
                     <div class="col-md-1 col-2 d-flex justify-content-end mt-3">
                         <button class="btn btn btn-primary" type="submit" id="button-addon2">Search</button>
                     </div>
