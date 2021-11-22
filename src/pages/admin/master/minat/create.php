@@ -8,11 +8,11 @@
             <form class="form form-vertical" id="qual" method="post" action="/minat/store" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-1" style="padding-top: 3pt; padding-left: 21pt;">
+                        <div class="col-md-1" style="padding-top: 3pt; padding-left: 21pt;">
                             <a href="/minat" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></a>
 
                         </div>
-                        <div class="col">
+                        <div class="col-md-11">
                             <h4 class="card-title">Tambah Data Minat</h4>
                             <p style="font-size: 13px;">Data Minat</p>
                         </div>
@@ -22,16 +22,16 @@
                     <div class="form-body">
                         <h5>Data Pemohon</h5>
                         <div class="row mb-3">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kode Minat *</label>
                                                 <input type="text" class="form-control" name="kodeMinat" value="<?= $kode_minat ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Nama Pemohon *</label>
                                                 <input type="text" class="form-control" name="namaPemohon" required>
@@ -44,10 +44,10 @@
 
                         <h5>Lokasi</h5>
                         <div class="row mb-3">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Provinsi *</label>
                                                 <select name="idProvinsi" id="provinsi" class="form-control" required>
@@ -58,7 +58,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kabupaten *</label>
                                                 <select name="idKabupaten" id="kabupaten" class="form-control" disabled required>
@@ -66,7 +66,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kecamatan *</label>
                                                 <select name="idKecamatan" id="kecamatan" class="form-control" disabled required>
@@ -74,7 +74,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kelurahan *</label>
                                                 <select name="idKelurahan" id="kelurahan" class="form-control" disabled required>
@@ -82,32 +82,32 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kode Pos *</label>
                                                 <input type="text" class="form-control" name="kodepos" required>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">RT *</label>
                                                 <input type="text" class="form-control" name="rt" required>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">RW *</label>
                                                 <input type="text" class="form-control" name="rw" required>
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Koordinat</label>
                                                 <input type="text" class="form-control" name="koordinat" id="koordinat" required>
                                                 <span class="text-danger" style="font-size: 10pt;" id="error"></span>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Alamat *</label>
                                                 <textarea name="alamat" id="" class="form-control" required></textarea>
@@ -120,22 +120,22 @@
 
                         <h5>Kontak</h5>
                         <div class="row mb-3">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">No. Telp *</label>
                                                 <input type="text" class="form-control" name="telpkontak" required>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Whatsapp *</label>
                                                 <input type="text" class="form-control" name="whatsappkontak" required>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Email *</label>
                                                 <input type="text" class="form-control" name="emailkontak" required>
@@ -148,10 +148,10 @@
 
                         <h5>Layanan</h5>
                         <div class="row mb-3">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Layanan</label>
                                                 <select name="idLayanan" id="layanan" class="form-control" required>
@@ -162,7 +162,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Kecepatan</label>
                                                 <select name="idLayanandetail" id="kecepatan" class="form-control" disabled required>
@@ -170,7 +170,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Sales</label>
                                                 <select name="idSales" id="data_sales" class="form-control" required>
@@ -188,10 +188,10 @@
 
                         <h5>Upload Foto</h5>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Foto Lokasi</label>
                                                 <input type="file" class="form-control" name="fotolokasi" id="file" onchange="Filevalidation()">
@@ -205,7 +205,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="col-12 d-flex justify-content-end">
+                    <div class="col-md-12 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                     </div>

@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title mb-3">Daftar Hasil Survey</h4>
+                        <h4 class="card-title mb-3">Daftar Hasil Survey Onsite</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
                         <table class="table" id="table1">
                             <thead>
@@ -60,18 +60,18 @@
             <form action="" class="form-update form-group" method="post">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <label for="first-name-vertical">Tanggal Keluar Hasil Survey</label>
                             <input type="date" class="form-control" name="tanggalHasil" required>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6">
                             <label for="first-name-vertical">Jarak</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="jarak" required>
                                 <span class="input-group-text">m</span>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-md-12">
                             <label for="">Keterangan</label>
                             <textarea name="keterangan" id="" class="form-control"></textarea>
                         </div>

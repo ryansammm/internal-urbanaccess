@@ -1,11 +1,6 @@
 <?php include('../src/pages/adminhelper/header.php'); ?>
 <?php include('../src/pages/adminhelper/sidebar.php'); ?>
 <div id="main">
-    <header>
-        <a href="#" class="burger-btn d-block d-xl-none">
-            <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -82,15 +77,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="row anyar">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="card-body form-group border border-1 rounded">
                                 <h5>Vendor</h5>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="first-name-vertical">Tanggal Keluar Hasil Survey</label>
                                         <input type="date" class="form-control" name="tanggalHasil" value="" required>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="first-name-vertical">Status</label>
                                         <select name="hasil" id="" class="form-select">
                                             <option value="1">Tercover</option>
@@ -100,14 +95,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="first-name-vertical">Jarak</label>
                                         <div class="input-group ">
                                             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="jarak" required>
                                             <span class="input-group-text">m</span>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="first-name-vertical">Biaya Instalasi</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp.</span>
@@ -116,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-12">
                                         <label for="first-name-vertical">Keterangan</label>
                                         <textarea name="keterangan" id="" class=" form-control"></textarea>
                                     </div>

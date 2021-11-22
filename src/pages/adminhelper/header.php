@@ -26,6 +26,8 @@
     <!-- Dropzone -->
     <link rel="stylesheet" href="/plugins/dropzone/dropzone.css">
 
+    <!-- Choice -->
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
 </head>
 
 <body>

@@ -45,7 +45,7 @@ class RolePermissions
             'idRole' => 'ytuy77',
             'namaRole' => 'Billing',
             'aliasRole' => 'billing',
-            'permissions' => ['aktif']
+            'permissions' => ['aktif', 'data-user-registrasi']
         ],
     ];
 

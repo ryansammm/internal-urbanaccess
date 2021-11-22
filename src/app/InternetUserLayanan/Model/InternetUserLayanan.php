@@ -35,6 +35,7 @@ class InternetUserLayanan extends GlobalFunc
 
     public function create($idInternetuserregistrasi, $data_internet_layanan, $datas)
     {
+        $id = uniqid('id');
         $idLayanan = $datas['idLayanan'];
         $idLayanandetail = $datas['idLayanandetail'];
         $biayaregistrasiLayanan = $data_internet_layanan['biayaregistrasiLayanan'];
@@ -49,7 +50,7 @@ class InternetUserLayanan extends GlobalFunc
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO " . $this->table . " VALUES ('$idInternetuserregistrasi','$idLayanan', '$idLayanandetail', '$biayaregistrasiLayanan', '$biayabulananLayanan', '$biayadasarregistrasiLayanan', '$biayadasarbulananLayanan', '$ppnbiayaregistrasi', '$ppnbiayabulanan', '$statusLayanan', '$mediakoneksiLayanan', '$ippublicLayanan', '$createdAt', '$updatedAt')";
+        $sql = "INSERT INTO " . $this->table . " VALUES ('$id','$idInternetuserregistrasi','$idLayanan', '$idLayanandetail', '$biayaregistrasiLayanan', '$biayabulananLayanan', '$biayadasarregistrasiLayanan', '$biayadasarbulananLayanan', '$ppnbiayaregistrasi', '$ppnbiayabulanan', '$statusLayanan', '$mediakoneksiLayanan', '$ippublicLayanan', '$createdAt', '$updatedAt')";
         // dd($sql);
 
         try {
@@ -65,7 +66,7 @@ class InternetUserLayanan extends GlobalFunc
 
     public function selectOne($id)
     {
-        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN layananinternetdetail ON layananinternetdetail.idLayananinternet = internetuserlayanan.idLayanandetail WHERE " . $this->primaryKey . " = '$id'";
+        $sql = "SELECT * FROM " . $this->table . " LEFT JOIN layananinternet ON layananinternet.idLayananinternet = internetuserlayanan.idLayanan LEFT JOIN layananinternetdetail ON layananinternetdetail.idLayananinternetdetail = internetuserlayanan.idLayanandetail WHERE " . $this->primaryKey . " = '$id'";
         // dd($sql);
 
         try {

@@ -31,6 +31,7 @@ use App\MinatLayanan\Model\MinatLayanan;
 use App\People\Model\People;
 use App\PIC\Model\PIC;
 use App\Provinsi\Model\Provinsi;
+use App\RegistrasiUser\Model\InternetUserRegistrasiNew;
 use App\Reseller\Model\Reseller;
 use App\Sales\Model\Sales;
 use App\SalesPerorangan\Model\SalesPerorangan;
@@ -38,6 +39,7 @@ use App\UserRequestSurvey\Model\UserRequestSurvey;
 use App\Users\Model\Users;
 use App\Vendor\Model\Vendor;
 use Core\GlobalFunc;
+use PDOException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,21 +60,47 @@ class RegistrasiUserController extends GlobalFunc
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
-        $datas = $this->model->selectAll("WHERE statusRegistrasi = 4 AND internetuseralamat.jenisAlamat = 'pemasangan'");
+        $layanan = $request->query->get('namaLayanan');
+        $kota = $request->query->get('namaKota');
+        $status = $request->query->get('statusRegistrasi');
+        // dd($layanan, $kota, $status);
+
+
+        $result_per_page = 10;
+        $model = new InternetUserRegistrasiNew;
+        $datas = $model
+            ->select('*', 'provinsi.id as idProvinsi', 'provinsi.name as nameProvinsi', 'kabupaten.id as idKabupaten', 'kabupaten.name as nameKabupaten', 'kecamatan.id as idKecamatan', 'kecamatan.name as nameKecamatan', 'kelurahan.id as idKelurahan', 'kelurahan.name as nameKelurahan')
+            ->where('statusRegistrasi', '>', '3')
+            ->where('internetuseralamat.jenisAlamat', 'pemasangan')
+            ->where('namaLayanan', 'LIKE', '%' . $layanan . '%')
+            ->where('kabupaten.name', 'LIKE', '%' . $kota . '%')
+            // ->where('statusRegistrasi', $status)
+            ->join('LEFT', 'internetuserlayanan',  'internetuserlayanan.idInternetuserregistrasi', ' =', 'internetuserregistrasi.noRegistrasi')
+            ->join('LEFT', 'layananinternet',  'layananinternet.idLayananinternet', '=', 'internetuserlayanan.idLayanan')
+            ->join('LEFT', 'layananinternetdetail',  'layananinternetdetail.idLayananinternetdetail', '=', 'internetuserlayanan.idLayanandetail')
+            ->join('LEFT', 'salesperorangan',  'salesperorangan.idSales', '=', 'internetuserregistrasi.idSales')
+            ->join('LEFT', 'salesreseller',  'salesreseller.idSales', '=', 'internetuserregistrasi.idSales')
+            ->join('LEFT', 'internetuseralamat',  'internetuseralamat.noRegistrasi', '=', 'internetuserregistrasi.noRegistrasi')
+            ->join('LEFT', 'provinsi',  'provinsi.id', '=', 'internetuseralamat.idProvinsi')
+            ->join('LEFT', 'kabupaten', 'kabupaten.id', '=', 'internetuseralamat.idKabupaten')
+            ->join('LEFT', 'kecamatan',  'kecamatan.id', '=', 'internetuseralamat.idKecamatan')
+            ->join('LEFT', 'kelurahan',  'kelurahan.id', '=', 'internetuseralamat.idKelurahan')
+            ->paginate($result_per_page);
         // dd($datas);
 
+        // $datas = $this->model->selectAll("WHERE statusRegistrasi = 4 AND internetuseralamat.jenisAlamat = 'pemasangan'");
 
-
-
-        foreach ($datas as $key => $value) {
+        foreach ($datas->items as $key => $value) {
             if ($value['statusRegistrasi'] == '1') {
-                $datas[$key]['tercoverText'] = 'Registrasi';
+                $datas->items[$key]['tercoverText'] = 'Registrasi';
             } else if ($value['statusRegistrasi'] == '2') {
-                $datas[$key]['tercoverText'] = 'Instalasi';
+                $datas->items[$key]['tercoverText'] = 'Instalasi';
             } else if ($value['statusRegistrasi'] == '3') {
-                $datas[$key]['tercoverText'] = 'Aktivasi';
+                $datas->items[$key]['tercoverText'] = 'Aktivasi';
             } else if ($value['statusRegistrasi'] == '4') {
-                $datas[$key]['tercoverText'] = 'Aktif';
+                $datas->items[$key]['tercoverText'] = 'Aktif';
+            } else if ($value['statusRegistrasi'] == '5') {
+                $datas->items[$key]['tercoverText'] = 'Dimatikan';
             }
         }
 
@@ -1005,37 +1033,82 @@ class RegistrasiUserController extends GlobalFunc
     }
 
 
-
-    public function lite(Request $request)
+    public function aktif(Request $request)
     {
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
-        $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanLite'");
+        $datas = $request->request->all();
+        $id = $request->attributes->get('id');
 
-        return $this->render_template('admin/master/urban/lite', ['datas' => $datas]);
+        $detail = $this->model->selectOne($id);
+
+        $statusRegistrasi = '4';
+        $user_status = $this->model->status($id, $statusRegistrasi);
+
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+        $message = "User atas nama <b>" . $detail['namauserRegistrasi'] . "</b> telah berhasil di <b>aktifkan</b>";
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+
+
+        return new RedirectResponse('/registrasi-user');
     }
 
-    public function max(Request $request)
+    public function mati(Request $request)
     {
         if ($request->getSession()->get('username') == null) {
             return new RedirectResponse("/admin");
         }
-        $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanMax'");
+        $datas = $request->request->all();
+        $id = $request->attributes->get('id');
 
-        return $this->render_template('admin/master/urban/max', ['datas' => $datas]);
+        $detail = $this->model->selectOne($id);
+
+        $statusRegistrasi = '5';
+        $user_status = $this->model->status($id, $statusRegistrasi);
+
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+        $message = "User atas nama <b>" . $detail['namauserRegistrasi'] . "</b> telah berhasil di <b>dimatikan</b>";
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+
+
+        return new RedirectResponse('/registrasi-user');
     }
 
-    public function ultimate(Request $request)
-    {
-        if ($request->getSession()->get('username') == null) {
-            return new RedirectResponse("/admin");
-        }
-        $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanUltimate'");
 
 
-        return $this->render_template('admin/master/urban/ultimate', ['datas' => $datas]);
-    }
+    // public function lite(Request $request)
+    // {
+    //     if ($request->getSession()->get('username') == null) {
+    //         return new RedirectResponse("/admin");
+    //     }
+    //     $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanLite'");
+
+    //     return $this->render_template('admin/master/urban/lite', ['datas' => $datas]);
+    // }
+
+    // public function max(Request $request)
+    // {
+    //     if ($request->getSession()->get('username') == null) {
+    //         return new RedirectResponse("/admin");
+    //     }
+    //     $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanMax'");
+
+    //     return $this->render_template('admin/master/urban/max', ['datas' => $datas]);
+    // }
+
+    // public function ultimate(Request $request)
+    // {
+    //     if ($request->getSession()->get('username') == null) {
+    //         return new RedirectResponse("/admin");
+    //     }
+    //     $datas = $this->model->selectAll(" WHERE namaLayanan = 'UrbanUltimate'");
+
+
+    //     return $this->render_template('admin/master/urban/ultimate', ['datas' => $datas]);
+    // }
 
 
     public function dokumentasiAktivasi(Request $request)

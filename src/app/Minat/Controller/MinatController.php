@@ -14,6 +14,7 @@ use App\LayananInternet\Model\LayananInternet;
 use App\LayananInternetDetail\Model\LayananInternetDetail;
 use App\Media\Model\Media;
 use App\Minat\Model\Minat;
+use App\Minat\Model\MinatNew;
 use App\MinatLayanan\Model\MinatLayanan;
 use App\Provinsi\Model\Provinsi;
 use App\Reseller\Model\Reseller;
@@ -42,34 +43,42 @@ class MinatController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
 
-        $datas = $this->model->selectAll("WHERE status < 7");
+        $result_per_page = 10;
+
+        $model = new MinatNew;
+        $datas = $model
+            ->where('status', '<', '7')
+            ->join('LEFT', 'minatlayanan', 'minatlayanan.idMinat', '=', 'minat.kodeMinat')
+            ->join('LEFT', 'layananinternet', 'layananinternet.idLayananinternet', '=', 'minatlayanan.idLayanan')
+            ->paginate($result_per_page);
+
         $minat_layanan = new MinatLayanan();
 
-        foreach ($datas as $key => $value) {
+        foreach ($datas->items as $key => $value) {
             if ($value['status'] == '1') {
-                $datas[$key]['statusText'] = 'Minat';
+                $datas->items[$key]['statusText'] = 'Minat';
             } else if ($value['status'] == '2') {
-                $datas[$key]['statusText'] = 'Request Survey (Soft)';
+                $datas->items[$key]['statusText'] = 'Request Survey (Soft)';
             } else if ($value['status'] == '3') {
-                $datas[$key]['statusText'] = 'Input Hasil Soft Survey (Soft)';
+                $datas->items[$key]['statusText'] = 'Input Hasil Soft Survey (Soft)';
             } else if ($value['status'] == '4') {
-                $datas[$key]['statusText'] = 'Konfirmasi Request Survey (Soft)';
+                $datas->items[$key]['statusText'] = 'Konfirmasi Request Survey (Soft)';
             } else if ($value['status'] == '5') {
-                $datas[$key]['statusText'] = 'Lanjut Survey Onsite';
+                $datas->items[$key]['statusText'] = 'Lanjut Survey Onsite';
             } else if ($value['status'] == '6') {
-                $datas[$key]['statusText'] = 'Survey Onsite';
+                $datas->items[$key]['statusText'] = 'Survey Onsite';
             } else if ($value['status'] == '7') {
-                $datas[$key]['statusText'] = 'User';
+                $datas->items[$key]['statusText'] = 'User';
             } else if ($value['status'] == '8') {
-                $datas[$key]['statusText'] = 'Prospek';
+                $datas->items[$key]['statusText'] = 'Prospek';
             } else if ($value['status'] == '9') {
-                $datas[$key]['statusText'] = 'User';
+                $datas->items[$key]['statusText'] = 'User';
             }
 
             if ($value['tercover'] == '1') {
-                $datas[$key]['tercoverText'] = 'Tercover';
+                $datas->items[$key]['tercoverText'] = 'Tercover';
             } else if ($value['tercover'] == '2') {
-                $datas[$key]['tercoverText'] = 'Tidak Tercover';
+                $datas->items[$key]['tercoverText'] = 'Tidak Tercover';
             }
         }
 

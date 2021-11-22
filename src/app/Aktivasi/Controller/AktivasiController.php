@@ -4,6 +4,7 @@ namespace App\Aktivasi\Controller;
 
 use App\Chronology\Model\Chronology;
 use App\Aktivasi\Model\Aktivasi;
+use App\InternetUserAlamat\Model\InternetUserAlamat;
 use App\InternetUserLayanan\Model\InternetUserLayanan;
 use App\LayananInternet\Model\LayananInternet;
 use App\LayananInternetDetail\Model\LayananInternetDetail;
@@ -11,6 +12,7 @@ use App\Media\Model\Media;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
+use App\Users\Model\Users;
 use Core\GlobalFunc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -80,23 +82,49 @@ class AktivasiController extends GlobalFunc
             return new RedirectResponse("/admin");
         }
         $datas = $request->request->all();
-        // dd($datas);
         $id = $request->attributes->get('id');
-        // dd($id);
+
+        $datas['statusIP'] = $datas['jenisIp'] == '1' ? 'IP Public' : 'IP Private';
+
 
         $internet_user_registrasi = new InternetUserRegistrasi();
         $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
-        // dd($internet_user_registrasi_data['namauserRegistrasi']);
+
+
+        /* ------------------------------- Ubah Status ------------------------------ */
         $status = '3';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
+        /* -------------------------------------------------------------------------- */
 
+
+        /* -------------------------- Tambah Data Aktivasi -------------------------- */
         $aktivasi_create = $this->model->create($datas, $datas['nomorRegistrasi']);
-        // buat log aktivitas
+        /* -------------------------------------------------------------------------- */
+
+
+        /* --------------------------------- Telebot -------------------------------- */
+        $user_registrasi = new InternetUserRegistrasi();
+        $user_registrasi_data = $user_registrasi->selectOne($id);
+        $user_alamat = new InternetUserAlamat();
+        $user_alamat_data = $user_alamat->selectOne("WHERE noRegistrasi ='" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $user_layanan = new InternetUserLayanan();
+        $user_layanan_data = $user_layanan->selectOne($id);
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+
+        $message = urlencode("Berikut Data Aktivasi atas nama " . $user_registrasi_data['namauserRegistrasi'] . ".\n\nNomor Registrasi : \n" . $datas['nomorRegistrasi'] . "\n \nTanggal Aktivasi : \n" . date('d F Y', strtotime($datas['tglAktivasi'])) . "\n\nAlamat : \n" . $user_alamat_data['alamat'] . " RT." . $user_alamat_data['rt'] . "/RW." . $user_alamat_data['rw'] . " Kel." . $user_alamat_data['nameKelurahan'] . ", Kec." .  $user_alamat_data['nameKecamatan'] . ", Kab." .  substr(strstr($user_alamat_data['nameKabupaten'], " "), 1)  . "\n\nPerkiraan koordinat : \n " . $user_alamat_data['latitude'] . "," . $user_alamat_data['longtitude']  . "\n\nLayanan : \n" . $user_layanan_data['namaLayanan'] . " " .  $user_layanan_data['kecepatan'] . " Mbps\n\nVLan : \n" . $datas['vlan'] . "m" . "\n\nMAC Address : \n" . $datas['macAddress'] . "\n\nSerial Number : \n" . $datas['serialNumber'] . "\n\nJenis IP : \n" . $datas['statusIP']);
+
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* -------------------------------- Kronologi ------------------------------- */
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
         $deskripsi = "<b>" . $nama . "</b> telah melengkapi Data Aktivasi pada menu Aktivasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $aktivasi_create, $idUser);
+        /* -------------------------------------------------------------------------- */
 
 
         return new RedirectResponse('/aktivasi/dokumentasi/' . $id);

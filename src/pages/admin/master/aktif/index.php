@@ -57,14 +57,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="ro">
-                        <div class="col">
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Tanggal Pembayaran</label>
                                 <input type="date" class="form-control" name="tanggalPembayaran" value="" required>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Jumlah Pembayaran</label>
                                 <div class="input-group">

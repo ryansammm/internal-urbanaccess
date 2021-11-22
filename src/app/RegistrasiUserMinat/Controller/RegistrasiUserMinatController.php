@@ -90,12 +90,17 @@ class RegistrasiUserMinatController extends GlobalFunc
 
         $kode_form = uniqid();
 
-        $tes2 = explode(' ', $data_minat['alamat']); //dipecah perkata
-        $tes3 = substr($data_minat['alamat'], strlen($tes2[0])); //menghilangkan karakter berdasarkan jumlah kata pertama
-        $tes4 = substr($tes3, 1); //ngilangin spasi
-        $user_id = str_replace(' ', '_', $tes4); //ngubah spasi jadi underscore
+        $nama_asli = explode(' ', $data_minat['namapemohon']);
 
-        // dd($user_id);
+
+        $tahap1 = explode(' ', $data_minat['alamat']); //dipecah perkata
+        $tahap2 = substr($data_minat['alamat'], strlen($tahap1[0])); //menghilangkan karakter berdasarkan jumlah kata pertama
+        $tahap3 = substr($tahap2, 1); //ngilangin spasi
+        $alamat_id = str_replace(' ', '_', $tahap3); //ngubah spasi jadi underscore
+
+        $raw_user_id = $nama_asli[0] . '_' . $alamat_id;
+        $user_id = str_replace('.', '', $raw_user_id);
+
 
         $minat_layanan = new MinatLayanan();
         $data_minat_layanan = $minat_layanan->selectOne("WHERE idMinat = '" . $id . "'");

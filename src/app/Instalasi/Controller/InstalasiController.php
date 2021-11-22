@@ -4,10 +4,13 @@ namespace App\Instalasi\Controller;
 
 use App\Chronology\Model\Chronology;
 use App\Instalasi\Model\Instalasi;
+use App\InternetUserAlamat\Model\InternetUserAlamat;
+use App\InternetUserVendor\Model\InternetUserVendor;
 use App\Media\Model\Media;
 use App\RegistrasiUser\Model\InternetUserRegistrasi;
 use App\Roles\Model\Roles;
 use App\UserManagement\Model\UserManagement;
+use App\Users\Model\Users;
 use Core\GlobalFunc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -72,7 +75,6 @@ class InstalasiController extends GlobalFunc
         }
         $datas = $request->request->all();
         $id = $request->attributes->get('id');
-        // dd($datas, $id);
 
 
         $internet_user_registrasi = new InternetUserRegistrasi();
@@ -86,12 +88,27 @@ class InstalasiController extends GlobalFunc
 
 
         $instalasi_create = $this->model->create($datas, $id);
-        // buat log aktivitas
+
+
+        /* --------------------------------- Telebot -------------------------------- */
+        $user_registrasi = new InternetUserRegistrasi();
+        $user_registrasi_data = $user_registrasi->selectOne($id);
+        $user_alamat = new InternetUserAlamat();
+        $user_alamat_data = $user_alamat->selectOne("WHERE noRegistrasi ='" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+        $message = "Instalasi pada <b>" .  date('d F Y', strtotime($datas['tglInstalasi'])) . "</b> atas nama <b>" . $user_registrasi_data['namauserRegistrasi'] . "</b> dengan jarak <b>" . $datas['jarak'] . "m</b> pada alamat <b>" . $user_alamat_data['alamat'] . " RT." . $user_alamat_data['rt'] . "/RW." . $user_alamat_data['rt'] . " Kel." . $user_alamat_data['nameKelurahan'] . " Kec." . $user_alamat_data['nameKecamatan'] . " Kab." . $user_alamat_data['nameKabupaten'] . "</b> telah terjadwal.";
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* -------------------------------- Kronologi ------------------------------- */
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
         $deskripsi = "<b>" . $nama . "</b> telah menambahkan data hasil Instalasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b> pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $instalasi_create, $idUser);
+        /* -------------------------------------------------------------------------- */
 
 
         return new RedirectResponse('/instalasi');
@@ -108,15 +125,36 @@ class InstalasiController extends GlobalFunc
 
         $internet_user_registrasi = new InternetUserRegistrasi();
         $internet_user_registrasi_data = $internet_user_registrasi->selectOneWHere("WHERE noRegistrasi = '" . $id . "'");
-        // dd($internet_user_registrasi_data['namauserRegistrasi']);
+
         $status = '2';
         $internet_user_registrasi_status = $internet_user_registrasi->statusRegistrasi($id, $status);
 
+
+        $instalasi = new Instalasi();
+        $instalasi_data = $instalasi->selectOne("WHERE noRegistrasi = '" . $id . "'");
+        // dd($instalasi_data);
+
+        /* --------------------------------- Telebot -------------------------------- */
+        $user_registrasi = new InternetUserRegistrasi();
+        $user_registrasi_data = $user_registrasi->selectOne($id);
+        $user_alamat = new InternetUserAlamat();
+        $user_alamat_data = $user_alamat->selectOne("WHERE noRegistrasi ='" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+
+        $message = "Data Instalasi atas nama <b>" . $user_registrasi_data['namauserRegistrasi'] . "</b> dengan alamat <b>" . $user_alamat_data['alamat'] . " RT." . $user_alamat_data['rt'] . "/RW." . $user_alamat_data['rt'] . " Kel." . $user_alamat_data['nameKelurahan'] . " Kec." . $user_alamat_data['nameKecamatan'] . " Kab." . $user_alamat_data['nameKabupaten'] . "</b> pada tanggal <b>" .  date('d F Y', strtotime($instalasi_data['tglInstalasi'])) . "</b> dengan jarak  <b>" . $instalasi_data['jarak'] . "m</b> telah dikondirmasi.";
+
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* -------------------------------- Kronologi ------------------------------- */
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();
         $deskripsi = "<b>" . $nama . "</b> telah mengkonfirmasi data hasil Instalasi pada menu Instalasi atas nama <b>" . $internet_user_registrasi_data['namauserRegistrasi'] . "</b>  pada tanggal " . date('d M Y H:i:s');
         $data_chronology = $chronology->create($deskripsi, $id, $idUser);
+        /* -------------------------------------------------------------------------- */
 
 
         return new RedirectResponse('/instalasi');
@@ -179,7 +217,23 @@ class InstalasiController extends GlobalFunc
         // dd($internet_user_registrasi_data['namauserRegistrasi']);
 
         $instalasi_create = $this->model->update($datas, $id);
-        // buat log aktivitas
+
+
+        /* --------------------------------- Telebot -------------------------------- */
+        $user_registrasi = new InternetUserRegistrasi();
+        $user_registrasi_data = $user_registrasi->selectOne($id);
+        $user_alamat = new InternetUserAlamat();
+        $user_alamat_data = $user_alamat->selectOne("WHERE noRegistrasi ='" . $id . "' AND jenisAlamat = 'pemasangan'");
+        $user = new Users();
+        $ambilUser = $user->selectOneUser($request->getSession()->get('idUser'));
+
+        $message = "Data Instalasi atas nama <b>" . $user_registrasi_data['namauserRegistrasi'] . "</b> dengan alamat <b>" . $user_alamat_data['alamat'] . " RT." . $user_alamat_data['rt'] . "/RW." . $user_alamat_data['rt'] . " Kel." . $user_alamat_data['nameKelurahan'] . " Kec." . $user_alamat_data['nameKecamatan'] . " Kab." . $user_alamat_data['nameKabupaten'] . "</b> telah diubah menjadi tanggal <b>" .  date('d F Y', strtotime($datas['tglInstalasi'])) . "</b> dengan jarak  <b>" . $datas['jarak'] . "m</b>.";
+
+        $kirim = $user->telegram($message, $ambilUser['chatId']);
+        /* -------------------------------------------------------------------------- */
+
+
+        /* -------------------------------- Kronologi ------------------------------- */
         $nama = $request->getSession()->get('namaUser');
         $idUser = $request->getSession()->get('idUser');
         $chronology = new Chronology();

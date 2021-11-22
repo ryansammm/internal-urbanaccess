@@ -8,30 +8,32 @@
                     <div class="card-body">
                         <h4 class="card-title mb-3">Daftar Request Survey</h4>
                         <div style="background-color: #589cd1;height: 2px;margin-bottom: 20px;"></div>
-                        <table class="table " id="table1">
-                            <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Kode Minat</td>
-                                    <td>Nama</td>
-                                    <td>Layanan</td>
-                                    <td>Alamat</td>
-                                    <td>Aksi</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($datas as $key => $value) { ?>
+                        <div class="table-responsive">
+                            <table class="table " id="table1">
+                                <thead>
                                     <tr>
-                                        <td><?= $key += 1 ?></td>
-                                        <td><a href="/minat/<?= $value['kodeMinat'] ?>"><?= $value['kodeMinat'] ?></a></td>
-                                        <td><?= $value['namapemohon'] ?></td>
-                                        <td><?= $value['namaLayanan'] ?></td>
-                                        <td><?= $value['alamat'] ?></td>
-                                        <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['kodeMinat'] ?>" data-nama="<?= $value['namapemohon'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
+                                        <td>#</td>
+                                        <td>Kode Minat</td>
+                                        <td>Nama</td>
+                                        <td>Layanan</td>
+                                        <td>Alamat</td>
+                                        <td>Aksi</td>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($datas as $key => $value) { ?>
+                                        <tr>
+                                            <td><?= $key += 1 ?></td>
+                                            <td><a href="/minat/<?= $value['kodeMinat'] ?>"><?= $value['kodeMinat'] ?></a></td>
+                                            <td><?= $value['namapemohon'] ?></td>
+                                            <td><?= $value['namaLayanan'] ?></td>
+                                            <td><?= $value['alamat'] ?></td>
+                                            <td><a href="" class="btn-update btn btn-sm btn-outline-primary" data-id="<?= $value['kodeMinat'] ?>" data-nama="<?= $value['namapemohon'] ?>" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fas fa-envelope"></i></a></td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,14 +54,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="ro">
-                    <div class="col">
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="first-name-vertical">Nama</label>
                             <input type="text" class="form-control namaPemohon" name="namapemohon" value="" required readonly>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="first-name-vertical">Pilih Vendor</label>
                             <select class="choices form-select multiple-remove select-vendor" multiple="multiple" required>

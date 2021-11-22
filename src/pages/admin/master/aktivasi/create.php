@@ -7,10 +7,10 @@
             <form class="form form-vertical" method="post" action="/aktivasi/<?= $id ?>/store" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-1" style="padding-top: 3pt; padding-left: 21pt;">
+                        <div class="col-md-1 col-2" style="padding-top: 3pt; padding-left: 21pt;">
                             <a href="/aktivasi" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></a>
                         </div>
-                        <div class="col">
+                        <div class="col-md-11 col-10">
                             <h4 class="card-title">Tambah Data Kelengkapan Aktivasi</h4>
                             <p style="font-size: 13px;">Aktivasi User</p>
                         </div>
@@ -19,7 +19,7 @@
 
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
                                         <div class="col">
@@ -55,7 +55,7 @@
                                                 <label for="first-name-vertical">Kecepatan</label>
                                                 <select name="idLayanandetail" id="kecepatan" class="form-control" readonly="readonly">
                                                     <?php foreach ($layanan_detail as $key => $value) { ?>
-                                                        <option <?= $value['idLayananinternetdetail'] == $data_internet_user_layanan['idLayananinternet'] ? 'selected' : '' ?> value="<?= $value['idLayananinternet'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
+                                                        <option <?= $value['idLayananinternetdetail'] == $data_internet_user_layanan['idLayanandetail'] ? 'selected' : '' ?> value="<?= $value['idLayananinternetdetail'] ?>"><?= $value['kecepatan'] ?> Mbps</option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="card-body border border-1 rounded">
                                     <div class="row">
                                         <div class="col">

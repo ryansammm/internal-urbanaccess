@@ -65,13 +65,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Tanggal Instalasi</label>
                                 <input type="date" class="form-control" name="tglInstalasi" value="" required>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Jarak</label>
                                 <input type="text" class="form-control" name="jarak" value="" required>
@@ -99,13 +99,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Tanggal Instalasi</label>
                                 <input type="date" class="form-control tanggalEdit" name="tglInstalasi" value="" required>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="first-name-vertical">Jarak</label>
                                 <input type="text" class="form-control jarakEdit" name="jarak" value="" required>
@@ -130,11 +130,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     <form action="" class="form-detail">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-12">
                                     <table class="table table-borderless">
                                         <tr>
                                             <td style="width: 35%;">Tanggal Instalasi</td>

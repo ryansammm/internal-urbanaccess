@@ -168,6 +168,15 @@ $routes->add('registrasiDokumentasiAktivasi', new Route('/registrasi-user/dokume
     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::dokumentasiAktivasi',
 ]));
 
+
+$routes->add('registrasiStatusAktif', new Route('/registrasi-user/{id}/aktif', [
+    '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::aktif',
+]));
+$routes->add('registrasiStatusMati', new Route('/registrasi-user/{id}/mati', [
+    '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::mati',
+]));
+
+
 // Data User
 $routes->add('urbanLite', new Route('/urban-lite', [
     '_controller' => 'App\RegistrasiUser\Controller\RegistrasiUserController::lite',

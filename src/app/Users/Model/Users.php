@@ -148,7 +148,7 @@ class Users extends GlobalFunc
 
         $curl = curl_init();
 
-        $tes = 'https://api.telegram.org/bot2107671620:AAFjlGiUgFLs54YBzRcjUjDe7y9KjFLE-QE/sendmessage?chat_id=-1001605671009&text=' . $msg . '&parse_mode=html';
+        $tes = 'https://api.telegram.org/bot2107671620:AAFjlGiUgFLs54YBzRcjUjDe7y9KjFLE-QE/sendmessage?chat_id=626917343&text=' . $msg . '&parse_mode=html';
         // dd($tes);1001605671009
 
         curl_setopt_array($curl, array(
